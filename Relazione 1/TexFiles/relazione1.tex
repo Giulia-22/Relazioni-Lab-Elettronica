@@ -1,0 +1,92 @@
+
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{import}
+\usepackage{todonotes}
+\usepackage{color}
+\usepackage{rotating}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage{pdfpages}
+\usepackage{siunitx}
+\usepackage{pdflscape}
+\usepackage{subfig}
+\usepackage[euler]{textgreek}
+\usepackage{mhchem}
+
+\usepackage{enumerate} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usepackage[signatures,swapnames,sans]{frontespizio}
+
+\usepackage{geometry}
+\geometry{portrait, margin=3cm}
+\usepackage{siunitx}
+\usepackage{booktabs}
+
+\renewcommand*\figurename{Figura}
+
+\newcommand{\sub}[1]{\textsubscript{#1}}
+\newcommand{\super}[1]{\textsuperscript{#1}}
+\newcommand{\parallelsum}{\mathbin{\!/\mkern-5mu/\!}}
+
+\newcommand{\Fig}[0]{Fig.}
+
+\usepackage{titlesec}
+
+\titleformat{\chapter}{\normalfont\huge}{}{20pt}{\huge\bfseries}
+
+\linespread{1.1}
+
+\begin{document}
+\addtocounter{chapter}{-1}
+	\begin{frontespizio}
+		\Margini{3cm}{3cm}{3cm}{3cm}
+		\Universita{Bergamo}
+		\Logo[43.332mm]{unibg-mark}
+		\Divisione{Scuola di Ingegneria}
+		\Corso[Laurea Magistrale]{Ingegneria Informatica}
+		\Titolo{Laboratorio di Elettronica}
+		\Sottotitolo{Relazione esperienza di laboratorio}
+		\Punteggiatura{}
+		\NRelatore{Prof.}{Prof.}
+		\Relatore{Luigi Gaioni}
+		\Candidato[1058231]{Giulia Allievi}
+		\Candidato[1059640]{Martina Fanton}
+		\Annoaccademico{2022--2023}
+		\begin{Preambolo*}
+			\usepackage[italian]{babel}
+			\usepackage[T1]{fontenc}
+			\usepackage[utf8]{inputenc}
+			\usepackage{microtype}
+			\usepackage{lmodern}
+			\graphicspath{{img/}}
+			
+			\renewcommand{\frontinstitutionfont}{\fontsize{14}{17}\bfseries\scshape}
+			\renewcommand{\fronttitlefont}{\fontsize{17}{21}\bfseries\scshape}
+			\renewcommand{\frontfootfont}{\fontsize{12}{14}\bfseries\scshape}
+		\end{Preambolo*}
+	\end{frontespizio}
+
+
+%----------------------------------------------------------------------------------------
+%	INDICE
+%----------------------------------------------------------------------------------------
+\tableofcontents
+
+
+%----------------------------------------------------------------------------------------
+%	INTRO
+%----------------------------------------------------------------------------------------
+\chapter{Introduzione}
+\chapter{Capitolo 1}
+\section{Sezione}
+\subsection{Sottosezione}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
