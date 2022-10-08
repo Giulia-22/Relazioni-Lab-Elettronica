@@ -176,13 +176,15 @@ In figura \ref{figura:foto_circ} è mostrata una fotografia del circuito realizz
 \caption{Fotografia del filtro passa-basso attivo con le connessioni del segnale e dell'oscilloscopio.}
 \label{figura:connessioni}
 \end{figure}
-\\Nella fig sotto è mostrato il grafico dell'oscilloscopio con La forma d'onda scelta è una sinusoide di frequenza \SI{100}{\hertz} e tensione picco-picco $V_{PP}=\SI{500}{m\volt}$. 
-% oscilloscopio
-% tabella (c'è già)
-% matlab (io)
-% considerazioni teo vs sper (io)
-% saturazione
-% offset
+\\Nella figura \ref{figura:TEK1} è mostrato il grafico prodotto dall'oscilloscopio in cui è rappresentata la forma d'onda scelta, ovvero una sinusoide di frequenza \SI{100}{\hertz} e tensione picco-picco $V_{PP}=\SI{500}{m\volt}$.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/TEK00001}
+	\caption{Grafico prodotto dall'oscilloscopio con frequenza \SI{100}{\hertz}.}
+	\label{figura:TEK1}
+\end{figure}
+\\Come si può notare dal grafico, la forma d'onda in ingresso presenta uno sfasamento rispetto alla forma d'onda in uscita pari a circa \SI{180}{\degree} e questo fatto è prevedibile poichè il circuito analizzato è in configurazione invertente.
+\\In seguito è stata svolta un'analisi sulla funzione sinusoidale scelta apportando delle variazioni alla frequenza e facendola variare in un intervallo compreso tra \SI{100}{\hertz} e \SI{10}{M\hertz}. Le misure effettuate durante questa analisi sono state riportate nella tabella \ref{table:misure}.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|}
@@ -216,7 +218,40 @@ In figura \ref{figura:foto_circ} è mostrata una fotografia del circuito realizz
 \caption{Grandezze misurate ad ogni frequenza.}
 \label{table:misure}
 \end{table}
+\\Successivamente queste misure sono state utilizzate come campioni per poter realizzare in Matlab i diagrammi di Bode del modulo e della fase della forma d'onda in ingresso scelta.
+% matlab (io)
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/Bode_teo}
+	\caption{Diagrammi di Bode teorici.}
+	\label{figura:bodeteorici}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/modulo_sper}
+	\caption{Diagramma di Bode del modulo con misure.}
+	\label{figura:modulosperimentale}
+\end{figure}
+% Questa immagine è commentata perchè mi da errore
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[height=6.5cm]{immagini/fase_sper}
+%	\caption{Diagramma di Bode della fase con misure}.}
+%	\label{figura:fasesperimentale}
+%\end{figure}
+% considerazioni teo vs sper (io)
+% saturazione
+\\Dalla figura \ref{figura:satur} si può notare che la forma d'onda scelta alla frequenza di \SI{1}{k\hertz} presenta una saturazione. In particolare questo evento si verifica nella parte inferiore della forma d'onda quando la sua tensione picco-picco ha un valore inferiore a \SI{1.7}{\volt}, mentre si verifica anche nella parte superiore della forma d'onda quando la sua tensione picco-picco ha un valore superiore a \SI{2}{\volt}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/TEK00015}
+	\caption{Saturazione.}
+	\label{figura:satur}
+\end{figure}
 
+% offset = +100 mV
+
+% SCRIVERE ANCHE: andamento anomalo del bode ampiezza per comportamento in frequenza dell'opamp (vedi datasheet)
 
 %----------------------------------------------------------------------------------------
 
