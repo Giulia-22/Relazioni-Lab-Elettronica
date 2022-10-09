@@ -192,7 +192,7 @@ In seguito è stata svolta un'analisi sulla funzione sinusoidale scelta apportan
 		\hline
 		\textbf{Frequenza} &\boldmath$\displaystyle\mathrm{{V_{PP,in}}}$ \textbf{[V]} & \boldmath$\displaystyle\mathrm{{V_{PP,out}}}$\textbf{[V]} & \textbf{Guadagno} & \textbf{Sfasamento [°]}\\
 		\hline
-		100 Hz & 0.491 & 4.812 & 9.80 & -179.5\\ % ho aggiornato i valori per renderli coerenti con l'immagine precedente
+		100 Hz & 0.491 & 4.812 & 9.80 & -179.5\\
 		\hline
 		500 Hz & 0.488 & 4.799 & 9.83 & -176.8\\
 		\hline
@@ -219,7 +219,7 @@ In seguito è stata svolta un'analisi sulla funzione sinusoidale scelta apportan
 \caption{Grandezze misurate ad ogni frequenza.}
 \label{table:misure}
 \end{table}
-\\Successivamente queste misure sono state utilizzate come campioni per poter realizzare in Matlab i diagrammi di Bode sperimentali del modulo e della fase. I grafici sono mostrati nelle figure successive, nella figura \ref{figura:modulosperimentale} è rappresentato il diagramma del modulo mentre nella figura \ref{figura:fasesperimentale} quello della fase. \par %della forma d'onda in ingresso scelta. % MOD
+\\Successivamente queste misure sono state utilizzate come campioni per poter realizzare in Matlab i diagrammi di Bode sperimentali del modulo e della fase. I grafici sono mostrati nelle figure successive, nella figura \ref{figura:modulosperimentale} è rappresentato il diagramma del modulo, mentre nella figura \ref{figura:fasesperimentale} quello della fase. \par % MOD
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7.3cm]{immagini/modulo_sper}
@@ -254,7 +254,7 @@ Per analizzare le prestazioni del filtro, confrontiamo i diagrammi sperimentali 
 	\label{figura:bandaguad}
 \end{figure}
 \\La limitazione in frequenza non è l'unica non idealità dell'amplificatore operazionale che possiamo osservare. Se consideriamo un OPAMP ideale, abbiamo che l'uscita non può assumere dei valori di tensione (in modulo) grandi a piacere, ma è limitata dalle alimentazioni. Quest'osservazione è ragionevole, perché se l'uscita assumesse un valore maggiore rispetto alle alimentazioni, significherebbe che il circuito eroga più energia di quanta ne consumi, fatto fisicamente non possibile. Se l'uscita dovesse essere maggiore dell'alimentazione, il segnale satura. Tuttavia, in un amplificatore operazionale reale, la saturazione subentra prima che si raggiungano le alimentazioni, in generale la tensione di saturazione positiva è diversa dalla tensione di saturazione dell'alimentazione negativa perché lo schema interno dell'OPAMP non è simmetrico. \par % AGG
-Dalla figura \ref{figura:satur} si può notare che la forma d'onda scelta, una sinusoide di frequenza \SI{1}{k\hertz} e tensione picco-picco di \SI{7}{\volt} presenta una saturazione. In particolare questo evento si verifica nella parte inferiore della forma d'onda quando la sua tensione picco-picco ha un valore inferiore a \SI{1.7}{\volt}, mentre si verifica anche nella parte superiore della forma d'onda quando la sua tensione picco-picco ha un valore superiore a \SI{2}{\volt}. Sempre da questo grafico, notiamo un'altra non idealità dell'amplificatore operazionale, che è la tensione di offet. Infatti, quando l'ingresso è pari a \SI{0}{\volt} l'uscita non si trova ad un valore di tensione nullo ma positivo, perché in un OPAMP reale l'offset di tensione, seppur piccolo, non è nullo. % MOD vediamo se lasciare o togliere
+Dalla figura \ref{figura:satur} si può notare che la forma d'onda scelta, una sinusoide di frequenza \SI{1}{k\hertz} e tensione picco-picco di \SI{7}{\volt} presenta una saturazione. In particolare questo evento si verifica nella parte inferiore della forma d'onda quando la sua tensione picco-picco ha un valore inferiore a \SI{1.7}{\volt}, mentre si verifica anche nella parte superiore della forma d'onda quando la sua tensione picco-picco ha un valore superiore a \SI{2}{\volt}. Sempre da questo grafico, notiamo un'altra non idealità dell'amplificatore operazionale, che è la tensione di offset. Infatti, quando l'ingresso è pari a \SI{0}{\volt} l'uscita non si trova ad un valore di tensione nullo ma positivo, perché in un OPAMP reale l'offset di tensione, seppur piccolo, non è nullo. % MOD vediamo se lasciare o togliere
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/TEK00015}
