@@ -128,7 +128,7 @@ Per alimentare l'amplificatore operazionale abbiamo utilizzato un'alimentazione 
 \\[2pt]Dalla frequenza di taglio desiderata calcoliamo il valore che deve avere la capacità $C_1$:
 \\[2pt]\indent$\displaystyle{f_T=\frac{1}{2\pi\cdot R_1C_1}\rightarrow C_1=\frac{1}{2\pi\cdot R_1\cdot f_T}=\frac{1}{2\pi\cdot \SI{18}{k\ohm}\cdot \SI{10}{k\hertz}}\simeq\SI{0.88}{n\farad}}$
 \\[4pt]Scegliamo di approssimare $C_1$ a \SI{1}{n\farad}, perciò la frequenza di taglio del nostro filtro sarà:
-\\[2pt]\indent$\displaystyle{f_T=\frac{1}{2\pi\cdot R_1C_1}=\frac{1}{2\pi\cdot \SI{18}{k\ohm}\cdot \SI{1}{n\farad}}\simeq\SI{8.8}{k\hertz}}$
+\\[2pt]\indent$\displaystyle{f_T=\frac{1}{2\pi\cdot R_1C_1}=\frac{1}{2\pi\cdot \SI{18}{k\ohm}\cdot \SI{1}{n\farad}}\simeq\SI{8.84}{k\hertz}}$ % MOD (aggiunta una cifra significativa a f_T)
 \\[4pt]In figura \ref{figura:cto_filtro} è riportato lo schema del circuito con i valori dei componenti scelti. 
 \begin{figure}[h!]
 \centering
@@ -172,26 +172,27 @@ In figura \ref{figura:foto_circ} è mostrata una fotografia del circuito realizz
 \\Alimentiamo il circuito e applichiamo un segnale collegando con un cavo BNC il generatore di forme d'onda al circuito. Per osservare la risposta del filtro utilizziamo l'oscilloscopio collegando le due sonde come mostrato in figura \ref{figura:connessioni}. I coccodrilli delle due sonde li colleghiamo a massa, la punta della prima sonda (CH1, traccia gialla) la colleghiamo al capo della resistenza $R_2$ connesso al generatore di forme d'onda, mentre la punta dell'altra sonda (CH2, traccia azzurra) la connettiamo al terminale di $R_1$ connesso al pin 6 del \textmu A741.
 \begin{figure}[h!]
 \centering
-\includegraphics[height=7.6cm]{immagini/circuito_sonde}
+\includegraphics[height=7cm]{immagini/circuito_sonde}
 \caption{Fotografia del filtro passa-basso attivo con le connessioni del segnale e dell'oscilloscopio.}
 \label{figura:connessioni}
 \end{figure}
-\\Nella figura \ref{figura:TEK1} è mostrato il grafico prodotto dall'oscilloscopio in cui è rappresentata la forma d'onda scelta, ovvero una sinusoide di frequenza \SI{100}{\hertz} e tensione picco-picco $V_{PP}=\SI{500}{m\volt}$.
+\\Nella figura \ref{figura:TEK1} è mostrato il grafico prodotto dall'oscilloscopio in cui è rappresentata la risposta del circuito quando in ingresso applichiamo una sinusoide di frequenza \SI{100}{\hertz} e tensione picco-picco $V_{PP}=\SI{500}{m\volt}$.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/TEK00001}
 	\caption{Grafico prodotto dall'oscilloscopio con frequenza \SI{100}{\hertz}.}
 	\label{figura:TEK1}
 \end{figure}
-\\Come si può notare dal grafico, la forma d'onda in ingresso presenta uno sfasamento rispetto alla forma d'onda in uscita pari a circa \SI{180}{\degree} e questo fatto è prevedibile poichè il circuito analizzato è in configurazione invertente.
-\\In seguito è stata svolta un'analisi sulla funzione sinusoidale scelta apportando delle variazioni alla frequenza e facendola variare in un intervallo compreso tra \SI{100}{\hertz} e \SI{10}{M\hertz}. Le misure effettuate durante questa analisi sono state riportate nella tabella \ref{table:misure}.
+\\Come si può notare dal grafico, la forma d'onda in ingresso presenta uno sfasamento rispetto alla forma d'onda in uscita pari a circa \SI{180}{\degree} e questo fatto è prevedibile poichè il circuito analizzato è in configurazione invertente. Infatti, quando il segnale in ingresso è positivo l'uscita è negativa, viceversa, quando l'ingresso è negativo l'uscita è positiva.\par % MOD
+Se calcoliamo il guadagno (in modulo) del circuito otteniamo: $\displaystyle{G=\frac{V_{PP,in}}{V_{PP,out}}=\frac{\SI{4.812}{\volt}}{\SI{0.491}{\volt}}=9.80}$, quindi il guadagno del filtro è molto prossimo al valore che ci aspettiamo dalla teoria (è solo il 2\% in meno). Anche la frequenza di taglio ottenuta è confrontabile con la frequenza di taglio teorica, dato che superiore a questa di solo 0.1\%.\par % AGG
+In seguito è stata svolta un'analisi sulla funzione sinusoidale scelta apportando delle variazioni alla frequenza e facendola variare in un intervallo compreso tra \SI{100}{\hertz} e \SI{10}{M\hertz}. I valori delle tensioni e della fase misurati con l'oscilloscopio ci serviranno per ricavare i diagrammi di Bode di modulo e fase del filtro, così da confrontarli con i diagrammi teorici per poter valutare le prestazioni del filtro. Le misure effettuate durante questa analisi sono state riportate nella tabella \ref{table:misure}. % MOD
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline
 		\textbf{Frequenza} &\boldmath$\displaystyle\mathrm{{V_{PP,in}}}$ \textbf{[V]} & \boldmath$\displaystyle\mathrm{{V_{PP,out}}}$\textbf{[V]} & \textbf{Guadagno} & \textbf{Sfasamento [°]}\\
 		\hline
-		100 Hz & 0.488 & 4.804 & 9.84 & -179.3\\
+		100 Hz & 0.491 & 4.812 & 9.80 & -179.5\\ % ho aggiornato i valori per renderli coerenti con l'immagine precedente
 		\hline
 		500 Hz & 0.488 & 4.799 & 9.83 & -176.8\\
 		\hline
@@ -218,30 +219,42 @@ In figura \ref{figura:foto_circ} è mostrata una fotografia del circuito realizz
 \caption{Grandezze misurate ad ogni frequenza.}
 \label{table:misure}
 \end{table}
-\\Successivamente queste misure sono state utilizzate come campioni per poter realizzare in Matlab i diagrammi di Bode del modulo e della fase della forma d'onda in ingresso scelta.
-% matlab (io)
+\\Successivamente queste misure sono state utilizzate come campioni per poter realizzare in Matlab i diagrammi di Bode sperimentali del modulo e della fase. I grafici sono mostrati nelle figure successive, nella figura \ref{figura:modulosperimentale} è rappresentato il diagramma del modulo mentre nella figura \ref{figura:fasesperimentale} quello della fase. \par %della forma d'onda in ingresso scelta. % MOD
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.5cm]{immagini/Bode_teo}
+	\includegraphics[height=7.3cm]{immagini/modulo_sper}
+	\caption{Diagramma di Bode del modulo ottenuto sperimentalmente.}
+	\label{figura:modulosperimentale}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=7.3cm]{immagini/fase_sper}
+	\caption{Diagramma di Bode della fase ottenuto sperimentalmente.}
+	\label{figura:fasesperimentale}
+\end{figure}
+Come ci aspettavamo, il guadagno in bassa frequenza è pari a \SI{20}{\decibel}, che corrisponde ad un valore di guadagno di 10 in scala lineare. Anche lo sfasamento in bassa frequenza è molto preciso ed è pari a circa \SI{-180}{\degree}. Spostandoci verso la frequenza di taglio, il modulo rimane circa costante e diminuisce di \SI{3}{\decibel} in corrispondenza della frequenza di taglio, esattamente come ci aspettiamo (in scala lineare, \SI{17}{\decibel} corrispondono ad un valore di 7.08, valore molto prossimo al guadagno ricavato, che è 7.00). Oltre questa frequenza, il modulo inizia a diminuire. Per quanto riguarda invece la fase, spostandoci verso la frequenza di taglio il suo valore aumenta, fino a raggiungere il valore \SI{-133}{\degree} in corrispondenza della frequenza di taglio. Questo valore è molto vicino allo sfasamento di \SI{-135}{\degree} che ci aspettiamo dall'analisi teorica. Proseguendo verso valori maggiori, la fase continua ad aumentare. \par
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=7.7cm]{immagini/Bode_teo}
 	\caption{Diagrammi di Bode teorici.}
 	\label{figura:bodeteorici}
 \end{figure}
+Per analizzare le prestazioni del filtro, confrontiamo i diagrammi sperimentali con quelli teorici, mostrati in figura \ref{figura:bodeteorici}. Possiamo notare che sia il diagramma sperimentale del modulo che quello della fase approssimano molto bene i diagrammi teorici solo fino ad una frequenza di \SI{100}{k\hertz}. Oltre questa frequenza, il grafico sperimentale del modulo oscilla tra valori di \SI{5}{\decibel} e \SI{0}{\decibel} per poi calare drasticamente alla frequenza di \SI {10}{M\hertz}. Il comportamento teorico prevede invece che il modulo diminuisca linearmente con una pendenza di \SI{-20}{\decibel}/decade. Oltre questa frequenza anche il diagramma sperimentale della fase non segue più il comportamento teorico: invece che assestarsi asintoticamente al valore di \SI{90}{\degree} (\SI{-90}{\degree} nel nostro diagramma), la fase aumenta pressoché linearmente. Questo risultato apparentemente anomalo può essere spiegato se consideriamo il comportamento in alta frequenza dell'amplificatore operazionale che utilizziamo per realizzare il filtro: dato che l'OPAMP è componente reale e non ideale, ha delle limitazioni in frequenza ed il suo comportamento è di tipo passa-basso, motivo per cui dopo una certa frequenza il nostro circuito non è più in grado di funzionare ed amplificare correttamente. In figura \ref{figura:TEK13} vediamo che quando applichiamo una sinusoide con tensione picco-picco di \SI{500}{m\volt} e frequenza \SI{10}{M\hertz} l'uscita non è più in controfase rispetto all'ingresso ed è inoltre fortemente attenuata.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.5cm]{immagini/modulo_sper}
-	\caption{Diagramma di Bode del modulo con misure.}
-	\label{figura:modulosperimentale}
+	\includegraphics[height=6.5cm]{immagini/TEK00013}
+	\caption{Risposta del circuito ad una sinusoide ad alta frequenza.}
+	\label{figura:TEK13}
 \end{figure}
-% Questa immagine è commentata perchè mi da errore
-%\begin{figure}[h!]
-%	\centering
-%	\includegraphics[height=6.5cm]{immagini/fase_sper}
-%	\caption{Diagramma di Bode della fase con misure}.}
-%	\label{figura:fasesperimentale}
-%\end{figure}
-% considerazioni teo vs sper (io)
-% saturazione
-\\Dalla figura \ref{figura:satur} si può notare che la forma d'onda scelta alla frequenza di \SI{1}{k\hertz} presenta una saturazione. In particolare questo evento si verifica nella parte inferiore della forma d'onda quando la sua tensione picco-picco ha un valore inferiore a \SI{1.7}{\volt}, mentre si verifica anche nella parte superiore della forma d'onda quando la sua tensione picco-picco ha un valore superiore a \SI{2}{\volt}.
+\\Se guardiamo il datasheet, vediamo che l'amplificatore operazionale \textmu A741 ha prodotto banda-guadagno di \SI{1}{M\hertz}, questo valore corrisponde alla banda passante dell'OPAMP in configurazione ad anello aperto. Nel grafico seguente, la figura \ref{figura:bandaguad} è riportato il grafico del guadagno in anello aperto del nostro componente. Noi però non lo utilizziamo in anello aperto, bensì in configurazione invertente con un guadagno di \SI{20}{\decibel}, quindi la banda passante dell'amplificatore si riduce, il suo valore si determina andando a vedere a quale frequenza il grafico del guadagno in anello aperto attraversa la linea a \SI{20}{\decibel}. La banda passante è di \SI{100}{k\hertz}, questo è perfettamente in accordo con il comportamento del circuito che osserviamo, perché fino a questa frequenza i diagrammi di Bode sperimentali di modulo e fase sono sovrapponibili ai diagrammi teorici, oltre questa frequenza invece subentrano le non-idealità dell'amplificatore operazionale e di conseguenza il comportamento reale differisce da quello teorico ideale.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/gbw}
+	\caption{Grafico del guadagno in anello aperto dell'\textmu A741.}
+	\label{figura:bandaguad}
+\end{figure}
+\\La limitazione in frequenza non è l'unica non idealità dell'amplificatore operazionale che possiamo osservare. Se consideriamo un OPAMP ideale, abbiamo che l'uscita non può assumere dei valori di tensione (in modulo) grandi a piacere, ma è limitata dalle alimentazioni. Quest'osservazione è ragionevole, perché se l'uscita assumesse un valore maggiore rispetto alle alimentazioni, significherebbe che il circuito eroga più energia di quanta ne consumi, fatto fisicamente non possibile. Se l'uscita dovesse essere maggiore dell'alimentazione, il segnale satura. Tuttavia, in un amplificatore operazionale reale, la saturazione subentra prima che si raggiungano le alimentazioni, in generale la tensione di saturazione positiva è diversa dalla tensione di saturazione dell'alimentazione negativa perché lo schema interno dell'OPAMP non è simmetrico. \par % AGG
+Dalla figura \ref{figura:satur} si può notare che la forma d'onda scelta, una sinusoide di frequenza \SI{1}{k\hertz} e tensione picco-picco di \SI{7}{\volt} presenta una saturazione. In particolare questo evento si verifica nella parte inferiore della forma d'onda quando la sua tensione picco-picco ha un valore inferiore a \SI{1.7}{\volt}, mentre si verifica anche nella parte superiore della forma d'onda quando la sua tensione picco-picco ha un valore superiore a \SI{2}{\volt}. Sempre da questo grafico, notiamo un'altra non idealità dell'amplificatore operazionale, che è la tensione di offet. Infatti, quando l'ingresso è pari a \SI{0}{\volt} l'uscita non si trova ad un valore di tensione nullo ma positivo, perché in un OPAMP reale l'offset di tensione, seppur piccolo, non è nullo. % MOD vediamo se lasciare o togliere
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/TEK00015}
@@ -251,7 +264,6 @@ In figura \ref{figura:foto_circ} è mostrata una fotografia del circuito realizz
 
 % offset = +100 mV
 
-% SCRIVERE ANCHE: andamento anomalo del bode ampiezza per comportamento in frequenza dell'opamp (vedi datasheet)
 
 %----------------------------------------------------------------------------------------
 
