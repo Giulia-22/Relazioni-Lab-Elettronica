@@ -254,16 +254,23 @@ Per analizzare le prestazioni del filtro, confrontiamo i diagrammi sperimentali 
 	\label{figura:bandaguad}
 \end{figure}
 \\La limitazione in frequenza non è l'unica non idealità dell'amplificatore operazionale che possiamo osservare. Se consideriamo un OPAMP ideale, abbiamo che l'uscita non può assumere dei valori di tensione (in modulo) grandi a piacere, ma è limitata dalle alimentazioni. Quest'osservazione è ragionevole, perché se l'uscita assumesse un valore maggiore rispetto alle alimentazioni, significherebbe che il circuito eroga più energia di quanta ne consumi, fatto fisicamente non possibile. Se l'uscita dovesse essere maggiore dell'alimentazione, il segnale satura. Tuttavia, in un amplificatore operazionale reale, la saturazione subentra prima che si raggiungano le alimentazioni, in generale la tensione di saturazione positiva è diversa dalla tensione di saturazione dell'alimentazione negativa perché lo schema interno dell'OPAMP non è simmetrico. \par % AGG
-Dalla figura \ref{figura:satur} si può notare che la forma d'onda scelta, una sinusoide di frequenza \SI{1}{k\hertz} e tensione picco-picco di \SI{7}{\volt} presenta una saturazione. In particolare questo evento si verifica nella parte inferiore della forma d'onda quando la sua tensione picco-picco ha un valore inferiore a \SI{1.7}{\volt}, mentre si verifica anche nella parte superiore della forma d'onda quando la sua tensione picco-picco ha un valore superiore a \SI{2}{\volt}. Sempre da questo grafico, notiamo un'altra non idealità dell'amplificatore operazionale, che è la tensione di offset. Infatti, quando l'ingresso è pari a \SI{0}{\volt} l'uscita non si trova ad un valore di tensione nullo ma positivo, perché in un OPAMP reale l'offset di tensione, seppur piccolo, non è nullo. % MOD vediamo se lasciare o togliere
+Dalla figura \ref{figura:satur} si può notare che quando applichiamo in ingresso una sinusoide di frequenza \SI{1}{k\hertz} e tensione picco-picco di \SI{7}{\volt} il segnale in uscita presenta una saturazione. In particolare questo evento si verifica per le semionde negative del segnale in uscita quando la tensione picco-picco del segnale in ingresso ha un valore superiore a \SI{1.7}{\volt}, mentre per le semionde positive del segnale in uscita si verifica quando la tensione picco-picco del segnale in ingresso ha un valore superiore a \SI{2}{\volt}. Sempre da questo grafico, notiamo un'altra non idealità dell'amplificatore operazionale, che è la tensione di offset. Infatti, quando l'ingresso è pari a \SI{0}{\volt} l'uscita non si trova ad un valore di tensione nullo ma positivo, perché in un OPAMP reale l'offset di tensione, seppur piccolo, non è nullo. % MOD vediamo se lasciare o togliere
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/TEK00015}
-	\caption{Saturazione.}
+	\caption{Grafico della tensione in uscita quando si verifica la saturazione.}
 	\label{figura:satur}
 \end{figure}
-
+\\Per ultimo, si è analizzato il comportamento del circuito quando il segnale in ingresso presenta un offset di tensione. Abbiamo quindi applicato in ingresso una sinusoide con tensione picco-picco di \SI{500}{m\volt}, offset in DC di \SI{+100}{m\volt} e  frequenza \SI{1}{k\hertz}. Analizzamo la risposta del circuito, accoppiando l'oscilloscopio prima in DC  e poi in AC, il grafico della tensione in uscita al circuito nei due casi è riportata in figura \ref{figura:accopp}. \par
+\begin{figure}
+\centering
+\includegraphics[height=6.5cm]{immagini/TEK00018}\\(a)\\[1ex]
+\includegraphics[height=6.5cm]{immagini/TEK00019}\\(b)
+\caption{Risposta del circuito con accoppiamento DC (a) e accoppiamento AC (b).}
+	\label{figura:accopp}
+\end{figure}
 % offset = +100 mV
-
+Dal primo grafico, possiamo notare che sia l'ingresso che l'uscita presentano un offset in DC. In particolare, anche l'offset viene amplificato di un fattore pari al guadagno del circuito, perciò la sinusoide in uscita, oltre che essere amplificata, sarà traslata di \SI{1}{\volt} sull'asse delle ordinate. Se volessimo analizzare soltanto la componente di segnale, senza l'offset, possiamo sfruttare l'oscilloscopio: se accoppiamo entrambe le sonde in AC, l'oscilloscopio ``cancella'' l'offset di tensione e in uscita vediamo solo la componente di segnale, come illustrato nel secondo grafico di figura \ref{figura:accopp}.
 
 %----------------------------------------------------------------------------------------
 
