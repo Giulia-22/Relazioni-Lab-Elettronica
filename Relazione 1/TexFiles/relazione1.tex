@@ -145,7 +145,7 @@ Per alimentare l'amplificatore operazionale abbiamo utilizzato un'alimentazione 
 		%\hline
 		%{} & \textbf{Valore nominale} & \textbf{Valore misurato} \\ 
 		\hline
-		$\mathbf{R_1}$ & \SI{18}{k\ohm} & \SI{17.977}{\ohm} \\ 
+		$\mathbf{R_1}$ & \SI{18}{k\ohm} & \SI{17.977}{k\ohm} \\ 
 		\hline
 		$\mathbf{R_2}$& \SI{1.8}{k\ohm} & \SI{1.815}{k\ohm} \\ 
 		\hline
@@ -155,12 +155,12 @@ Per alimentare l'amplificatore operazionale abbiamo utilizzato un'alimentazione 
 \end{table}
 \\Per realizzare il filtro posizioniamo il \textmu A741 sulla breadboard e colleghiamo i terminali in questo modo:
 \begin{itemize}
-\item il terminale numero 8 è \textit{Not Connected}, perciò non viene collegato a nulla;
-\item i terminali 7 e 4 sono collegati rispettivamente all'alimentazione positiva e all'alimentazione negativa;
 \item i terminali 1 e 5 servono per compensare l'offset, li lasciamo floating;
+\item il terminale 2 è l'ingresso invertente. A questo terminale colleghiamo un terminale della resistenza $R_1$ e un terminale della capacità $C_1$, inoltre applichiamo il segnale tramite la resistenza $R_2$;
 \item il terminale 3, ovvero l'ingresso non-invertente, lo connettiamo a massa;
-\item il terminale 2 è l'ingresso invertente. A questo terminale colleghiamo un terminale della resistenza $R_1$ e un terminale della capacità $C_1$, inoltre applichiamo il segnale tramite la resistenza $R_2$; 
-\item il terminale 6 serve per prelevare l'output. Questo terminale è collegato al terminale di $R_1$ e al terminale di $C_1$ non connessi con il pin 6.
+\item i terminali 4 e 7 sono collegati rispettivamente all'alimentazione  negativa e all'alimentazione positiva;
+\item il terminale 6 serve per prelevare l'output. Questo terminale è collegato al terminale di $R_1$ e al terminale di $C_1$ non connessi con il pin 2;
+\item il terminale numero 8 è \textit{Not Connected}, perciò non viene collegato a nulla.
 \end{itemize}
 In figura \ref{figura:foto_circ} è mostrata una fotografia del circuito realizzato in cui si possono vedere le connessioni descritte in precedenza.
 \begin{figure}[h!]
@@ -239,14 +239,14 @@ Come ci aspettavamo, il guadagno in bassa frequenza è pari a \SI{20}{\decibel},
 	\caption{Diagrammi di Bode teorici.}
 	\label{figura:bodeteorici}
 \end{figure}
-Per analizzare le prestazioni del filtro, confrontiamo i diagrammi sperimentali con quelli teorici, mostrati in figura \ref{figura:bodeteorici}. Possiamo notare che sia il diagramma sperimentale del modulo che quello della fase approssimano molto bene i diagrammi teorici solo fino ad una frequenza di \SI{100}{k\hertz}. Oltre questa frequenza, il grafico sperimentale del modulo oscilla tra valori di \SI{5}{\decibel} e \SI{0}{\decibel} per poi calare drasticamente alla frequenza di \SI {10}{M\hertz}. Il comportamento teorico prevede invece che il modulo diminuisca linearmente con una pendenza di \SI{-20}{\decibel}/decade. Oltre questa frequenza anche il diagramma sperimentale della fase non segue più il comportamento teorico: invece che assestarsi asintoticamente al valore di \SI{90}{\degree} (\SI{-90}{\degree} nel nostro diagramma), la fase aumenta pressoché linearmente. Questo risultato apparentemente anomalo può essere spiegato se consideriamo il comportamento in alta frequenza dell'amplificatore operazionale che utilizziamo per realizzare il filtro: dato che l'OPAMP è componente reale e non ideale, ha delle limitazioni in frequenza ed il suo comportamento è di tipo passa-basso, motivo per cui dopo una certa frequenza il nostro circuito non è più in grado di funzionare ed amplificare correttamente. In figura \ref{figura:TEK13} vediamo che quando applichiamo una sinusoide con tensione picco-picco di \SI{500}{m\volt} e frequenza \SI{10}{M\hertz} l'uscita non è più in controfase rispetto all'ingresso ed è inoltre fortemente attenuata.
+Per analizzare le prestazioni del filtro, confrontiamo i diagrammi sperimentali con quelli teorici, mostrati in figura \ref{figura:bodeteorici}. Possiamo notare che sia il diagramma sperimentale del modulo che quello della fase approssimano molto bene i diagrammi teorici solo fino ad una frequenza di \SI{100}{k\hertz}. Oltre questa frequenza, il grafico sperimentale del modulo oscilla tra valori di \SI{5}{\decibel} e \SI{0}{\decibel} per poi calare drasticamente alla frequenza di \SI {10}{M\hertz}. Il comportamento teorico prevede invece che il modulo diminuisca linearmente con una pendenza di \SI{-20}{\decibel}/decade. Oltre questa frequenza anche il diagramma sperimentale della fase non segue più il comportamento teorico: invece che assestarsi asintoticamente al valore di \SI{90}{\degree} (\SI{-90}{\degree} nel nostro diagramma), la fase aumenta pressoché linearmente. Questo risultato apparentemente anomalo può essere spiegato se consideriamo il comportamento in alta frequenza dell'amplificatore operazionale che utilizziamo per realizzare il filtro: dato che l'OPAMP è un componente reale e non ideale, ha delle limitazioni in frequenza ed il suo comportamento è di tipo passa-basso, motivo per cui dopo una certa frequenza il nostro circuito non è più in grado di funzionare ed amplificare correttamente. In figura \ref{figura:TEK13} vediamo che quando applichiamo una sinusoide con tensione picco-picco di \SI{500}{m\volt} e frequenza \SI{10}{M\hertz} l'uscita non è più in controfase rispetto all'ingresso ed è inoltre fortemente attenuata.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/TEK00013}
 	\caption{Risposta del circuito ad una sinusoide ad alta frequenza.}
 	\label{figura:TEK13}
 \end{figure}
-\\Se guardiamo il datasheet, vediamo che l'amplificatore operazionale \textmu A741 ha prodotto banda-guadagno di \SI{1}{M\hertz}, questo valore corrisponde alla banda passante dell'OPAMP in configurazione ad anello aperto. Nel grafico seguente, la figura \ref{figura:bandaguad} è riportato il grafico del guadagno in anello aperto del nostro componente. Noi però non lo utilizziamo in anello aperto, bensì in configurazione invertente con un guadagno di \SI{20}{\decibel}, quindi la banda passante dell'amplificatore si riduce, il suo valore si determina andando a vedere a quale frequenza il grafico del guadagno in anello aperto attraversa la linea a \SI{20}{\decibel}. La banda passante è di \SI{100}{k\hertz}, questo è perfettamente in accordo con il comportamento del circuito che osserviamo, perché fino a questa frequenza i diagrammi di Bode sperimentali di modulo e fase sono sovrapponibili ai diagrammi teorici, oltre questa frequenza invece subentrano le non-idealità dell'amplificatore operazionale e di conseguenza il comportamento reale differisce da quello teorico ideale.
+\\Se guardiamo il datasheet, vediamo che l'amplificatore operazionale \textmu A741 ha prodotto banda-guadagno di \SI{1}{M\hertz}, questo valore corrisponde alla banda passante dell'OPAMP in configurazione ad anello aperto. Nel grafico seguente, la figura \ref{figura:bandaguad}, è riportato il grafico del guadagno in anello aperto del nostro componente. Noi però non lo utilizziamo in anello aperto, bensì in configurazione invertente con un guadagno di \SI{20}{\decibel}, quindi la banda passante dell'amplificatore si riduce, il suo valore si determina andando a vedere a quale frequenza il grafico del guadagno in anello aperto attraversa la linea a \SI{20}{\decibel}. La banda passante è di \SI{100}{k\hertz}, questo è perfettamente in accordo con il comportamento del circuito che osserviamo, perché fino a questa frequenza i diagrammi di Bode sperimentali di modulo e fase sono sovrapponibili ai diagrammi teorici, oltre questa frequenza invece subentrano le non-idealità dell'amplificatore operazionale e di conseguenza il comportamento reale differisce da quello teorico ideale.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/gbw}
@@ -261,7 +261,7 @@ Dalla figura \ref{figura:satur} si può notare che quando applichiamo in ingress
 	\caption{Grafico della tensione in uscita quando si verifica la saturazione.}
 	\label{figura:satur}
 \end{figure}
-\\Per ultimo, si è analizzato il comportamento del circuito quando il segnale in ingresso presenta un offset di tensione. Abbiamo quindi applicato in ingresso una sinusoide con tensione picco-picco di \SI{500}{m\volt}, offset in DC di \SI{+100}{m\volt} e  frequenza \SI{1}{k\hertz}. Analizzamo la risposta del circuito, accoppiando l'oscilloscopio prima in DC  e poi in AC, il grafico della tensione in uscita al circuito nei due casi è riportata in figura \ref{figura:accopp}. \par
+\\Per ultimo, si è analizzato il comportamento del circuito quando il segnale in ingresso presenta un offset di tensione. Abbiamo quindi applicato in ingresso una sinusoide con tensione picco-picco di \SI{500}{m\volt}, offset in DC di \SI{+100}{m\volt} e  frequenza di \SI{1}{k\hertz}. Analizziamo la risposta del circuito, accoppiando l'oscilloscopio prima in DC e poi in AC. Il grafico della tensione in uscita al circuito nei due casi è riportata in figura \ref{figura:accopp}. \par
 \begin{figure}
 \centering
 \includegraphics[height=6.5cm]{immagini/TEK00018}\\(a)\\[1ex]
@@ -270,7 +270,7 @@ Dalla figura \ref{figura:satur} si può notare che quando applichiamo in ingress
 	\label{figura:accopp}
 \end{figure}
 % offset = +100 mV
-Dal primo grafico, possiamo notare che sia l'ingresso che l'uscita presentano un offset in DC. In particolare, anche l'offset viene amplificato di un fattore pari al guadagno del circuito, perciò la sinusoide in uscita, oltre che essere amplificata, sarà traslata di \SI{1}{\volt} sull'asse delle ordinate. Se volessimo analizzare soltanto la componente di segnale, senza l'offset, possiamo sfruttare l'oscilloscopio: se accoppiamo entrambe le sonde in AC, l'oscilloscopio ``cancella'' l'offset di tensione e in uscita vediamo solo la componente di segnale, come illustrato nel secondo grafico di figura \ref{figura:accopp}.
+Dal primo grafico, possiamo notare che sia l'ingresso che l'uscita presentano un offset in DC. In particolare, anche l'offset viene amplificato di un fattore pari al guadagno del circuito, perciò la sinusoide in uscita, oltre che essere amplificata, sarà traslata di \SI{1}{\volt} sull'asse delle ordinate. Per analizzare soltanto la componente di segnale, senza l'offset, possiamo sfruttare l'oscilloscopio: se accoppiamo entrambe le sonde in AC, l'oscilloscopio ``cancella'' l'offset di tensione e in uscita vediamo solo la componente di segnale, come illustrato nel secondo grafico di figura \ref{figura:accopp}.
 
 %----------------------------------------------------------------------------------------
 
