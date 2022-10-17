@@ -120,7 +120,7 @@ Nei circuiti realizzati in questa attività di laboratorio utilizzeremo dei diod
 	\caption{Caratteristica reale (a destra) e ideale (a destra) di un diodo.}
 	\label{figura:diodo}
 \end{figure}
-\\Nella figura precedente, la figura \ref{figura:diodo} si possono vedere la caratteristica reale ed ideale di un diodo: per studiare più facilemente i circuiti si approssima il comportamento di un diodo e lo si considera spento (OFF) se la tensione applicata ai suoi capi è minore di \SI{0.7}{\volt}; al contrario, se la tensione ai suoi capi è maggiore di questo valore, il diodo è acceso (ON) e lascia fluire la corrente dall'anodo al catodo con una caduta di tensione ai suoi capi di \SI{0.7}{\volt}.
+\\Nella figura precedente, la figura \ref{figura:diodo} si possono vedere la caratteristica reale ed ideale di un diodo: per studiare più facilmente i circuiti si approssima il comportamento di un diodo e lo si considera spento (OFF) se la tensione applicata ai suoi capi è minore di \SI{0.7}{\volt}; al contrario, se la tensione ai suoi capi è maggiore di questo valore, il diodo è acceso (ON) e lascia fluire la corrente dall'anodo al catodo con una caduta di tensione ai suoi capi di \SI{0.7}{\volt}.
 \newpage
 \section{Circuito 1: raddrizzatore passivo a semionda}
 \subsection{Schema del circuito e Funzione di Trasferimento}Il primo circuito è il raddrizzatore più semplice che si può realizzare. \`E costituito da un diodo e da una resistenza, il segnale viene applicato all'anodo del diodo e l'uscita del circuito è prelevata al catodo del diodo. Il circuito non viene alimentato, perciò abbiamo un raddrizzatore passivo. \par
@@ -164,7 +164,7 @@ Il raddrizzatore passivo a semionda realizzato in laboratorio è mostrato in fig
 	\caption{Misure delle resistenze utilizzate nel raddrizzatore a semionda passivo.}
 	\label{table:misure1}
 \end{table}
-Facciamo variare la frequenza della sinusoide in ingresso da \SI{1}{k\hertz} a \SI{1}{M\hertz} prendendo un punto per ogni decade e misuriamo con l'oscilloscopio l'ampizza del segnale in ingresso e del segnale in uscita, quindi ne facciamo la differenza. Ripetiamo queste misure per i quattro valori di resistenza, i valori ricavati sono riportati in tabella \ref{table:misTensioni1}.
+Facciamo variare la frequenza della sinusoide in ingresso da \SI{1}{k\hertz} a \SI{1}{M\hertz} prendendo un punto per ogni decade e misuriamo con l'oscilloscopio l'ampiezza del segnale in ingresso e del segnale in uscita, quindi ne facciamo la differenza. Ripetiamo queste misure per i quattro valori di resistenza, i valori ricavati sono riportati in tabella \ref{table:misTensioni1}.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
@@ -235,7 +235,7 @@ Se la resistenza ha un valore elevato, non favorisce la scarica del condensatore
 \newpage
 \section{Circuito 2: raddrizzatore a semionda di precisione}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Modifichiamo il circuito di prima introducendo un'amplificatore operazionale, il \textmu A741. Il diodo si trova ora in reazione all'amplificatore operazionale, nella cosiddetta configurazione a superdiodo: con queste connessioni otteniamo un raddrizzatore di precisione perché eliminiamo la caduta di tensione della giunzione p-n del diodo. Lo svantaggio è che l'OPAMP è un dispositivo attivo, quindi dovremo alimentare il circuito.\par
+Modifichiamo il circuito di prima introducendo un amplificatore operazionale, il \textmu A741. Il diodo si trova ora in reazione all'amplificatore operazionale, nella cosiddetta configurazione a superdiodo: con queste connessioni otteniamo un raddrizzatore di precisione perché eliminiamo la caduta di tensione della giunzione p-n del diodo. Lo svantaggio è che l'OPAMP è un dispositivo attivo, quindi dovremo alimentare il circuito.\par
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/schema2}
@@ -256,13 +256,19 @@ Modifichiamo il circuito di prima introducendo un'amplificatore operazionale, il
 \subsection{Schema del circuito e Funzione di Trasferimento}
 In questo circuito (come mostrato nella figura \ref{figura:schema3}), a differenza dei precedenti due, sono presenti due diodi: il primo è collegato con l'anodo all'uscita dell'OPAMP e con il catodo al noto $\displaystyle\mathrm{V_{out}}$, mentre il secondo è posizionato nella retroazione del circuito, con l'anodo collegato al nodo $\displaystyle\mathrm{V_{in}}$ e il catodo a $\displaystyle\mathrm{V_{out}}$.\par
 La differenza principale di questo circuito rispetto ai precedenti è che non raddrizza solo le semionde negative o positive, ma entrambe, per questo il raddrizzatore è detto \textit{a doppia semionda}. \par
-Inoltre il raddrizzatore a doppia semionda presenta due retroazioni negative e in particolare quella costituita dalla sola resistenza R è sempre chiusa permettendo al circuito in esame di non operare in anello aperto.\par % DA CONTROLLARE
-In aggiunta l'amplificatore si trova in configurazione invertente e per la presenza di resistenze con valori equivalenti presenta un guadagno pari a -1 (di fatto è un buffer invertente, come si vede dalla figura \ref{figura:}). % Da mettere? (la figura non c'è ancora)
+Inoltre il raddrizzatore a doppia semionda presenta due retroazioni negative e in particolare quella costituita dalla sola resistenza R è sempre chiusa permettendo al circuito in esame di non operare in anello aperto.\par
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=7cm]{immagini/schema3}
 	\caption{Schema del raddrizzatore a doppia semionda.}
 	\label{figura:schema3}
+\end{figure}
+In aggiunta l'amplificatore si trova in configurazione invertente e per la presenza di resistenze con valori equivalenti presenta un guadagno pari a -1. Di fatto si comporta come un buffer invertente e questo lo si può notare dalla figura \ref{figura:TEK00023} in cui sono mostrati i segnali $\displaystyle\mathrm{V_{in}}$ e $\displaystyle\mathrm{V_{1}}$.
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/TEK00023}
+	\caption{Comportamento di un buffer invertente.}
+	\label{figura:TEK00023}
 \end{figure}
 \\La funzione di trasferimento corrispondente a questo circuito è:
 
@@ -298,7 +304,7 @@ Come primo passo per la costruzione del circuito, sono stati misurati i valori d
 	\caption{Fotografia del raddrizzatore a doppia semionda realizzato in laboratorio.}
 	\label{figura:circuito3}
 \end{figure}
-\\Una volta realizzato il circuito sulla breadboard, di cui si riporta la fotografia in figura \ref{figura:circuito3}, sono state effettuate delle misure (presenti nella tabella \ref{table:misure3}) dei valori di tensione nei vari nodi del circuito considerando i segnali in ingresso e in uscita a diverse frequenze (quelle considerate sono state: \SI{1}{k\hertz}, \SI{10}{k\hertz}, \SI{100}{k\hertz} e \SI{400}{k\hertz}). La forma d'onda utilizzata è sempre una sinusoide.
+\\Una volta realizzato il circuito sulla breadboard, di cui si riporta la fotografia in figura \ref{figura:circuito3}, sono state effettuate delle misure (presenti nella tabella \ref{table:misure3}) dei valori di tensione nei vari nodi del circuito considerando i segnali in ingresso e in uscita a diverse frequenze (\SI{1}{k\hertz}, \SI{10}{k\hertz}, \SI{100}{k\hertz} e \SI{400}{k\hertz}). La forma d'onda utilizzata è sempre una sinusoide con un'ampiezza picco-picco pari a \SI{2}{\volt}.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{|c|c|c|c|}
@@ -323,7 +329,7 @@ Come primo passo per la costruzione del circuito, sono stati misurati i valori d
 	\caption{Segnali di $\mathrm{V_1}$ e di $\mathrm{V_{out}}$ con frequenza di \SI{1}{k\hertz}.}
 	\label{figura:TEK00022}
 \end{figure}
-\\Invece se ad esempio si considera la frequenza di \SI{100}{k\hertz}, come si può notare dalla figura \ref{figura:TEK00025}, si vede che i segnali presentano una curva più estesa nella fase di spegnimento del diodo rispetto a quella della fase di accensione. Questo andamento risulta ancora più accentuato nella figura \ref{figura:TEK00030} in cui la frequenza considerata è di \SI{400}{k\hertz}. Questa distorsione è causata dallo spegnimento dei diodi, perché il tempo di spegnimento è più lungo del periodo del circuito e questo causa un ritardo nella forma d'onda. A questa frequenza vediamo anche che scompaiono le semionde negative, perché non vengono più raddrizzate, sempre per effetto del ritardo.
+\\Invece se ad esempio si considera la frequenza di \SI{100}{k\hertz}, come si può notare dalla figura \ref{figura:TEK00025}, si vede che i segnali presentano una curva più estesa nella fase di spegnimento del diodo rispetto a quella della fase di accensione del diodo stesso. Questo andamento risulta ancora più accentuato nella figura \ref{figura:TEK00030} in cui la frequenza considerata è di \SI{400}{k\hertz}. Questa distorsione è causata dallo spegnimento dei diodi, perché il tempo di spegnimento è più lungo del periodo del circuito e questo causa un ritardo nella forma d'onda. A questa frequenza vediamo anche che scompaiono le semionde negative, perché non vengono più raddrizzate, sempre per effetto del ritardo.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6cm]{immagini/TEK00025}
