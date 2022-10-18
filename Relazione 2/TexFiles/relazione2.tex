@@ -236,9 +236,9 @@ Se la resistenza ha un valore elevato, non favorisce la scarica del condensatore
 \section{Circuito 2: raddrizzatore a semionda di precisione}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 Modifichiamo il circuito di prima introducendo un amplificatore operazionale, il \textmu A741. Il diodo si trova ora in reazione all'amplificatore operazionale, nella cosiddetta configurazione a superdiodo: con queste connessioni otteniamo un raddrizzatore di precisione perché eliminiamo la caduta di tensione della giunzione p-n del diodo. Lo svantaggio è che l'OPAMP è un dispositivo attivo, quindi dovremo alimentare il circuito.\par
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.5cm]{immagini/schema2}
+	\includegraphics[height=7.5cm]{immagini/schema2}
 	\caption{Schema del raddrizzatore a semionda di precisione.}
 	\label{figura:schema2}
 \end{figure}
@@ -250,7 +250,47 @@ Modifichiamo il circuito di prima introducendo un amplificatore operazionale, il
    \end{cases}
 \end{equation}
 \subsection{Analisi e dati sperimentali}
-
+Montiamo il circuito sulla breadbord e la alimentiamo. Impostiamo la tensione positiva a +\SI{10}{\volt} e la tensione negativa a \SI{-10}{\volt}. Il circuito realizzato è mostrato in figura \ref{figura:circ2}. \par
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=7cm]{immagini/circuito2}
+	\caption{Fotografia del raddrizzatore a semionda di precisione realizzato in laboratorio.}
+	\label{figura:circ2}
+\end{figure}
+Fissiamo la resistenza a \SI{18}{k\ohm} e studiamo la risposta del circuito a due sinusoidi, una di frequenza \SI{1}{k\hertz} e l'altra di frequenza \SI{10}{k\hertz}. Di seguito, in figura \ref{figura:1khz}, si riporta il grafico della risposta del circuito alla prima sinusoide, mentre nella figura \ref{figura:10khz} la risposta alla seconda sinusoide. \par
+Con l'oscilloscopio, andiamo a misurare la tensione massima dei nodi $\mathrm{V_1}$ e $\mathrm{V_{out}}$ e ne facciamo la differenza, le misure sono riportate in tabella \ref{table:mis2}.
+\begin{figure}[h!]
+\centering
+\includegraphics[height=4.6cm]{immagini/TEK00017}
+\includegraphics[height=4.6cm]{immagini/TEK00019}
+\caption{Risposta del circuito in scala (sinistra) e non in scala (destra) con $\mathrm{f= \SI{1}{k\hertz}}$.}
+	\label{figura:1khz}
+\end{figure}\begin{figure}[h!]
+\centering
+\includegraphics[height=4.6cm]{immagini/TEK00018}
+\includegraphics[height=4.6cm]{immagini/TEK00020}
+\caption{Risposta del circuito in scala (sinistra) e non in scala (destra) con $\mathrm{f= \SI{10}{k\hertz}}$.}
+	\label{figura:10khz}
+\end{figure}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\cline{2-3} 
+		\multicolumn{1}{c|}{} & \textbf{1 kHz} &  \textbf{10 kHz}  &\multicolumn{1}{c}{} \\ 
+		\hline
+		\multirow{3}{*}{\textbf{18 k\textOmega}} &  \SI{1.36}{\volt} & \SI{1.36}{\volt} & $\mathbf{V_{1}}$ \\
+		\cline{2-4}
+		& \SI{880}{m\volt} & \SI{960}{m\volt} & $\mathbf{V_{out}}$\\
+		\cline{2-4}
+		& \SI{480}{m\volt}  & \SI{400}{m\volt} & $\mathbf{V_D}$\\
+		\hline
+	\end{tabular}
+	\caption{Misure delle tensioni al variare della frequenza.}
+	\label{table:mis2}
+\end{table}
+\\\\\\\\\\Come ci aspettiamo, quando il diodo è ON l'amplificatore si trova nella configurazione a buffer, perciò la tensione del nodo in uscita è pari alla tensione del nodo in ingresso, mentre il nodo $\mathrm{V_1}$ segue il nodo $\mathrm{V_{out}}$ ma è traslato di circa +\SI{0.7}{\volt} per la caduta di tensione ai capi del diodo. Quando la tensione in ingresso è negativa, il diodo è OFF e l'ingresso invertente è collegato a massa tramite la resistenza. Dato che le correnti in ingresso all'operazionale sono trascurabili, sulla resistenza non c'è caduta di tensione e sia l'ingresso invertente che il nodo $\mathrm{V_{out}}$ si trovano a massa. L'OPAMP non è in reazione, ma in anello aperto, quindi si comporta come un comparatore. Visto che l'ingresso non invertente si trova ad una tensione negativa mentre quello invertente a massa, la tensione satura all'alimentazione negativa, perciò vale \SI{-10}{\volt}.\par
+Se analizziamo la risposta alla prima sinusoide, vediamo che il circuito si comporta correttamente, come descritto nel paragrafo precedente. Per la seconda sinusoide invece, il comportamento è diverso da quello teorico perché le semionde non sono raddrizzate correttamente. Il degradamento delle prestazioni è dovuto ad una non-idealità dell'amplificatore operazionale, lo slew rate. Un OPAMP reale non è in grado di passare istantaneamente da una tensione di \SI{0}{\volt} all'alimentazione negativa, ma per erogarla impiegherà un certo intervallo di tempo per giungere a questo valore. Lo slew rate è definito come la pendenza della retta che descrive questa transizione e si misura in $[V/\mu s]$. Dal grafico precedente ricaviamo uno slew rate di [??], a fronte di un valore teorico (presente nel datasheet) di [??]. \par
+Il raddrizzatore realizzato è detto di precisione perché si riesce a ``cancellare'' dal segnale in uscita l'offset dovuto alla caduta di tensione ai capi del diodo, tuttavia non è adatto per applicazioni ad alte frequenze a causa delle limitazioni operative dell'OPAMP. 
 \newpage
 \section{Circuito 3: raddrizzatore a doppia semionda}
 \subsection{Schema del circuito e Funzione di Trasferimento}
