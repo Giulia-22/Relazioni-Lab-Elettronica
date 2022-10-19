@@ -120,13 +120,13 @@ Nei circuiti realizzati in questa attività di laboratorio utilizzeremo dei diod
 	\caption{Caratteristica reale (a sinistra) e ideale (a destra) di un diodo.}
 	\label{figura:diodo}
 \end{figure}
-\\Nella figura precedente, la figura \ref{figura:diodo} si possono vedere la caratteristica reale ed ideale di un diodo: per studiare più facilmente i circuiti si approssima il comportamento di un diodo e lo si considera spento (OFF) se la tensione applicata ai suoi capi è minore di \SI{0.7}{\volt}; al contrario, se la tensione ai suoi capi è maggiore di questo valore, il diodo è acceso (ON) e lascia fluire la corrente dall'anodo al catodo con una caduta di tensione ai suoi capi di \SI{0.7}{\volt}.
+\\Nella figura precedente, la figura \ref{figura:diodo} si possono vedere la caratteristica reale ed ideale di un diodo: per studiare più facilmente i circuiti si approssima il comportamento di un diodo e lo si considera spento (OFF) se la tensione applicata ai suoi capi è minore di \SI{0.7}{\volt}; al contrario, se la tensione ai suoi capi è maggiore o uguale a questo valore, il diodo è acceso (ON) e lascia fluire la corrente dall'anodo al catodo con una caduta di tensione ai suoi capi di \SI{0.7}{\volt}.
 \newpage
 \section{Circuito 1: raddrizzatore passivo a semionda}
-\subsection{Schema del circuito e Funzione di Trasferimento}Il primo circuito è il raddrizzatore più semplice che si può realizzare. \`E costituito da un diodo e da una resistenza, il segnale viene applicato all'anodo del diodo e l'uscita del circuito è prelevata al catodo del diodo. Il circuito non viene alimentato, perciò abbiamo un raddrizzatore passivo. \par
+\subsection{Schema del circuito e Funzione di Trasferimento}Il primo circuito che abbiamo  costruito è il raddrizzatore più semplice che si può realizzare. \`E costituito da un diodo e da una resistenza, il segnale viene applicato all'anodo del diodo e l'uscita del circuito è prelevata al catodo del diodo. Il circuito non viene alimentato, perciò abbiamo un raddrizzatore passivo. \par
 \begin{figure}[h]
 	\centering
-	\includegraphics[height=6.5cm]{immagini/schema1}
+	\includegraphics[height=6.2cm]{immagini/schema1}
 	\caption{Schema del raddrizzatore passivo a semionda.}
 	\label{figura:schema1}
 \end{figure}
@@ -142,7 +142,7 @@ Prima di realizzare il circuito, misuriamo con il multimetro la caduta di tensio
 Il raddrizzatore passivo a semionda realizzato in laboratorio è mostrato in figura \ref{figura:circuito1}. Il nostro obiettivo è quello di studiare il suo comportamento al variare della frequenza della sinusoide in ingresso ed al variare della tensione ai capi del diodo. Per fare variare quest'ultimo parametro, utilizzeremo 4 resistenze di diverso valore, i valori nominali e misurati sono stati riportati in tabella \ref{table:misure1}. \par
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.5cm]{immagini/circuito1}
+	\includegraphics[height=5.9cm]{immagini/circuito1}
 	\caption{Fotografia del raddrizzatore passivo a semionda realizzato in laboratorio con $\displaystyle\mathrm{R=\SI{18}{k\ohm}}$.}
 	\label{figura:circuito1}
 \end{figure}
@@ -164,7 +164,7 @@ Il raddrizzatore passivo a semionda realizzato in laboratorio è mostrato in fig
 	\caption{Misure delle resistenze utilizzate nel raddrizzatore a semionda passivo.}
 	\label{table:misure1}
 \end{table}
-Facciamo variare la frequenza della sinusoide in ingresso da \SI{1}{k\hertz} a \SI{1}{M\hertz} prendendo un punto per ogni decade e misuriamo con l'oscilloscopio l'ampiezza del segnale in ingresso e del segnale in uscita, quindi ne facciamo la differenza. Ripetiamo queste misure per i quattro valori di resistenza, i valori ricavati sono riportati in tabella \ref{table:misTensioni1}.
+Facciamo variare la frequenza della sinusoide in ingresso da \SI{1}{k\hertz} a \SI{1}{M\hertz} prendendo un punto per ogni decade e misuriamo con l'oscilloscopio l'ampiezza del segnale in ingresso e del segnale in uscita, quindi ne facciamo la differenza. Ripetiamo queste misure per i quattro valori di resistenza, i valori ricavati sono riportati in tabella \ref{table:misTensioni1}. La tensione picco-picco delle sinusoidi in ingresso è fissata a \SI{2}{\volt}.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
@@ -257,8 +257,8 @@ Montiamo il circuito sulla breadbord e la alimentiamo. Impostiamo la tensione po
 	\caption{Fotografia del raddrizzatore a semionda di precisione realizzato in laboratorio.}
 	\label{figura:circ2}
 \end{figure}
-Fissiamo la resistenza a \SI{18}{k\ohm} e studiamo la risposta del circuito a due sinusoidi, una di frequenza \SI{1}{k\hertz} e l'altra di frequenza \SI{10}{k\hertz}. Di seguito, in figura \ref{figura:1khz}, si riporta il grafico della risposta del circuito alla prima sinusoide, mentre nella figura \ref{figura:10khz} la risposta alla seconda sinusoide. \par
-Con l'oscilloscopio, andiamo a misurare la tensione massima dei nodi $\mathrm{V_1}$ e $\mathrm{V_{out}}$ e ne facciamo la differenza, le misure sono riportate in tabella \ref{table:mis2}.
+Fissiamo la resistenza a \SI{18}{k\ohm} e studiamo la risposta del circuito a due sinusoidi, una di frequenza \SI{1}{k\hertz} e l'altra di frequenza \SI{10}{k\hertz}. La tensione picco-picco del segnale in ingresso è pari a \SI{2}{\volt} per entrambe le sinusoidi. Di seguito, in figura \ref{figura:1khz}, si riporta il grafico della risposta del circuito alla prima sinusoide, mentre nella figura \ref{figura:10khz} la risposta alla seconda sinusoide. \par
+Con l'oscilloscopio, andiamo a misurare la tensione massima dei nodi $\mathrm{V_1}$ e $\mathrm{V_{out}}$ e ne calcoliamo la differenza, le misure sono riportate in tabella \ref{table:mis2}.
 \begin{figure}[h!]
 \centering
 \includegraphics[height=4.6cm]{immagini/TEK00017}
@@ -288,8 +288,8 @@ Con l'oscilloscopio, andiamo a misurare la tensione massima dei nodi $\mathrm{V_
 	\caption{Misure delle tensioni al variare della frequenza.}
 	\label{table:mis2}
 \end{table}
-\\\\\\\\\\Come ci aspettiamo, quando il diodo è ON l'amplificatore si trova nella configurazione a buffer, perciò la tensione del nodo in uscita è pari alla tensione del nodo in ingresso, mentre il nodo $\mathrm{V_1}$ segue il nodo $\mathrm{V_{out}}$ ma è traslato di circa +\SI{0.7}{\volt} per la caduta di tensione ai capi del diodo. Quando la tensione in ingresso è negativa, il diodo è OFF e l'ingresso invertente è collegato a massa tramite la resistenza. Dato che le correnti in ingresso all'operazionale sono trascurabili, sulla resistenza non c'è caduta di tensione e sia l'ingresso invertente che il nodo $\mathrm{V_{out}}$ si trovano a massa. L'OPAMP non è in reazione, ma in anello aperto, quindi si comporta come un comparatore. Visto che l'ingresso non invertente si trova ad una tensione negativa mentre quello invertente a massa, la tensione satura all'alimentazione negativa, perciò vale \SI{-10}{\volt}.\par
-Se analizziamo la risposta alla prima sinusoide, vediamo che il circuito si comporta correttamente, come descritto nel paragrafo precedente. Per la seconda sinusoide invece, il comportamento è diverso da quello teorico perché le semionde non sono raddrizzate correttamente. Il degradamento delle prestazioni è dovuto ad una non-idealità dell'amplificatore operazionale, lo slew rate. Un OPAMP reale non è in grado di passare istantaneamente da una tensione di \SI{0}{\volt} all'alimentazione negativa, ma per erogarla impiegherà un certo intervallo di tempo per giungere a questo valore. Lo slew rate è definito come la pendenza della retta che descrive questa transizione e si misura in $[V/\mu s]$. Dal grafico precedente (figura \ref{figura:10khz} a destra), calcoliamo la pendenza considerando un tratto della retta crescente e ricaviamo uno slew rate di:
+\\Come ci aspettiamo, quando il diodo è ON l'amplificatore si trova nella configurazione a buffer, perciò la tensione del nodo in uscita è pari alla tensione del nodo invertente. Per il principio del cortocircuito virtuale, l'ingresso invertente e l'ingresso non invertente si trovano alla stessa tensione,  che è $\mathrm{V_{in}}$. Il nodo $\mathrm{V_1}$ segue invece la tensione del nodo $\mathrm{V_{out}}$ ma è traslato di circa +\SI{0.7}{\volt} per la caduta di tensione ai capi del diodo. Quando la tensione in ingresso è negativa, il diodo è OFF e l'ingresso invertente è collegato a massa tramite la resistenza. Dato che le correnti in ingresso all'operazionale sono trascurabili, sulla resistenza non c'è caduta di tensione e sia l'ingresso invertente che il nodo $\mathrm{V_{out}}$ si trovano a massa. L'OPAMP non è in reazione, ma in anello aperto, quindi si comporta come un comparatore. Visto che l'ingresso non invertente si trova ad una tensione negativa mentre quello invertente a massa, la tensione satura all'alimentazione negativa, perciò vale \SI{-10}{\volt}.\par
+Se analizziamo la risposta alla prima sinusoide, vediamo che il circuito si comporta correttamente, come descritto nel paragrafo precedente. Per la seconda sinusoide invece, il comportamento è diverso da quello teorico perché le semionde non sono raddrizzate correttamente. Il degradamento delle prestazioni è dovuto ad una non-idealità dell'amplificatore operazionale, lo slew rate. Un OPAMP reale non è in grado di passare istantaneamente da una tensione di \SI{0}{\volt} all'alimentazione negativa, ma per erogare questo valore di tensione impiegherà un certo intervallo di tempo. Lo slew rate è definito come la pendenza della retta che descrive questa transizione e si misura in $[V/\mu s]$. Dal grafico precedente (figura \ref{figura:10khz} a destra), calcoliamo la pendenza considerando un tratto della retta crescente e ricaviamo uno slew rate di:
 \\[2pt]\indent $\displaystyle{Slew\;Rate=\frac{\Delta V}{\Delta t}=\frac{\SI{6}{\volt}}{\SI{12}{\mu\second}}=0.5\frac{\SI{}{\volt}}{\SI{}{\mu\second}}}$
 \\[2pt] che corrisponde esattamente al valore indicato nel datasheet. \par
 Il raddrizzatore realizzato è detto di precisione perché si riesce a ``cancellare'' dal segnale in uscita l'offset dovuto alla caduta di tensione ai capi del diodo, tuttavia non è adatto per applicazioni ad alte frequenze a causa delle limitazioni operative dell'OPAMP. 
@@ -305,7 +305,7 @@ Inoltre il raddrizzatore a doppia semionda presenta due retroazioni negative e i
 	\caption{Schema del raddrizzatore a doppia semionda.}
 	\label{figura:schema3}
 \end{figure}
-In aggiunta l'amplificatore si trova in configurazione invertente e per la presenza di resistenze con valori equivalenti presenta un guadagno pari a -1. Di fatto si comporta come un buffer invertente e questo lo si può notare dalla figura \ref{figura:TEK00023} in cui sono mostrati i segnali $\displaystyle\mathrm{V_{in}}$ e $\displaystyle\mathrm{V_{1}}$.
+\noindent In aggiunta l'amplificatore si trova in configurazione invertente e per la presenza di resistenze con valori equivalenti presenta un guadagno pari a -1. Di fatto si comporta come un buffer invertente e questo lo si può notare dalla figura \ref{figura:TEK00023} in cui sono mostrati i segnali $\displaystyle\mathrm{V_{in}}$ e $\displaystyle\mathrm{V_{1}}$.
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/TEK00023}
@@ -364,7 +364,7 @@ Come primo passo per la costruzione del circuito, sono stati misurati i valori d
 	\caption{Grandezze misurate ad ogni frequenza.}
 	\label{table:misure3}
 \end{table}
-\\Per quanto riguarda la frequenza di \SI{1}{k\hertz}, come si può notare dalla figura \ref{figura:TEK00022}, i segnali presentano un andamento quasi ideale. A questa frequenza si può anche notare la presenza di un offset tra la tensione in ingresso e quella in uscita, che risulta pari a \SI{0.460}{\volt}.
+\\\\Per quanto riguarda la frequenza di \SI{1}{k\hertz}, come si può notare dalla figura \ref{figura:TEK00022}, i segnali presentano un andamento quasi ideale. A questa frequenza si può anche notare la presenza di una caduta di tensione fra l'ingresso e l'uscita, che risulta pari a \SI{0.460}{\volt}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6cm]{immagini/TEK00022}
