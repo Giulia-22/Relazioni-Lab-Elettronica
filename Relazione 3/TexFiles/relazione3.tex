@@ -110,7 +110,6 @@
 %----------------------------------------------------------------------------------------
 %	INTRO
 %----------------------------------------------------------------------------------------
-% Ho cambiato la struttura per questa relazione così rimane tutto nominato con il numero 2
 \chapter{Relazione attività di laboratorio 3}
 \section*{Introduzione}
 \newpage
@@ -122,11 +121,13 @@
 	\caption{Schema del raddrizzatore a doppia semionda di precisione.}
 	\label{figura:schema1}
 \end{figure}
-%\noindent La funzione di trasferimento di questo raddrizzatore è:
-%\begin{equation}
-%   \begin{cases}
-%   \end{cases}
-%\end{equation}
+\noindent La funzione di trasferimento di questo raddrizzatore è:
+\begin{equation}
+   \begin{cases}
+   V_{in}< \SI{0}{\volt}\;\;\indent\indent\rightarrow \mathrm{D\;ON}\;\;\;\; \Rightarrow V_{out} = -V_{in}\\
+   V_{in}\ge \SI{0}{\volt}\;\;\indent\indent\rightarrow \mathrm{D\; OFF}\;\; \Rightarrow V_{out} = V_{in}
+   \end{cases}
+\end{equation}
 \subsection{Analisi e dati sperimentali}
 \begin{figure}[h]
 	\centering
@@ -161,11 +162,13 @@
 	\caption{Schema del trigger di Schmitt.}
 	\label{figura:schema2}
 \end{figure}
-%\noindent La funzione di trasferimento di questo raddrizzatore è:
-%\begin{equation}
-%   \begin{cases}
-	%   \end{cases}
-%\end{equation}
+\noindent La funzione di trasferimento di questo comparatore è:
+\begin{equation}
+   \begin{cases} % da controllare
+   V_{out}= V_{DD}\;\indent\indent \mathrm{per\;}  V_L^+<V_{in}<V_H^+\mathrm{, \;\; con\;}\displaystyle{ V_H^+=\frac{R_1}{R_1+R_2}\cdot V_{DD}=\frac{V_{DD}}{2}}\mathrm{\;\;\;\; se \;} R_1=R_2\\[10pt]
+   V_{out}= V_{SS}\;\;\indent\indent \mathrm{per\;} V_H^+<V_{in}<V_L^+\mathrm{, \;\; con\;}\displaystyle{ V_H^+=\frac{R_1}{R_1+R_2}\cdot |V_{SS}|=\frac{|V_{SS}|}{2}}\mathrm{\;\; se \;} R_1=R_2\\
+   \end{cases}
+\end{equation}
 \subsection{Analisi e dati sperimentali}
 \begin{figure}[h]
 	\centering
