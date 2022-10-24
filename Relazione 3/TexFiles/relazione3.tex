@@ -193,8 +193,6 @@ Il segnale in uscita prodotto dall'oscilloscopio lo si può vedere nella figura 
 	\label{figura:uscita12}
 \end{figure}
 \newpage
-\null
-\newpage
 \section{Circuito 2: trigger di Schmitt}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 In questo circuito è presente un amplificatore operazionale non retroazionato negativamente, ma con una retroazione positiva, quindi il circuito opera come un comparatore.\par
@@ -252,7 +250,8 @@ Per prima cosa abbiamo analizzato l'uscita del circuito con un segnale in ingres
 	\caption{Risposta del circuito con $\mathrm{f= \SI{100}{\hertz}}$.}
 	\label{figura:uscita21}
 \end{figure}
-\\\indent Successivamente è stato analizzato anche il grafico della caratteristica ingresso-uscita per la stessa frequenza. Come si può notare dalla figura \ref{figura:uscita22}, è presente un ciclo di isteresi, come ci si aspettava per questo trigger.
+\\\indent Successivamente è stato analizzato anche il grafico della caratteristica ingresso-uscita per la stessa frequenza. Come si può notare dalla figura \ref{figura:uscita22}, è presente un ciclo di isteresi, come ci si aspettava per questo trigger. L'area del ciclo di isteresi dipende dal valore delle due resistenze secondo la formula:
+\\[2pt]\indent$\displaystyle{\mathrm{Isteresi}=2\cdot\frac{R_1}{R_1+R_2}\cdot |V_ {DD}|}$
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6cm]{immagini/TEK00019}
@@ -264,82 +263,72 @@ Per prima cosa abbiamo analizzato l'uscita del circuito con un segnale in ingres
 \newpage\null\newpage % da togliere poi ultimi due comandi
 \section{Circuito 3: oscillatore con duty cicle pari a 50\%}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Il trigger di Schmitt può essere utilizzato per realizzare un oscillatore. Un oscillatore è un circuito autoalimentato ...
-\begin{figure}[h]
+Il trigger di Schmitt può essere utilizzato per realizzare un oscillatore. Un oscillatore è un circuito  che produce in uscita una forma d'onda ad una determinata frequenza, entrambi i parametri (forma e frequenza) dipendono sia dai componenti presenti nell'oscillatore che dalle tensioni di alimentazione. \`E un circuito particolare perché è \textit{autoalimentato}, questo significa che non dovremo applicare un segnale in ingresso per osservare il segnale d'uscita (per innescare la reazione è sufficiente un disturbo, ad esempio il rumore dei componenti elettronici).
+\begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/schema3}
+	\includegraphics[height=8cm]{immagini/schema3}
 	\caption{Schema dell'oscillatore con duty cicle di 50\%.}
 	\label{figura:schema3}
 \end{figure}
-%\noindent La funzione di trasferimento di questo raddrizzatore è:
-%\begin{equation}
-%   \begin{cases}
-	%   \end{cases}
-%\end{equation}
+\\Il circuito che realizzeremo produrrà in uscita un'onda quadra. Inizialmente utilizzeremo lo stesso valore per le resistenze $\mathrm{R_1}$ e $\mathrm{R_2}$, quindi le soglie che determinano le transizioni da alto a basso e viceversa sono:
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{cc}
+		$\displaystyle{V_H^+=\frac{R_1}{R_1+R_2}\cdot V_{DD}=+\SI{5}{\volt}}$\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; & $\displaystyle{V_L^+=\frac{R_1}{R_1+R_2}\cdot V_{SS}=-\SI{5}{\volt}}$\\ 
+	\end{tabular}
+\end{table}
+\\Il suo funzionamento sfrutta il processo di carica e scarica di un condensatore su una resistenza. Ipotizziamo che inizialmente il condensatore sia scarico, se $\mathrm{V^-}$ è minore di $\mathrm{V^+}$, l'uscita satura alla tensione positiva e il condensatore si carica attraverso la resistenza $\mathrm{R}$. La tensione ai suoi capi cresce con andamento esponenziale, con costante di tempo $\displaystyle{\tau=R\cdot C}$. Se non ci fosse la soglia $\mathrm{V_H^+}$, la tensione ai capi del condensatore continuerebbe a crescere fino a raggiungere la tensione di saturazione positiva. In questo oscillatore invece, quando la tensione ai capi della capacità raggiunge la soglia $\mathrm{V_H^+}$, si ha che $\mathrm{V^-}$ è maggiore di $\mathrm{V^+}$, di conseguenza l'uscita satura alla tensione negativa. Questo provoca la scarica della capacità sulla resistenza, l'andamento è sempre esponenziale con la stessa costante di tempo $\tau$. Il processo di scarica continua fin quando la tensione ai capi della capacità risulta pari alla soglia inferiore, in questo caso risulta soddisfatta la condizione $V^+>V^-$, e il condesatore ripete il processo di carica. Il comportamento del circuito può essere riassunto così:
+\begin{equation}
+   \begin{cases}
+   [metti formule]
+   \end{cases}
+\end{equation}
+Il periodo di oscillazione dipende dai tempi t1 e t2 [...]
 \subsection{Analisi e dati sperimentali}
+Utilizzaimo ancora le tre r da 12 k misurate in tabella \ref{table:mis_res1}. Posizioniamo componenti su bb, come mostrato in figura \ref{figura:circuito3} e colleghiamo oscilloscopio, metti fig. ci dà frequenaz di ...
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=6.2cm]{immagini/circuito3}
 	\caption{Fotografia dell'oscillatore con duty cicle pari a 50\% realizzato in laboratorio.}
 	\label{figura:circuito3}
 \end{figure}
-%\begin{table}[h!]
-%	\centering
-%	\begin{tabular}{|c|c|c|}
-	%		\cline{2-3} 
-	%		\multicolumn{1}{c|}{} & \textbf{Valore nominale} & \textbf{Valore misurato}\\ 
-	%		\hline
-	%		$\mathbf{R_1}$ & \SI{18}{k\ohm} & \SI{17.977}{k\ohm} \\ 
-	%		\hline
-	%		$\mathbf{R_2}$ & \SI{33}{k\ohm} & \SI{37.630}{k\ohm} \\ 
-	%		\hline
-	%		$\mathbf{R_3}$ & \SI{56}{k\ohm} & \SI{54.742}{k\ohm} \\ 
-	%		\hline
-	%		$\mathbf{R_4}$ & $\displaystyle\mathrm{\SI{82}{k\ohm}+\SI{18}{k\ohm}=\SI{100}{k\ohm}}$ & $\displaystyle\mathrm{\SI{80.717}{k\ohm+}\SI{17.977}{k\ohm}=\SI{98.694}{k\ohm}}$ \\ 
-	%		\hline
-	%	\end{tabular}
-%	\caption{Misure delle resistenze utilizzate nel raddrizzatore a semionda passivo.}
-%	\label{table:misure1}
-%\end{table}
-
-\section{Circuito 4: oscillatore con duty cicle $\neq$ 50\%}
+\\Utilizziamo formule per vedere se periodo corretto.
+[...]
+\\calcolo dc
+\\spostamento alimentaziooni e nuove misure
+\newpage
+\section{Circuito 4: oscillatore con duty cicle diverso da 50\%}
 \subsection{Schema del circuito e Funzione di Trasferimento}
+spostare alim non buono, quindi con diodi e due r di valore diverso, cerchiamo di realizzare un oscillo con dc != da 50
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=6.2cm]{immagini/schema4}
-	\caption{Schema dell'oscillatore con duty cicle $\neq$ 50\%.}
+	\caption{Schema dell'oscillatore con duty cicle diverso da 50\%.}
 	\label{figura:schema4}
 \end{figure}
+\\dc puo essere min magg del 50, rip da valore di r 3 e 4 (metti relazione)
 %\noindent La funzione di trasferimento di questo raddrizzatore è:
 %\begin{equation}
 %   \begin{cases}
 	%   \end{cases}
 %\end{equation}
 \subsection{Analisi e dati sperimentali}
-\begin{figure}[h]
+info su bb
+\begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.2cm]{immagini/circuito4_1.jpg}
-	\caption{Fotografia dell'oscillatore con duty cicle $\neq$ 50\% realizzato in laboratorio.}
-	\label{figura:circuito4}
+	\caption{Fotografia dell'oscillatore con duty cicle maggiore del 50\% realizzato in laboratorio.}
+	\label{figura:circuito4_1}
 \end{figure}
-%\begin{table}[h!]
-%	\centering
-%	\begin{tabular}{|c|c|c|}
-	%		\cline{2-3} 
-	%		\multicolumn{1}{c|}{} & \textbf{Valore nominale} & \textbf{Valore misurato}\\ 
-	%		\hline
-	%		$\mathbf{R_1}$ & \SI{18}{k\ohm} & \SI{17.977}{k\ohm} \\ 
-	%		\hline
-	%		$\mathbf{R_2}$ & \SI{33}{k\ohm} & \SI{37.630}{k\ohm} \\ 
-	%		\hline
-	%		$\mathbf{R_3}$ & \SI{56}{k\ohm} & \SI{54.742}{k\ohm} \\ 
-	%		\hline
-	%		$\mathbf{R_4}$ & $\displaystyle\mathrm{\SI{82}{k\ohm}+\SI{18}{k\ohm}=\SI{100}{k\ohm}}$ & $\displaystyle\mathrm{\SI{80.717}{k\ohm+}\SI{17.977}{k\ohm}=\SI{98.694}{k\ohm}}$ \\ 
-	%		\hline
-	%	\end{tabular}
-%	\caption{Misure delle resistenze utilizzate nel raddrizzatore a semionda passivo.}
-%	\label{table:misure1}
-%\end{table}
+\\oscillo+analisi misure e formule
+\\ora scambiamo verso diodi, cosi da avere r invertite e ripetiasmo analisi. secondo cto in fig \ref{figura:circuito4_2}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.2cm]{immagini/circuito4_2.jpg}
+	\caption{Fotografia dell'oscillatore con duty cicle minore del 50\% realizzato in laboratorio.}
+	\label{figura:circuito4_2}
+\end{figure}
+\\oscillo+misure
 
 %----------------------------------------------------------------------------------------
 
