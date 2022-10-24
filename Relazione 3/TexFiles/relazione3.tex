@@ -277,29 +277,41 @@ Il trigger di Schmitt può essere utilizzato per realizzare un oscillatore. Un o
 		$\displaystyle{V_H^+=\frac{R_1}{R_1+R_2}\cdot V_{DD}=+\SI{5}{\volt}}$\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; & $\displaystyle{V_L^+=\frac{R_1}{R_1+R_2}\cdot V_{SS}=-\SI{5}{\volt}}$\\ 
 	\end{tabular}
 \end{table}
-\\Il suo funzionamento sfrutta il processo di carica e scarica di un condensatore su una resistenza. Ipotizziamo che inizialmente il condensatore sia scarico, se $\mathrm{V^-}$ è minore di $\mathrm{V^+}$, l'uscita satura alla tensione positiva e il condensatore si carica attraverso la resistenza $\mathrm{R}$. La tensione ai suoi capi cresce con andamento esponenziale, con costante di tempo $\displaystyle{\tau=R\cdot C}$. Se non ci fosse la soglia $\mathrm{V_H^+}$, la tensione ai capi del condensatore continuerebbe a crescere fino a raggiungere la tensione di saturazione positiva. In questo oscillatore invece, quando la tensione ai capi della capacità raggiunge la soglia $\mathrm{V_H^+}$, si ha che $\mathrm{V^-}$ è maggiore di $\mathrm{V^+}$, di conseguenza l'uscita satura alla tensione negativa. Questo provoca la scarica della capacità sulla resistenza, l'andamento è sempre esponenziale con la stessa costante di tempo $\tau$. Il processo di scarica continua fin quando la tensione ai capi della capacità risulta pari alla soglia inferiore, in questo caso risulta soddisfatta la condizione $V^+>V^-$, e il condesatore ripete il processo di carica. Il comportamento del circuito può essere riassunto così:
-\begin{equation}
-   \begin{cases}
-   [metti formule]
-   \end{cases}
-\end{equation}
-Il periodo di oscillazione dipende dai tempi t1 e t2 [...]
-\subsection{Analisi e dati sperimentali}
-Utilizzaimo ancora le tre r da 12 k misurate in tabella \ref{table:mis_res1}. Posizioniamo componenti su bb, come mostrato in figura \ref{figura:circuito3} e colleghiamo oscilloscopio, metti fig. ci dà frequenaz di ...
-\begin{figure}[h]
+\\Il suo funzionamento sfrutta il processo di carica e scarica di un condensatore su una resistenza. Ipotizziamo che inizialmente il condensatore sia scarico, se $\mathrm{V^-}$ è minore di $\mathrm{V^+}$, l'uscita satura alla tensione positiva e il condensatore si carica attraverso la resistenza $\mathrm{R}$. La tensione ai suoi capi cresce con andamento esponenziale, con costante di tempo $\displaystyle{\tau=R\cdot C}$. Se non ci fosse la soglia $\mathrm{V_H^+}$, la tensione ai capi del condensatore continuerebbe a crescere fino a raggiungere la tensione di saturazione positiva. In questo oscillatore invece, quando la tensione ai capi della capacità raggiunge la soglia $\mathrm{V_H^+}$, si ha che $\mathrm{V^-}$ è maggiore di $\mathrm{V^+}$, di conseguenza l'uscita satura alla tensione negativa. Questo provoca la scarica della capacità sulla resistenza, l'andamento è sempre esponenziale con la stessa costante di tempo $\tau$. Il processo di scarica continua fin quando la tensione ai capi della capacità risulta pari alla soglia inferiore, in questo caso risulta soddisfatta la condizione $V^+>V^-$, e il condesatore ripete il processo di carica. Riassumendo, il circuito si comporta come un comparatore con isteresi.\par
+Il periodo di oscillazione è dato dalla somma dell'intervallo di tempo in cui l'onda quadra resta alta ($T_1$) e dell'intervallo di tempo in cui l'onda quadra resta bassa ($T_2$). Questi valori si ricavano dalle formule inverse di carica e di scarica del condensatore:
+\begin{table}[h!]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/circuito3}
+	\begin{tabular}{cc}
+		$\displaystyle{T_1=\tau\cdot\ln\frac{V_L^+-V_{DD}}{V_H^+-V_{DD}}=\tau\cdot\ln\frac{R_2+2R_1}{R_2}}$\;\;\;\;\;\;\;\;\;\;\;\;\; & $\displaystyle{T_2=\tau\cdot\ln\frac{V_H^+-V_{SS}}{V_L^+-V_{SS}}=\tau\cdot\ln\frac{R_2+2R_1}{R_2}}$\\ 
+	\end{tabular}
+\end{table}
+\\Dato che il circuito è simmetrico, le due soglie sono in modulo uguali. Inoltre, dato che le due resistenze hanno lo stesso valore, l'argomento del logaritmo è uguale per entrambi gli intervalli, di conseguenza $T_1=T_2$. Il duty cycle, $\delta$, che è la percentuale di tempo che un'onda quadra è alta, sarà pari a:
+\\[4pt]\indent$\displaystyle{\delta=\frac{T_1}{T}=\frac{T_1}{T_1+T_2}=\frac{T_1}{2\cdot T_1}=\frac{1}{2}=50\%}$
+\subsection{Analisi e dati sperimentali}
+Utilizziamo ancora le tre resistenza dal valore nominale di \SI{12}{k\ohm} e di cui abbiamo già riportato le misure in tabella \ref{table:mis_res1}. Posizioniamo i componenti sulla breadboard, come mostrato in figura \ref{figura:circuito3}, e colleghiamo l'oscilloscopio. I nodi di cui siamo interessati a misurare la tensione sono gli ingressi dell'OPAMP (sia quello invertente che quello non invertente) e l'uscita dell'operazionale.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=7cm]{immagini/circuito3}
 	\caption{Fotografia dell'oscillatore con duty cicle pari a 50\% realizzato in laboratorio.}
 	\label{figura:circuito3}
 \end{figure}
-\\Utilizziamo formule per vedere se periodo corretto.
-[...]
-\\calcolo dc
+\\In figura \ref{figura:oscillo1} è riportato il grafico della tensione ai capi della capacità (traccia gialla, CH1) e della tensione in uscita all'OPAMP (traccia azzurra, CH2). Tramite l'oscilloscopio ricaviamo che la frequenza dell'onda quadra è pari a \SI{247}{\hertz}. Successivamente, confrontiamo questi valori con quelli teorici.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.2cm]{immagini/TEK00025}
+	\caption{Grafico della tensione ai capi della capacità e della tensione in uscita all'oscillatore.}
+	\label{figura:oscillo1}
+\end{figure}
+\\Utiliziamo le formule ricavate nella sezione precedente per calcolare i due intervalli di tempo:
+\\[4pt]\indent$\displaystyle{T_1=T_2=\tau\cdot\ln\frac{R_2+2R_1}{R_2}=\SI{12}{k\ohm}\cdot\SI{150}{n\farad}\cdot\ln\frac{\SI{12}{k\ohm}+2\cdot\SI{12}{k\ohm}}{\SI{12}{k\ohm}}=\SI{1.978}{m\second}}$
+\\[4pt]\indent$\displaystyle{T=2\cdot T_1 = \SI{3.955}{m\second}}$
+\\[4pt]\indent$\Rightarrow\displaystyle{f=\frac{1}{T}=\frac{1}{\SI{3.955}{m\second}}=\SI{253}{\hertz}}$
+\\[4pt]Il circuito si comporta correttamente, come vediamo dal grafico. Il valore di frequenza che misuriamo è corretto e preciso, infatti è maggiore solo del 2.4\% rispetto al valore teorico.
 \\spostamento alimentaziooni e nuove misure
 \newpage
 \section{Circuito 4: oscillatore con duty cicle diverso da 50\%}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-spostare alim non buono, quindi con diodi e due r di valore diverso, cerchiamo di realizzare un oscillo con dc != da 50
+spostare alim non buono, quindi con diodi e due r di valore diverso, cerchiamo di realizzare un oscilla con dc != da 50
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=6.2cm]{immagini/schema4}
