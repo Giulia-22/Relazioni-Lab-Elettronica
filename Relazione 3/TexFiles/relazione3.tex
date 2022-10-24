@@ -111,20 +111,20 @@
 %	INTRO
 %----------------------------------------------------------------------------------------
 \chapter{Relazione attività di laboratorio 3}
-\section*{Introduzione}
-In questo laboratorio, sono stati analizzati circuiti composti da diodi e/o da amplificatori operazionali.
-In particolare il primo circuito analizzato permette di risolvere un problema che si verificava nell'ultimo circuito analizzato durante il precedente laboratorio, ovvero nel raddrizzatore a doppia semionda. Questo problema consisteva nella presenza di una differenza di tensione, idealmente pari a \SI{0.7}{\volt} (mentre nelle nostre misure risultava pari a \SI{0.460}{\volt}), tra il segnale in uscita e quello in ingresso.
-\\Il secondo circuito invece è un trigger di  Schmitt, che presenta nella sua caratteristica tra la tensione di ingresso e quella di uscita un ciclo di isteresi.
-\\Infine il terzo circuito e il quarto funzionano senza la necessità di applicare un segnale in ingresso.
-% DA SISTEMARE
+%\section*{Introduzione}
+%In questo laboratorio, sono stati analizzati circuiti composti da diodi e/o da amplificatori operazionali.
+%In particolare il primo circuito analizzato permette di risolvere un problema che si verificava nell'ultimo circuito analizzato durante il precedente laboratorio, ovvero nel raddrizzatore a doppia semionda. Questo problema consisteva nella presenza di una differenza di tensione, idealmente pari a \SI{0.7}{\volt} (mentre nelle nostre misure risultava pari a \SI{0.460}{\volt}), tra il segnale in uscita e quello in ingresso.
+%\\Il secondo circuito invece è un trigger di  Schmitt, che presenta nella sua caratteristica tra la tensione di ingresso e quella di uscita un ciclo di isteresi.
+%\\Infine il terzo circuito e il quarto funzionano senza la necessità di applicare un segnale in ingresso.
+%% DA SISTEMARE
 
-\newpage
+%\newpage
 \section{Circuito 1: raddrizzatore a doppia semionda di precisione}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 Questo circuito, come si può notare dalla figura \ref{figura:schema1}, presenta due amplificatori operazionali, di cui quello in alto è retroazionato negativamente, e un diodo.
 \begin{figure}[h]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/schema1}
+	\includegraphics[height=7.5cm]{immagini/schema1}
 	\caption{Schema del raddrizzatore a doppia semionda di precisione.}
 	\label{figura:schema1}
 \end{figure}
@@ -135,8 +135,7 @@ Questo circuito, come si può notare dalla figura \ref{figura:schema1}, presenta
    V_{in}\ge \SI{0}{\volt}\;\;\indent\indent\rightarrow \mathrm{D\; OFF}\;\; \Rightarrow V_{out} = V_{in}
    \end{cases}
 \end{equation}
-Da questa Funzione di Trasferimento si può notare che l'uscita non risulta shiftata rispetto all'uscita, come invece succedeva nel raddrizzatore a doppia semionda analizzato durante lo scorso laboratorio. Dunque questo circuito permette di risolvere il problema della differenza di tensione presente tra uscita e ingresso.
-\\Di conseguenza in uscita si ottiene un segnale analogo a quello in ingresso, ma in cui le semionde risultano raddrizzate.
+Da questa funzione di trasferimento si può notare che l'uscita non risulta shiftata rispetto all'ingresso, come invece succedeva nel raddrizzatore a doppia semionda analizzato durante lo scorso laboratorio. Dunque questo circuito permette di risolvere il problema della differenza di tensione presente tra uscita e ingresso. Di conseguenza, in uscita si ottiene un segnale analogo a quello in ingresso, ma in cui le semionde risultano raddrizzate.
 \subsection{Analisi e dati sperimentali}
 Per la realizzazione del circuito sulla breadboard (visibile nella figura \ref{figura:circuito1}) abbiamo deciso di utilizzare due amplificatori operazionali di tipo \textmu A741, che sono amplificatori operazionali \textit{general purpose}, e un diodo di tipo 1N4148.
 Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato resistenze da \SI{12}{k\ohm}, le cui misure sono state riportate nella tabella \ref{table:mis_res1}.
@@ -158,13 +157,12 @@ Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato resisten
 \end{table}
 \begin{figure}[h]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/circuito1}
+	\includegraphics[height=6.5cm]{immagini/circuito1}
 	\caption{Fotografia del raddrizzatore a doppia semionda di precisione realizzato in laboratorio.}
 	\label{figura:circuito1}
 \end{figure}
-\\\\\\
-\\Dopo aver realizzato il circuito sulla breadboard, sono stati collegati sia la alimentazioni (con un valore di \SI{+10}{\volt}) e di \SI{-10}{\volt} sia il segnale d'ingresso (con un'ampiezza picco-picco di \SI{2}{\volt}).
-\\Il segnale in uscita prodotto dall'oscilloscopio lo si può vedere nelle figure \ref{figura:uscita11} per frequenze pari a \SI{100}{\hertz} e a \SI{1}{k\hertz}. Per queste frequenze sono state analizzate anche le rappresentazioni XY (in figure \ref{figura:xyuscita1}), ovvero le caratteristiche tra tensione di ingresso e tensione di uscita del circuito.
+\\\indent Dopo aver realizzato il circuito sulla breadboard, sono state collegate sia le alimentazioni (con un valore di \SI{+10}{\volt} per l'alimentazione positiva e di \SI{-10}{\volt} per quella negativa) sia il segnale d'ingresso, con un'ampiezza picco-picco di \SI{2}{\volt} e frequenza prima di  \SI{100}{\hertz},  e poi pari a \SI{1}{k\hertz}.\par
+Il segnale in uscita prodotto dall'oscilloscopio lo si può vedere nella figura \ref{figura:uscita11}. Per queste due frequenze sono state analizzate anche le rappresentazioni XY, ovvero la caratteristica tra tensione di ingresso e tensione di uscita del circuito (in figura \ref{figura:xyuscita1}).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00000}
@@ -179,8 +177,7 @@ Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato resisten
 	\caption{Rappresentazione XY della risposta del circuito con $\mathrm{f= \SI{100}{\hertz}}$ (sinistra) e con $\mathrm{f= \SI{1}{k\hertz}}$ (destra).}
 	\label{figura:xyuscita1}
 \end{figure}
-\\\\\\
-\\In tutti questi grafici il segnale presenta un andamento quasi ideale, ma nella parte iniziale delle semionde negative raddrizzate si possono notare dei tratti anomali vicino all'asse delle ascisse. Queste anomalie sono dovute al fatto che l'OPAMP in basso può avere una retroazione aperta per la presenza del diodo e quindi la sua uscita deve svolgere uno swing abbastanza ampio (visualizzato nelle figure \ref{figura:uscita111}) per far arrivare la sua uscita al valore dell'alimentazione. Questo poi incide anche sulla velocità del sistema.
+\\In tutti questi grafici il segnale presenta un andamento quasi ideale, ma nella parte iniziale delle semionde negative raddrizzate si possono notare dei tratti anomali vicino all'asse delle ascisse. Nel grafico XY, lo vediamo perché il segnale non si trova solo nel primo e nel secondo quadrante, ma c'è un tratto (seppur molto breve) anche nel terzo quadrante. Queste anomalie sono dovute al fatto che \todo{quando il segnale in ingresso è positivo, il diodo è spento, quindi il secondo OPAMP (quello in basso) lavora in anello aperto. La sua tensione in uscita è pari a $\displaystyle\mathrm{V_{SS}}$, come si vede in figura \ref{figura:uscita111}, perciò impiegherà un certo tempo per erogare una tensione positiva, di conseguenza il diodo non si accende istantaneamente}{l'OPAMP in basso può avere una retroazione aperta per la presenza del diodo e quindi la sua uscita deve svolgere uno swing abbastanza ampio (visualizzato nella figura \ref{figura:uscita111}) per far arrivare la sua uscita al valore dell'alimentazione.} Questo poi incide anche sulla velocità del sistema nel raddrizzare il primo tratto delle semionde negative.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00002}
@@ -188,27 +185,28 @@ Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato resisten
 	\caption{Risposta dell'OPAMP in basso con $\mathrm{f= \SI{100}{\hertz}}$ (sinistra) e con $\mathrm{f= \SI{1}{k\hertz}}$ (destra).}
 	\label{figura:uscita111}
 \end{figure}
-\\Analizzando invece frequenze maggiori (ad esempio \SI{10}{k\hertz}), il segnale presenta delle anomalie di maggiore rilevanza rispetto alle precedenti come si può notare nella figura \ref{figura:uscita12}. Tutte queste anomalie derivano dal fatto che l'OPAMP non è adatto a operare in alta frequenza quando presenta un anello che può risultare aperto.
+\\Analizzando invece frequenze maggiori (ad esempio \SI{10}{k\hertz}), il segnale presenta delle anomalie di maggiore rilevanza rispetto alle precedenti, come si può notare nella figura \ref{figura:uscita12}. Le semionde positive sono poco distorte, infatti vengono solo leggermente ritardate, invece sulle semionde negative si vede chiaramente l'escursione di tensione provocata dall'operazionale che si trova in anello aperto. Queste anomalie derivano dal fatto che l'OPAMP non è adatto a operare in alta frequenza quando presenta un anello che può risultare aperto.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=4.6cm]{immagini/TEK00008}
+	\includegraphics[height=6.5cm]{immagini/TEK00008}
 	\caption{Risposta del circuito con $\mathrm{f= \SI{10}{k\hertz}}$.}
 	\label{figura:uscita12}
 \end{figure}
-
+\newpage
+\null
 \newpage
 \section{Circuito 2: trigger di Schmitt}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-In questo circuito è presente un amplificatore operazionale non retroazionato negativamente, ma con una retroazione positiva e quindi il circuito opera come un comparatore.
-\\Inoltre è costituito anche da una rete sulla retroazione formata da un partitore resistivo, in cui le due resistenze sono equivalenti.
-\\La caratteristica principale di questo circuito è che, a differenza dei normali comparatori, presenta in uscita un'isteresi. Inoltre questo circuito è immune a eventuali disturbi presenti sui possibili segnali in ingresso perchè in un comparatore se il segnale in ingresso è rumoroso su valori prossimi alla soglia ${V^+}$ si possono avere delle transizioni involontarie dell'uscita da ${V_{DD}}$ a ${V_{SS}}$. Questo problema viene infatti risolto nel trigger di Schmitt perchè una volta attraversata la soglia quest'ultima varierà il suo valore e quindi andrebbe attraversata la nuova soglia per avere un'ulteriore transizione.
+In questo circuito è presente un amplificatore operazionale non retroazionato negativamente, ma con una retroazione positiva, quindi il circuito opera come un comparatore.\par
+La rete di reazione positiva è formata da un partitore resistivo, in cui inizialmente utilizzeremo due resistenze dello stesso valore per analizzare la risposta del circuito in maniera più semplice, come si può vedere dallo schema di figura \ref{figura:schema2}.\par
+La particolarità del trigger di Schmitt è che, a differenza dei normali comparatori, la caratteristica ingresso-uscita presenta un'isteresi, di conseguenza questo circuito è immune a eventuali disturbi presenti in ingresso. In un comparatore semplice infatti, se il segnale in ingresso è rumoroso su valori prossimi alla soglia ${V^+}$, si possono avere delle transizioni involontarie dell'uscita da ${V_{DD}}$ a ${V_{SS}}$, perciò il rumore in ingresso rende anche l'uscita rumorosa. Questo problema viene risolto nel trigger di Schmitt, perché una volta attraversata una soglia (per esempio ${V_H^+}$ ) quest'ultima varierà il suo valore e si sposterà sul secondo valore (${V_L^+}$), quindi l'uscita non cambia finché non si attraversa la seconda soglia, rendendo il circuito robusto rispetto ai rumori presenti sulle linee d'ingresso.\par
 \begin{figure}[h]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/schema2}
+	\includegraphics[height=7.5cm]{immagini/schema2}
 	\caption{Schema del trigger di Schmitt.}
 	\label{figura:schema2}
 \end{figure}
-\\ \noindent La funzione di trasferimento di questo comparatore è:
+La funzione di trasferimento di questo comparatore è:\\
 \begin{equation}
    \begin{cases} % da controllare
    V_{out}= V_{DD}\;\indent\indent \mathrm{per\;}  V_L^+<V_{in}<V_H^+\mathrm{, \;\; con\;}\displaystyle{ V_H^+=\frac{R_1}{R_1+R_2}\cdot V_{DD}=\frac{V_{DD}}{2}}\mathrm{\;\;\;\; se \;} R_1=R_2\\[10pt]
@@ -241,12 +239,12 @@ Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato due resi
 \end{table}
 \begin{figure}[h]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/circuito2}
+	\includegraphics[height=7.5cm]{immagini/circuito2}
 	\caption{Fotografia del trigger di Schmitt realizzato in laboratorio.}
 	\label{figura:circuito2}
 \end{figure}
-\\Dopo aver realizzato la breadboard, come segnale in ingresso è stata utilizzata un'onda triangolare con ampiezza picco-picco di \SI{15}{\volt}.
-\\Per prima cosa abbiamo analizzato l'uscita del circuito con un segnale in ingresso con frequenza di \SI{100}{\hertz} (figure \ref{figura:uscita21}).
+\\Dopo aver realizzato il circuito sulla breadboard, scegliamo di applicare in ingresso un'onda triangolare con ampiezza picco-picco di \SI{15}{\volt}. Questo valore deve essere scelto in modo tale da poter vedere le transizioni da una soglia all'altra.\par
+Per prima cosa abbiamo analizzato l'uscita del circuito con un segnale in ingresso con frequenza di \SI{100}{\hertz} (figura \ref{figura:uscita21}), dai grafici si può notare che il comportamento dei segnali risulta corretto. Abbiamo quindi misurate le due soglie, i cui valori sono risultati pari a \SI{4.88}{\volt} per ${V_H^+}$ (soglia positiva) e \SI{-4.16}{\volt} per ${V_L^+}$ (soglia negativa). Anche questi valori sono corretti, infatti corrispondono a circa metà della tensione che l'OPAMP eroga in uscita quando satura al valore positivo o negativo.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00017}
@@ -254,23 +252,23 @@ Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato due resi
 	\caption{Risposta del circuito con $\mathrm{f= \SI{100}{\hertz}}$.}
 	\label{figura:uscita21}
 \end{figure}
-\\\\\\\\\\
-\\Dai grafici si può notare che il comportamento dei segnali risulta corretto e poi sono state misurate le due soglie, i cui valori sono risultati pari a \SI{4.88}{\volt} per ${V_H^+}$ (soglia positiva) e \SI{-4.16}{\volt} per ${V_L^+}$ (soglia negativa).
-\\Successivamente è stato analizzato anche il grafico della caratteristica ingresso-uscita per la stessa frequenza. Come si può notare dalla figura \ref{figura:uscita22}, è presente un ciclo di isteresi, come ci si aspettava per questo trigger.
+\\\indent Successivamente è stato analizzato anche il grafico della caratteristica ingresso-uscita per la stessa frequenza. Come si può notare dalla figura \ref{figura:uscita22}, è presente un ciclo di isteresi, come ci si aspettava per questo trigger.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=4.6cm]{immagini/TEK00019}
+	\includegraphics[height=6cm]{immagini/TEK00019}
 	\caption{Rappresentazione XY della risposta del circuito con $\mathrm{f= \SI{100}{\hertz}}$.}
 	\label{figura:uscita22}
 \end{figure}
+\todo{Quando f aumenta $->$ visibile slew rate OPAMP $=>$ isteresi non più rettangolare ma a parallelogramma (aggiungere immagini oscilloscopio + spiegazione)}
 
-\newpage
-\section{Circuito 3: oscillatore con duty cicle = 50\%}
+\newpage\null\newpage % da togliere poi ultimi due comandi
+\section{Circuito 3: oscillatore con duty cicle pari a 50\%}
 \subsection{Schema del circuito e Funzione di Trasferimento}
+Il trigger di Schmitt può essere utilizzato per realizzare un oscillatore. Un oscillatore è un circuito autoalimentato ...
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=6.2cm]{immagini/schema3}
-	\caption{Schema dell'oscillatore con duty cicle = 50\%.}
+	\caption{Schema dell'oscillatore con duty cicle di 50\%.}
 	\label{figura:schema3}
 \end{figure}
 %\noindent La funzione di trasferimento di questo raddrizzatore è:
@@ -282,7 +280,7 @@ Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato due resi
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=6.2cm]{immagini/circuito3}
-	\caption{Fotografia dell'oscillatore con duty cicle = 50\% realizzato in laboratorio.}
+	\caption{Fotografia dell'oscillatore con duty cicle pari a 50\% realizzato in laboratorio.}
 	\label{figura:circuito3}
 \end{figure}
 %\begin{table}[h!]
