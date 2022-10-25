@@ -284,6 +284,7 @@ Il periodo di oscillazione è dato dalla somma dell'intervallo di tempo in cui l
 	\begin{tabular}{cc}
 		$\displaystyle{T_1=\tau\cdot\ln\frac{V_L^+-V_{DD}}{V_H^+-V_{DD}}=\tau\cdot\ln\frac{R_2+2R_1}{R_2}}$\;\;\;\;\;\;\;\;\;\;\;\;\; & $\displaystyle{T_2=\tau\cdot\ln\frac{V_H^+-V_{SS}}{V_L^+-V_{SS}}=\tau\cdot\ln\frac{R_2+2R_1}{R_2}}$\\ 
 	\end{tabular}
+	\label{table:formuleSoglie}
 \end{table}
 \\Dato che il circuito è simmetrico, le due soglie sono in modulo uguali. Inoltre, dato che le due resistenze hanno lo stesso valore, l'argomento del logaritmo è uguale per entrambi gli intervalli, di conseguenza $T_1=T_2$. Il duty cycle, $\delta$, che è la percentuale di tempo che un'onda quadra è alta, sarà pari a:
 \\[4pt]\indent$\displaystyle{\delta=\frac{T_1}{T}=\frac{T_1}{T_1+T_2}=\frac{T_1}{2\cdot T_1}=\frac{1}{2}=50\%}$
@@ -306,15 +307,31 @@ Utilizziamo ancora le tre resistenza dal valore nominale di \SI{12}{k\ohm} e di 
 \\[4pt]\indent$\displaystyle{T_1=T_2=\tau\cdot\ln\frac{R_2+2R_1}{R_2}=\SI{12}{k\ohm}\cdot\SI{150}{n\farad}\cdot\ln\frac{\SI{12}{k\ohm}+2\cdot\SI{12}{k\ohm}}{\SI{12}{k\ohm}}=\SI{1.978}{m\second}}$
 \\[4pt]\indent$\displaystyle{T=2\cdot T_1 = \SI{3.955}{m\second}}$
 \\[4pt]\indent$\Rightarrow\displaystyle{f=\frac{1}{T}=\frac{1}{\SI{3.955}{m\second}}=\SI{253}{\hertz}}$
-\\[4pt]Il circuito si comporta correttamente, come vediamo dal grafico. Il valore di frequenza che misuriamo è corretto e preciso, infatti è maggiore solo del 2.4\% rispetto al valore teorico.
-\\spostamento alimentaziooni e nuove misure
+\\[4pt]Il circuito si comporta correttamente, come vediamo dal grafico. Il valore di frequenza che misuriamo è corretto e preciso, infatti è maggiore solo del 2.4\% rispetto al valore teorico.\par
+Se volessimo un'onda quadra con duty cycle diverso da 50\%, possiamo variare il valore delle alimentazioni, dato che i due intervalli di tempo $\mathrm{T_1}$ e $\mathrm{T_2}$ (e di conseguenza anche il duty cyle) dipendono da queste. Lasciamo invariata la tensione di alimentazione positiva, invece quella negativa la impostiamo a \SI{-15}{\volt}. Misuriamo ancora la tensione ai capi della capacità e la tensione in uscita, il grafico è mostrato in figura \ref{figura:oscillo3_2}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.2cm]{immagini/TEK00032}
+	\caption{Tensione ai capi della capacità ed in uscita all'oscillatore con le alimentazioni cambiate.}
+	\label{figura:oscillo3_2}
+\end{figure}
+\\Dato che la soglia negativa è più bassa, ci aspettiamo un duty cycle superiore a 50\%, perché l'onda quadra rimarrà bassa per un intervallo di tempo minore rispetto al caso precedente. Dal grafico in figura \ref{figura:oscillo3_2} vediamo che quest'affermazione è corretta, infatti il valore di duty cycle misurato dall'oscilloscopio è di 55.20\%. Il periodo dell'onda quadra misurato dall'oscilloscopio è di \SI{4.090}{m\second}, verifichiamo se questo valore è corretto con le formule per il calcolo di $T_1$ e $T_2$:
+\begin{table}[h!]
+	\begin{tabular}{cc}
+		\;\;\;$\displaystyle{V_H^+=\frac{R_1}{R_1+R_2}\cdot V_{DD}=\frac{1}{2}\cdot V_{DD}=+\SI{5}{\volt}}$\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; & $\displaystyle{V_L^+=\frac{R_1}{R_1+R_2}\cdot V_{SS}=\frac{1}{2}\cdot V_{SS}=-\SI{7.5}{\volt}}$\\ 
+	\end{tabular}
+\end{table}
+\\\indent$\rightarrow\displaystyle{T_1=\tau\cdot\ln\frac{V_L^+-V_{DD}}{V_H^+-V_{DD}}=R\cdot C\cdot\ln\frac{-7.5-10}{5-10}=\SI{12}{k\ohm}\cdot\SI{150}{n\farad}\cdot\ln\frac{7}{2}}=\SI{2.255}{m\second}$
+\\[6pt]\indent$\rightarrow\displaystyle{T_2=\tau\cdot\ln\frac{V_H^+-V_{SS}}{V_L^+-V_{SS}}=R\cdot C\cdot\ln\frac{5+15}{-7.5+15}=\SI{12}{k\ohm}\cdot\SI{150}{n\farad}\cdot\ln\frac{8}{3}}=\SI{1.765}{m\second}$
+\\[6pt]\indent$\Rightarrow\displaystyle{T=T_1+T_2=\SI{2.255}{m\second}+\SI{1.765}{m\second}=\SI{4.020}{m\second}}$
+\\[2pt]Il risultato precedente è corretto, dato che è inferiore del 1.7\% rispetto al valore misurato dall'oscilloscopio.
 \newpage
 \section{Circuito 4: oscillatore con duty cicle diverso da 50\%}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 spostare alim non buono, quindi con diodi e due r di valore diverso, cerchiamo di realizzare un oscilla con dc != da 50
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/schema4}
+	\includegraphics[height=9cm]{immagini/schema4}
 	\caption{Schema dell'oscillatore con duty cicle diverso da 50\%.}
 	\label{figura:schema4}
 \end{figure}
@@ -328,7 +345,7 @@ spostare alim non buono, quindi con diodi e due r di valore diverso, cerchiamo d
 info su bb
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/circuito4_1.jpg}
+	\includegraphics[height=7cm]{immagini/circuito4_1.jpg}
 	\caption{Fotografia dell'oscillatore con duty cicle maggiore del 50\% realizzato in laboratorio.}
 	\label{figura:circuito4_1}
 \end{figure}
@@ -336,7 +353,7 @@ info su bb
 \\ora scambiamo verso diodi, cosi da avere r invertite e ripetiasmo analisi. secondo cto in fig \ref{figura:circuito4_2}.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/circuito4_2.jpg}
+	\includegraphics[height=7cm]{immagini/circuito4_2.jpg}
 	\caption{Fotografia dell'oscillatore con duty cicle minore del 50\% realizzato in laboratorio.}
 	\label{figura:circuito4_2}
 \end{figure}
