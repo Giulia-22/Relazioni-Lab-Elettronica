@@ -111,17 +111,10 @@
 %	INTRO
 %----------------------------------------------------------------------------------------
 \chapter{Relazione attività di laboratorio 3}
-%\section*{Introduzione}
-%In questo laboratorio, sono stati analizzati circuiti composti da diodi e/o da amplificatori operazionali.
-%In particolare il primo circuito analizzato permette di risolvere un problema che si verificava nell'ultimo circuito analizzato durante il precedente laboratorio, ovvero nel raddrizzatore a doppia semionda. Questo problema consisteva nella presenza di una differenza di tensione, idealmente pari a \SI{0.7}{\volt} (mentre nelle nostre misure risultava pari a \SI{0.460}{\volt}), tra il segnale in uscita e quello in ingresso.
-%\\Il secondo circuito invece è un trigger di  Schmitt, che presenta nella sua caratteristica tra la tensione di ingresso e quella di uscita un ciclo di isteresi.
-%\\Infine il terzo circuito e il quarto funzionano senza la necessità di applicare un segnale in ingresso.
-%% DA SISTEMARE
 
-%\newpage
 \section{Circuito 1: raddrizzatore a doppia semionda di precisione}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Questo circuito, come si può notare dalla figura \ref{figura:schema1}, presenta due amplificatori operazionali, di cui quello in alto è retroazionato negativamente, e un diodo.
+Questo circuito, come si può notare dalla figura \ref{figura:schema1}, presenta due amplificatori operazionali, di cui quello in alto è retroazionato negativamente, e un diodo, il cui anodo è collegato all'uscita dell'OPAMP in basso e il cui catodo è collegato all'ingresso non invertente dell'OPAMP in alto.
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=7.5cm]{immagini/schema1}
@@ -161,8 +154,8 @@ Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato resisten
 	\caption{Fotografia del raddrizzatore a doppia semionda di precisione realizzato in laboratorio.}
 	\label{figura:circuito1}
 \end{figure}
-\\\indent Dopo aver realizzato il circuito sulla breadboard, sono state collegate sia le alimentazioni (con un valore di \SI{+10}{\volt} per l'alimentazione positiva e di \SI{-10}{\volt} per quella negativa) sia il segnale d'ingresso, con un'ampiezza picco-picco di \SI{2}{\volt} e frequenza prima di  \SI{100}{\hertz},  e poi pari a \SI{1}{k\hertz}.\par
-Il segnale in uscita prodotto dall'oscilloscopio lo si può vedere nella figura \ref{figura:uscita11}. Per queste due frequenze sono state analizzate anche le rappresentazioni XY, ovvero la caratteristica tra tensione di ingresso e tensione di uscita del circuito (in figura \ref{figura:xyuscita1}).
+\\\indent Dopo aver realizzato il circuito sulla breadboard, sono state collegate sia le alimentazioni (con un valore di \SI{+10}{\volt} per l'alimentazione positiva e di \SI{-10}{\volt} per quella negativa) sia il segnale d'ingresso (con un'ampiezza picco-picco di \SI{2}{\volt} e frequenza prima di \SI{100}{\hertz} e poi pari a \SI{1}{k\hertz}).\par
+Nella figura \ref{figura:uscita11} si può vedere il segnale in uscita prodotto dall'oscilloscopio. Per queste due frequenze sono state analizzate anche le rappresentazioni XY, ovvero la caratteristica tra tensione di ingresso e tensione di uscita del circuito (in figura \ref{figura:xyuscita1}).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00000}
@@ -177,7 +170,6 @@ Il segnale in uscita prodotto dall'oscilloscopio lo si può vedere nella figura 
 	\caption{Rappresentazione XY della risposta del circuito con $\mathrm{f= \SI{100}{\hertz}}$ (sinistra) e con $\mathrm{f= \SI{1}{k\hertz}}$ (destra).}
 	\label{figura:xyuscita1}
 \end{figure}
-\\In tutti questi grafici il segnale presenta un andamento quasi ideale, ma nella parte iniziale delle semionde negative raddrizzate si possono notare dei tratti anomali vicino all'asse delle ascisse. Nel grafico XY, lo vediamo perché il segnale non si trova solo nel primo e nel secondo quadrante, ma c'è un tratto (seppur molto breve) anche nel terzo quadrante. Queste anomalie sono dovute al fatto che \todo{quando il segnale in ingresso è positivo, il diodo è spento, quindi il secondo OPAMP (quello in basso) lavora in anello aperto. La sua tensione in uscita è pari a $\displaystyle\mathrm{V_{SS}}$, come si vede in figura \ref{figura:uscita111}, perciò impiegherà un certo tempo per erogare una tensione positiva, di conseguenza il diodo non si accende istantaneamente}{l'OPAMP in basso può avere una retroazione aperta per la presenza del diodo e quindi la sua uscita deve svolgere uno swing abbastanza ampio (visualizzato nella figura \ref{figura:uscita111}) per far arrivare la sua uscita al valore dell'alimentazione.} Questo poi incide anche sulla velocità del sistema nel raddrizzare il primo tratto delle semionde negative.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00002}
@@ -185,6 +177,7 @@ Il segnale in uscita prodotto dall'oscilloscopio lo si può vedere nella figura 
 	\caption{Risposta dell'OPAMP in basso con $\mathrm{f= \SI{100}{\hertz}}$ (sinistra) e con $\mathrm{f= \SI{1}{k\hertz}}$ (destra).}
 	\label{figura:uscita111}
 \end{figure}
+\\In tutti questi grafici il segnale presenta un andamento quasi ideale, ma nella parte iniziale delle semionde negative raddrizzate si possono notare dei tratti anomali vicino all'asse delle ascisse. Nel grafico XY, li vediamo perché il segnale non si trova solo nel primo e nel secondo quadrante, ma c'è un tratto (seppur molto breve) anche nel terzo quadrante. Queste anomalie sono dovute al fatto che, quando il segnale in ingresso è positivo, il diodo è spento e quindi l'OPAMP in basso lavora in anello aperto. Dunque la sua tensione in uscita è pari a $\displaystyle\mathrm{V_{SS}}$, come si vede in figura \ref{figura:uscita111}, e quindi deve svolgere uno swing abbastanza ampio per raggiungere il valore dell'alimentazione. Questo provoca un aumento del tempo necessario per erogare una tensione positiva e di conseguenza il diodo non si accende istantaneamente. Inoltre in questo modo si ha un effetto anche sulla velocità del sistema nel raddrizzare il primo tratto delle semionde negative.
 \\Analizzando invece frequenze maggiori (ad esempio \SI{10}{k\hertz}), il segnale presenta delle anomalie di maggiore rilevanza rispetto alle precedenti, come si può notare nella figura \ref{figura:uscita12}. Le semionde positive sono poco distorte, infatti vengono solo leggermente ritardate, invece sulle semionde negative si vede chiaramente l'escursione di tensione provocata dall'operazionale che si trova in anello aperto. Queste anomalie derivano dal fatto che l'OPAMP non è adatto a operare in alta frequenza quando presenta un anello che può risultare aperto.
 \begin{figure}[h!]
 	\centering
@@ -196,7 +189,7 @@ Il segnale in uscita prodotto dall'oscilloscopio lo si può vedere nella figura 
 \section{Circuito 2: trigger di Schmitt}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 In questo circuito è presente un amplificatore operazionale non retroazionato negativamente, ma con una retroazione positiva, quindi il circuito opera come un comparatore.\par
-La rete di reazione positiva è formata da un partitore resistivo, in cui inizialmente utilizzeremo due resistenze dello stesso valore per analizzare la risposta del circuito in maniera più semplice, come si può vedere dallo schema di figura \ref{figura:schema2}.\par
+La rete di reazione positiva è formata da un partitore resistivo, in cui utilizzeremo due resistenze dello stesso valore per analizzare la risposta del circuito in maniera più semplice, come si può vedere dallo schema di figura \ref{figura:schema2}.\par
 La particolarità del trigger di Schmitt è che, a differenza dei normali comparatori, la caratteristica ingresso-uscita presenta un'isteresi, di conseguenza questo circuito è immune a eventuali disturbi presenti in ingresso. In un comparatore semplice infatti, se il segnale in ingresso è rumoroso su valori prossimi alla soglia ${V^+}$, si possono avere delle transizioni involontarie dell'uscita da ${V_{DD}}$ a ${V_{SS}}$, perciò il rumore in ingresso rende anche l'uscita rumorosa. Questo problema viene risolto nel trigger di Schmitt, perché una volta attraversata una soglia (per esempio ${V_H^+}$ ) quest'ultima varierà il suo valore e si sposterà sul secondo valore (${V_L^+}$), quindi l'uscita non cambia finché non si attraversa la seconda soglia, rendendo il circuito robusto rispetto ai rumori presenti sulle linee d'ingresso.\par
 \begin{figure}[h]
 	\centering
@@ -219,8 +212,7 @@ La funzione di trasferimento di questo comparatore è:\\
 %	\end{cases}
 %\end{equation}
 \subsection{Analisi e dati sperimentali}
-Per la realizzazione del circuito sulla breadboard (visibile nella figura \ref{figura:circuito2}) è stato utilizzato un amplificatore operazionale di tipo \textmu A741.
-Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato due resistenze da \SI{12}{k\ohm}, le cui misure sono state riportate nella tabella \ref{table:mis_res2}.
+Per la realizzazione del circuito sulla breadboard, che viene mostrata nella figura \ref{figura:circuito2}, è stato utilizzato un amplificatore operazionale di tipo \textmu A741. Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato due resistenze da \SI{12}{k\ohm}, le cui misure sono state riportate nella tabella \ref{table:mis_res2}.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{|c|c|c|}
@@ -241,7 +233,7 @@ Invece per quanto riguarda i valori delle resistenze abbiamo utilizzato due resi
 	\caption{Fotografia del trigger di Schmitt realizzato in laboratorio.}
 	\label{figura:circuito2}
 \end{figure}
-\\Dopo aver realizzato il circuito sulla breadboard, scegliamo di applicare in ingresso un'onda triangolare con ampiezza picco-picco di \SI{15}{\volt}. Questo valore deve essere scelto in modo tale da poter vedere le transizioni da una soglia all'altra.\par
+\\Dopo aver realizzato il circuito sulla breadboard, scegliamo di applicare in ingresso un'onda triangolare con ampiezza picco-picco di \SI{15}{\volt}. Questo valore è stato scelto in modo tale da poter vedere le transizioni da una soglia all'altra.\par
 Per prima cosa abbiamo analizzato l'uscita del circuito con un segnale in ingresso con frequenza di \SI{100}{\hertz} (figura \ref{figura:uscita21}), dai grafici si può notare che il comportamento dei segnali risulta corretto. Abbiamo quindi misurate le due soglie, i cui valori sono risultati pari a \SI{4.88}{\volt} per ${V_H^+}$ (soglia positiva) e \SI{-4.16}{\volt} per ${V_L^+}$ (soglia negativa). Anche questi valori sono corretti, infatti corrispondono a circa metà della tensione che l'OPAMP eroga in uscita quando satura al valore positivo o negativo.
 \begin{figure}[h!]
 	\centering
@@ -258,7 +250,20 @@ Per prima cosa abbiamo analizzato l'uscita del circuito con un segnale in ingres
 	\caption{Rappresentazione XY della risposta del circuito con $\mathrm{f= \SI{100}{\hertz}}$.}
 	\label{figura:uscita22}
 \end{figure}
-\todo{Quando f aumenta $->$ visibile slew rate OPAMP $=>$ isteresi non più rettangolare ma a parallelogramma (aggiungere immagini oscilloscopio + spiegazione)}
+\\In seguito abbiamo analizzato frequenze maggiori, ad esempio \SI{1}{k\hertz}, e abbiamo notato che dalla figura \ref{figura:uscita23} risulta visibile lo slew rate dell'OPAMP, ovvero il tempo di cui necessita per passare dall'alimentazione positiva a quella negativa e viceversa.
+\\La presenza dello slew rate causa nella figura \ref{figura:uscita24} una deformazione del ciclo di isteresi, che non risulta più con una forma rettangolare ma presenta la forma di un parallelogramma.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6cm]{immagini/TEK00020}
+	\caption{Risposta del circuito con $\mathrm{f= \SI{1}{k\hertz}}$.}
+	\label{figura:uscita23}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6cm]{immagini/TEK00022}
+	\caption{Rappresentazione XY della risposta del circuito con $\mathrm{f= \SI{1}{k\hertz}}$.}
+	\label{figura:uscita24}
+\end{figure}
 
 \newpage\null\newpage % da togliere poi ultimi due comandi
 \section{Circuito 3: oscillatore con duty cicle pari a 50\%}
@@ -286,7 +291,7 @@ Il periodo di oscillazione è dato dalla somma dell'intervallo di tempo in cui l
 	\end{tabular}
 	\label{table:formuleSoglie}
 \end{table}
-\\Dato che il circuito è simmetrico, le due soglie sono in modulo uguali. Inoltre, dato che le due resistenze hanno lo stesso valore, l'argomento del logaritmo è uguale per entrambi gli intervalli, di conseguenza $T_1=T_2$. Il duty cycle, $\delta$, che è la percentuale di tempo che un'onda quadra è alta, sarà pari a:
+\\Dato che il circuito è simmetrico, le due soglie sono in modulo uguali. Inoltre, dato che le due resistenze hanno lo stesso valore, l'argomento del logaritmo è uguale per entrambi gli intervalli, di conseguenza $T_1=T_2$. Il duty cycle, $\delta$, che è la percentuale di tempo in cui un'onda quadra è alta, sarà pari a:
 \\[4pt]\indent$\displaystyle{\delta=\frac{T_1}{T}=\frac{T_1}{T_1+T_2}=\frac{T_1}{2\cdot T_1}=\frac{1}{2}=50\%}$
 \subsection{Analisi e dati sperimentali}
 Utilizziamo ancora le tre resistenza dal valore nominale di \SI{12}{k\ohm} e di cui abbiamo già riportato le misure in tabella \ref{table:mis_res1}. Posizioniamo i componenti sulla breadboard, come mostrato in figura \ref{figura:circuito3}, e colleghiamo l'oscilloscopio. I nodi di cui siamo interessati a misurare la tensione sono gli ingressi dell'OPAMP (sia quello invertente che quello non invertente) e l'uscita dell'operazionale.
@@ -303,12 +308,12 @@ Utilizziamo ancora le tre resistenza dal valore nominale di \SI{12}{k\ohm} e di 
 	\caption{Grafico della tensione ai capi della capacità e della tensione in uscita all'oscillatore.}
 	\label{figura:oscillo1}
 \end{figure}
-\\Utiliziamo le formule ricavate nella sezione precedente per calcolare i due intervalli di tempo:
+\\Utilizziamo le formule ricavate nella sezione precedente per calcolare i due intervalli di tempo:
 \\[4pt]\indent$\displaystyle{T_1=T_2=\tau\cdot\ln\frac{R_2+2R_1}{R_2}=\SI{12}{k\ohm}\cdot\SI{150}{n\farad}\cdot\ln\frac{\SI{12}{k\ohm}+2\cdot\SI{12}{k\ohm}}{\SI{12}{k\ohm}}=\SI{1.978}{m\second}}$
 \\[4pt]\indent$\displaystyle{T=2\cdot T_1 = \SI{3.955}{m\second}}$
 \\[4pt]\indent$\Rightarrow\displaystyle{f=\frac{1}{T}=\frac{1}{\SI{3.955}{m\second}}=\SI{253}{\hertz}}$
 \\[4pt]Il circuito si comporta correttamente, come vediamo dal grafico. Il valore di frequenza che misuriamo è corretto e preciso, infatti è maggiore del 2.4\% rispetto al valore teorico.\par
-Dal grafico di figura \ref{figura:soglieCap}, possiamo vediamo che il ciclo di carica e scarica della capacità è condizionato dalle due soglie, proprio come ci aspettiamo dalla teoria.
+Dal grafico in figura \ref{figura:soglieCap}, possiamo vedere che il ciclo di carica e scarica della capacità è condizionato dalle due soglie, proprio come ci aspettiamo dalla teoria.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/TEK00026}
@@ -335,17 +340,17 @@ Dal grafico di figura \ref{figura:soglieCap}, possiamo vediamo che il ciclo di c
 \newpage
 \section{Circuito 4: oscillatore con duty cicle diverso da 50\%}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Spostare le tensioni di alimentazione per far variare il duty cycle non è l'approccio migliore che si può adottare. Il circuito precedente può essere modificato per fare in modo che il condensatore non si carica e scarica sulla stessa resistenza, ma su due resistenze diverse. Per fare questo, complichiamo leggermente il circuito e al posto della resistenza $\mathrm{R}$ sostistuiamo due resistenze di diverso valore, $\mathrm{R_3}$ e $\mathrm{R_4}$. Successivamente, facciamo in modo che i percorsi di carica e scarica della capacità siano differenti, perciò inseriamo due diodi: il primo diodo, $\mathrm{D_1}$, ha l'anodo collegato alla resistenza, mentre il catodo è collegato all'uscita dell'OPAMP, quindi la resistenza $\mathrm{R_3}$ sarà quella utilizzata per scaricare il condensatore; l'altro diodo invece, $\mathrm{D_2}$, è collegato in modo opposto rispetto al diodo $\mathrm{D_1}$, perciò la capacità si caricherà sulla resistenza $\mathrm{R_4}$. Il circuito risultante è mostrato in figura \ref{figura:schema4}.
+Spostare le tensioni di alimentazione per far variare il duty cycle non è l'approccio migliore che si può adottare. Il circuito precedente può essere modificato per fare in modo che il condensatore non si carica e scarica sulla stessa resistenza, ma su due resistenze diverse. Per fare questo, complichiamo leggermente il circuito e al posto della resistenza $\mathrm{R}$ sostituiamo due resistenze di diverso valore, $\mathrm{R_3}$ e $\mathrm{R_4}$. Successivamente, facciamo in modo che i percorsi di carica e scarica della capacità siano differenti, perciò inseriamo due diodi: il primo diodo, $\mathrm{D_1}$, ha l'anodo collegato alla resistenza, mentre il catodo è collegato all'uscita dell'OPAMP, quindi la resistenza $\mathrm{R_3}$ sarà quella utilizzata per scaricare il condensatore; l'altro diodo invece, $\mathrm{D_2}$, è collegato in modo opposto rispetto al diodo $\mathrm{D_1}$, perciò la capacità si caricherà sulla resistenza $\mathrm{R_4}$. Il circuito risultante è mostrato in figura \ref{figura:schema4}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=9cm]{immagini/schema4}
 	\caption{Schema dell'oscillatore con duty cicle diverso da 50\%.}
 	\label{figura:schema4}
 \end{figure}
-\\Scegliendo opportunamente i valori delle due resistenze $\mathrm{R_3}$ e $\mathrm{R_4}$, è possibile ottenere tempi di carica e scarica diversi, senza andare a modificare le tensioni di alimentazione o il valore delle soglie. In particolare, se $\mathrm{R_3}$ è minore di $\mathrm{R_4}$, il duty cycle sarà maggiore del 50\% perché l'onda quadra resterà alta per un tempo maggiore del semiperiodo, vicevarsa sarà minore.  Il funzionamento del circuito però non cambia, resterà sempre un oscillatore. 
+\\Scegliendo opportunamente i valori delle due resistenze $\mathrm{R_3}$ e $\mathrm{R_4}$, è possibile ottenere tempi di carica e scarica diversi, senza andare a modificare le tensioni di alimentazione o il valore delle soglie. In particolare, se $\mathrm{R_3}$ è minore di $\mathrm{R_4}$, il duty cycle sarà maggiore del 50\% perché l'onda quadra resterà alta per un tempo maggiore del semiperiodo, viceversa sarà minore.  Il funzionamento del circuito però non cambia, resterà sempre un oscillatore. 
 \subsection{Analisi e dati sperimentali}
 Scegliamo di utilizzare lo stesso valore del circuito precedente per le resistenze $\mathrm{R_1}$ e $\mathrm{R_2}$, anche la resistenza $\mathrm{R_3}$ la scegliamo da \SI{12}{k\ohm}. La resistenza $\mathrm{R_4}$ invece ha valore nominale di \SI{22}{k\ohm} e valore misurato di \SI{23.945}{k\ohm}. La fotografia di questo circuito è mostrata in figura \ref{figura:circuito4_1}.\par
-Le formule utilizzate per il circuito precedente restano valide anche per questo circuito, cambiano solo le costanti di tempo $\mathrm{\tau}$ perché sono diverse per la fase di carica e di scarica. In particolare, dato che $\displaystyle{R_4>R_3}$, si che $\displaystyle{\tau_4>\tau_3}$, perciò la fase di carica sarà più lenta di quella di scarica, quindi l'intervallo di tempo in cui l'onda quadra è alta è maggiore rispetto a quello in cui è bassa e di conseguenza il duty cycle sarà maggiore del 50\%.
+Le formule utilizzate per il circuito precedente restano valide anche per questo circuito, cambiano solo le costanti di tempo $\mathrm{\tau}$ perché sono diverse per la fase di carica e di scarica. In particolare, dato che $\displaystyle{R_4>R_3}$, si ha che $\displaystyle{\tau_4>\tau_3}$, perciò la fase di carica sarà più lenta di quella di scarica, quindi l'intervallo di tempo in cui l'onda quadra è alta è maggiore rispetto a quello in cui è bassa e di conseguenza il duty cycle sarà maggiore del 50\%.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/circuito4_1.jpg}
@@ -371,7 +376,7 @@ Il periodo misurato è di \SI{6.497}{m\second}, pari ad una frequenza di \SI{154
 \\[6pt]\indent$\Rightarrow\displaystyle{T=T_1+T_2=\SI{3.946}{m\second}+\SI{1.969}{m\second}=\SI{5.915}{m\second}}$
 \\[6pt]\indent$\Rightarrow\displaystyle{\delta=\frac{T_1}{T}=\frac{\SI{3.946}{m\second}}{\SI{5.915}{m\second}}= 66.71\%}$
 \\[4pt]Otteniamo un periodo inferiore di circa \SI{0.5}{m\second} ed un duty cycle sensibilmente maggiore rispetto alla misura dell'oscilloscopio. Queste anomalie potrebbero essere causate dal rumore, infatti vediamo che sia l'onda quadra che la tensione ai capi della capacità sono segnali piuttosto rumorosi, questo può provocare l'imprecisione delle misure dell'oscilloscopio.\par
-Nel grafico seguente, la figura \ref{figura:oscillo4_1_soglie} vediamo invece l'andamento della tensione ai capi della capacità rispetto alle soglie. Notiamo che in questo caso la misura del duty cycle è più vicina al valore calcolato precedentemente con le formule.
+Nel grafico seguente, la figura \ref{figura:oscillo4_1_soglie}, vediamo invece l'andamento della tensione ai capi della capacità rispetto alle soglie. Notiamo che in questo caso la misura del duty cycle è più vicina al valore calcolato precedentemente con le formule.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.9cm]{immagini/TEK00038}
@@ -392,12 +397,12 @@ Nel grafico seguente, la figura \ref{figura:oscillo4_1_soglie} vediamo invece l'
 	\caption{Tensione ai capi della capacità ed in uscita all'oscillatore con $\delta<50\%$.}
 	\label{figura:oscillo4_2}
 \end{figure}
-\\Il valore delle due soglie resta invariato ($V_H^+=+\SI{5}{\volt}$, $V_L^+=\SI{-5}{\volt}$). Calcoliamo i parametri di nostro interesse e vedremo che i valori di $\mathrm{T_1}$ e di $\mathrm{T_2}$ si scambiano ra di loro, perciò il periodo, e di conseguenza anche la frequenza, restereanno invariati rispetto al circuito precedente. 
+\\I valori delle due soglie restano invariati ($V_H^+=+\SI{5}{\volt}$, $V_L^+=\SI{-5}{\volt}$). Calcoliamo i parametri di nostro interesse e vedremo che i valori di $\mathrm{T_1}$ e di $\mathrm{T_2}$ si scambiano tra di loro, perciò il periodo, e di conseguenza anche la frequenza, resteranno invariati rispetto al circuito precedente. 
 \\[4pt]\indent$\rightarrow\displaystyle{T_1=\tau_2\cdot\ln\frac{V_L^+-V_{DD}}{V_H^+-V_{DD}}=R_3\cdot C\cdot\ln\frac{-5-10}{5-10}=\SI{11.947}{k\ohm}\cdot\SI{150}{n\farad}\cdot\ln3}=\SI{1.969}{m\second}$
 \\[6pt]\indent$\rightarrow\displaystyle{T_2=\tau_1\cdot\ln\frac{V_H^+-V_{SS}}{V_L^+-V_{SS}}=R_4\cdot C\cdot\ln\frac{5+10}{-5+10}=\SI{23.945}{k\ohm}\cdot\SI{150}{n\farad}\cdot\ln3}=\SI{3.946}{m\second}$
 \\[6pt]\indent$\Rightarrow\displaystyle{T=T_1+T_2=\SI{3.946}{m\second}+\SI{1.969}{m\second}=\SI{5.915}{m\second}}$
 \\[6pt]\indent$\Rightarrow\displaystyle{\delta=\frac{T_1}{T}=\frac{\SI{1.969}{m\second}}{\SI{5.915}{m\second}}= 33.29\%}$
-\\[4pt]Anche in questo caso i valori teorici e reali sono sensibilmente diversi, però i segnali prodotti sono sempre piuttosto rumorosi. Infatti, il duty cycle che calcola l'oscilloscopio non è molto preciso, ma se guardiamo il grafico di figura \ref{figura:oscillo4_2_soglie}, in cui viene mostrato l'andamento della tensione ai capi della capacità rispetto alle soglie, notiamo che il valore è molto più preciso, esattamente come è avvenuto per il cirucito precedente. La misura del periodo rimane sempre parecchio imprecisa.
+\\[4pt]Anche in questo caso i valori teorici e reali sono sensibilmente diversi, però i segnali prodotti sono sempre piuttosto rumorosi. Infatti, il duty cycle che calcola l'oscilloscopio non è molto preciso, ma se guardiamo il grafico di figura \ref{figura:oscillo4_2_soglie}, in cui viene mostrato l'andamento della tensione ai capi della capacità rispetto alle soglie, notiamo che il valore è molto più preciso, esattamente come è avvenuto per il circuito precedente. La misura del periodo rimane sempre parecchio imprecisa.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.9cm]{immagini/TEK00036}
