@@ -299,7 +299,7 @@ Utilizziamo ancora le tre resistenza dal valore nominale di \SI{12}{k\ohm} e di 
 \\In figura \ref{figura:oscillo1} è riportato il grafico della tensione ai capi della capacità (traccia gialla, CH1) e della tensione in uscita all'OPAMP (traccia azzurra, CH2). Tramite l'oscilloscopio ricaviamo che la frequenza dell'onda quadra è pari a \SI{247}{\hertz}. Successivamente, confrontiamo questi valori con quelli teorici.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/TEK00025}
+	\includegraphics[height=7cm]{immagini/TEK00025}
 	\caption{Grafico della tensione ai capi della capacità e della tensione in uscita all'oscillatore.}
 	\label{figura:oscillo1}
 \end{figure}
@@ -308,10 +308,17 @@ Utilizziamo ancora le tre resistenza dal valore nominale di \SI{12}{k\ohm} e di 
 \\[4pt]\indent$\displaystyle{T=2\cdot T_1 = \SI{3.955}{m\second}}$
 \\[4pt]\indent$\Rightarrow\displaystyle{f=\frac{1}{T}=\frac{1}{\SI{3.955}{m\second}}=\SI{253}{\hertz}}$
 \\[4pt]Il circuito si comporta correttamente, come vediamo dal grafico. Il valore di frequenza che misuriamo è corretto e preciso, infatti è maggiore solo del 2.4\% rispetto al valore teorico.\par
-Se volessimo un'onda quadra con duty cycle diverso da 50\%, possiamo variare il valore delle alimentazioni, dato che i due intervalli di tempo $\mathrm{T_1}$ e $\mathrm{T_2}$ (e di conseguenza anche il duty cyle) dipendono da queste. Lasciamo invariata la tensione di alimentazione positiva, invece quella negativa la impostiamo a \SI{-15}{\volt}. Misuriamo ancora la tensione ai capi della capacità e la tensione in uscita, il grafico è mostrato in figura \ref{figura:oscillo3_2}.
+Dal grafico di figura \ref{figura:soglieCap}, possiamo vediamo che il ciclo di carica e scarica della capacità è condizionato dalle due soglie, proprio come ci aspettiamo dalla teoria.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.2cm]{immagini/TEK00032}
+	\includegraphics[height=7cm]{immagini/TEK00026}
+	\caption{Tensione ai capi della capacità rispetto alle soglie del circuito.}
+	\label{figura:soglieCap}
+\end{figure}
+\\Se volessimo un'onda quadra con duty cycle diverso da 50\%, possiamo variare il valore delle alimentazioni, dato che i due intervalli di tempo $\mathrm{T_1}$ e $\mathrm{T_2}$ (e di conseguenza anche il duty cyle) dipendono da queste. Lasciamo invariata la tensione di alimentazione positiva, invece quella negativa la impostiamo a \SI{-15}{\volt}. Misuriamo ancora la tensione ai capi della capacità e la tensione in uscita, il grafico è mostrato in figura \ref{figura:oscillo3_2}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=7cm]{immagini/TEK00032}
 	\caption{Tensione ai capi della capacità ed in uscita all'oscillatore con le alimentazioni cambiate.}
 	\label{figura:oscillo3_2}
 \end{figure}
@@ -328,14 +335,14 @@ Se volessimo un'onda quadra con duty cycle diverso da 50\%, possiamo variare il 
 \newpage
 \section{Circuito 4: oscillatore con duty cicle diverso da 50\%}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-spostare alim non buono, quindi con diodi e due r di valore diverso, cerchiamo di realizzare un oscilla con dc != da 50
+Spostare le tensioni di alimentazione per far variare il duty cycle non è l'approccio migliore che si può adottare. Il circuito precedente può essere modificato per fare in modo che il condensatore non si carica e scarica sulla stessa resistenza, ma su due resistenze diverse. Per fare questo, complichiamo leggermente il circuito e al posto della resistenza $\mathrm{R}$ sostistuiamo due resistenze di diverso valore, $\mathrm{R_3}$ e $\mathrm{R_4}$. Successivamente, facciamo in modo che i percorsi di carica e scarica della capacità siano differenti, perciò inseriamo due diodi: il primo diodo, $\mathrm{D_1}$, ha l'anodo collegato alla resistenza, mentre il catodo è collegato all'uscita dell'OPAMP, quindi la resistenza $\mathrm{R_3}$ sarà quella utilizzata per scaricare il condensatore; l'altro diodo invece, $\mathrm{D_2}$, è collegato in modo opposto rispetto al diodo $\mathrm{D_1}$, perciò la capacità si caricherà sulla resistenza $\mathrm{R_4}$. Il circuito risultante è mostrato in figura \ref{figura:schema4}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=9cm]{immagini/schema4}
 	\caption{Schema dell'oscillatore con duty cicle diverso da 50\%.}
 	\label{figura:schema4}
 \end{figure}
-\\dc puo essere min magg del 50, rip da valore di r 3 e 4 (metti relazione)
+\\Scegliendo opportunamente i valori delle due resistenze $\mathrm{R_3}$ e $\mathrm{R_4}$, è possibile impostare due soglie non simmetriche, senza andare a modificare le tensioni di alimentazione. In particolare, se $\mathrm{R_3}$ è minore di $\mathrm{R_4}$, il duty cycle sarà minore/maggiore del 50\%, vicevarsa sarà maggiore/minore.  Il funzionamento del circuito però non cambia, resterà sempre un oscillatore. % metti < e > dopo aver verificato conti
 %\noindent La funzione di trasferimento di questo raddrizzatore è:
 %\begin{equation}
 %   \begin{cases}
