@@ -186,7 +186,7 @@ Analizzando invece frequenze maggiori (ad esempio \SI{10}{k\hertz}), il segnale 
 	\label{figura:uscita12}
 \end{figure}
 \newpage
-\section{Circuito 2: trigger di Schmitt}
+\section{Circuito 2: Trigger di Schmitt}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 In questo circuito è presente un amplificatore operazionale non retroazionato negativamente, ma con una retroazione positiva, quindi il circuito opera come un comparatore.\par
 La rete di reazione positiva è formata da un partitore resistivo, in cui utilizzeremo due resistenze dello stesso valore per analizzare la risposta del circuito in maniera più semplice, come si può vedere dallo schema di figura \ref{figura:schema2}. Invece, all'ingresso invertente applichiamo il segnale, ottenendo un comparatore detto ``Trigger di Schmitt''.\par
@@ -198,13 +198,6 @@ La particolarità del trigger di Schmitt è che, a differenza dei normali compar
 	\label{figura:schema2}
 \end{figure}
 La funzione di trasferimento di questo comparatore è:
-%\begin{equation}
-%   \begin{cases} % da controllare
-%   V_{out}= V_{DD}\;\indent\indent \mathrm{per\;}  V_L^+<V_{in}<V_H^+\mathrm{, \;\; con\;}\displaystyle{ V_H^+=\frac{R_1}{R_1+R_2}\cdot V_{DD}=\frac{V_{DD}}{2}}\mathrm{\;\;\;\; se \;} R_1=R_2\\[10pt]
-%   V_{out}= V_{SS}\;\;\indent\indent \mathrm{per\;} V_H^+<V_{in}<V_L^+\mathrm{, \;\; con\;}\displaystyle{ V_H^+=\frac{R_1}{R_1+R_2}\cdot |V_{SS}|=\frac{|V_{SS}|}{2}}\mathrm{\;\; se \;} R_1=R_2\\
-%   \end{cases}
-%\end{equation}
- %SISTEMARE FDT
 \begin{equation}
 	\begin{cases} % da controllare
 		V_{out}= V_{DD}\indent\indent \mathrm{da\;quando\;} V_{in} \mathrm{\;supera\;} V_L^+ \mathrm{\;fin\;quando\;non\;supera\;la\;soglia\;} V_H^+\\[5pt]
@@ -270,13 +263,13 @@ Per prima cosa abbiamo analizzato l'uscita del circuito con un segnale in ingres
 	\label{figura:uscita24}
 \end{figure}
 \newpage\null\newpage % da togliere poi ultimi due comandi
-\section{Circuito 3: oscillatore con duty cicle pari a 50\%}
+\section{Circuito 3: oscillatore con duty cycle pari a 50\%}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 Il trigger di Schmitt può essere utilizzato per realizzare un oscillatore. Un oscillatore è un circuito  che produce in uscita una forma d'onda ad una determinata frequenza, entrambi i parametri (forma e frequenza) dipendono sia dai componenti presenti nell'oscillatore che dalle tensioni di alimentazione. \`E un circuito particolare perché è \textit{autoalimentato}, questo significa che non dovremo applicare un segnale in ingresso per osservare il segnale d'uscita (per innescare la reazione è sufficiente un disturbo, ad esempio il rumore dei componenti elettronici).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=8cm]{immagini/schema3}
-	\caption{Schema dell'oscillatore con duty cicle di 50\%.}
+	\caption{Schema dell'oscillatore con duty cycle di 50\%.}
 	\label{figura:schema3}
 \end{figure}
 \\Il circuito che realizzeremo produrrà in uscita un'onda quadra. Alimentiamo l'OPAMP tra +\SI{10}{\volt} e \SI{-10}{\volt}. Inizialmente utilizzeremo lo stesso valore per le resistenze $\mathrm{R_1}$ e $\mathrm{R_2}$, quindi le soglie che determinano le transizioni da alto a basso e viceversa sono:
@@ -286,7 +279,7 @@ Il trigger di Schmitt può essere utilizzato per realizzare un oscillatore. Un o
 		$\displaystyle{V_H^+=\frac{R_1}{R_1+R_2}\cdot V_{DD}=+\SI{5}{\volt}}$\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; & $\displaystyle{V_L^+=\frac{R_1}{R_1+R_2}\cdot V_{SS}=-\SI{5}{\volt}}$\\ 
 	\end{tabular}
 \end{table}
-\\Il suo funzionamento sfrutta il processo di carica e scarica di un condensatore su una resistenza. Ipotizziamo che inizialmente il condensatore sia scarico, se $\mathrm{V^-}$ è minore di $\mathrm{V^+}$, l'uscita satura alla tensione positiva e il condensatore si carica attraverso la resistenza $\mathrm{R}$. La tensione ai suoi capi cresce con andamento esponenziale, con costante di tempo $\displaystyle{\tau=R\cdot C}$. Se non ci fosse la soglia $\mathrm{V_H^+}$, la tensione ai capi del condensatore continuerebbe a crescere fino a raggiungere la tensione di saturazione positiva. In questo oscillatore invece, quando la tensione ai capi della capacità raggiunge la soglia $\mathrm{V_H^+}$, si ha che $\mathrm{V^-}$ è maggiore di $\mathrm{V^+}$, di conseguenza l'uscita satura alla tensione negativa. Questo provoca la scarica della capacità sulla resistenza, l'andamento è sempre esponenziale con la stessa costante di tempo $\tau$. Il processo di scarica continua fin quando la tensione ai capi della capacità risulta pari alla soglia inferiore, in questo caso risulta soddisfatta la condizione $V^+>V^-$, e il condesatore ripete il processo di carica. Riassumendo, il circuito si comporta come un comparatore con isteresi.\par
+\\Il suo funzionamento sfrutta il processo di carica e scarica di un condensatore su una resistenza. Ipotizziamo che inizialmente il condensatore sia scarico, se $\mathrm{V^-}$ è minore di $\mathrm{V^+}$, l'uscita satura alla tensione positiva e il condensatore si carica attraverso la resistenza $\mathrm{R}$. La tensione ai suoi capi cresce con andamento esponenziale, con costante di tempo $\displaystyle{\tau=R\cdot C}$. Se non ci fosse la soglia $\mathrm{V_H^+}$, la tensione ai capi del condensatore continuerebbe a crescere fino a raggiungere la tensione di saturazione positiva. In questo oscillatore invece, quando la tensione ai capi della capacità raggiunge la soglia $\mathrm{V_H^+}$, si ha che $\mathrm{V^-}$ è maggiore di $\mathrm{V^+}$, di conseguenza l'uscita satura alla tensione negativa. Questo provoca la scarica della capacità sulla resistenza, l'andamento è sempre esponenziale con la stessa costante di tempo $\tau$. Il processo di scarica continua fin quando la tensione ai capi della capacità risulta pari alla soglia inferiore, in questo caso risulta soddisfatta la condizione $V^+>V^-$, e il condensatore ripete il processo di carica. Riassumendo, il circuito si comporta come un comparatore con isteresi.\par
 Il periodo di oscillazione è dato dalla somma dell'intervallo di tempo in cui l'onda quadra resta alta ($T_1$) e dell'intervallo di tempo in cui l'onda quadra resta bassa ($T_2$). Questi valori si ricavano dalle formule inverse di carica e di scarica del condensatore:
 \begin{table}[h!]
 	\centering
@@ -302,7 +295,7 @@ Utilizziamo ancora le tre resistenza dal valore nominale di \SI{12}{k\ohm} e di 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/circuito3}
-	\caption{Fotografia dell'oscillatore con duty cicle pari a 50\% realizzato in laboratorio.}
+	\caption{Fotografia dell'oscillatore con duty cycle pari a 50\% realizzato in laboratorio.}
 	\label{figura:circuito3}
 \end{figure}
 \\In figura \ref{figura:oscillo1} è riportato il grafico della tensione ai capi della capacità (traccia gialla, CH1) e della tensione in uscita all'OPAMP (traccia azzurra, CH2). Tramite l'oscilloscopio ricaviamo che la frequenza dell'onda quadra è pari a \SI{247}{\hertz}. Successivamente, confrontiamo questo valore con quello teorico.
@@ -342,13 +335,13 @@ Dal grafico in figura \ref{figura:soglieCap}, possiamo vedere che il ciclo di ca
 \\[6pt]\indent$\Rightarrow\displaystyle{T=T_1+T_2=\SI{2.255}{m\second}+\SI{1.765}{m\second}=\SI{4.020}{m\second}}$
 \\[2pt]Il risultato precedente è corretto, dato che è inferiore solo del 1.7\% rispetto al valore misurato dall'oscilloscopio.
 \newpage
-\section{Circuito 4: oscillatore con duty cicle diverso da 50\%}
+\section{Circuito 4: oscillatore con duty cycle diverso da 50\%}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 Spostare le tensioni di alimentazione per far variare il duty cycle non è l'approccio migliore che si possa adottare. Il circuito precedente può essere modificato per fare in modo che il condensatore non si carichi e scarichi sulla stessa resistenza, ma su due resistenze diverse. Per fare questo, complichiamo leggermente il circuito e al posto della resistenza $\mathrm{R}$ sostituiamo due resistenze di diverso valore, $\mathrm{R_3}$ e $\mathrm{R_4}$. Successivamente, facciamo in modo che i percorsi di carica e scarica della capacità siano differenti, perciò inseriamo due diodi: il primo diodo, $\mathrm{D_1}$, ha l'anodo collegato alla resistenza $\mathrm{R_3}$, mentre il catodo è collegato all'uscita dell'OPAMP, quindi la resistenza $\mathrm{R_3}$ sarà quella utilizzata per scaricare il condensatore; l'altro diodo invece, $\mathrm{D_2}$, è collegato in modo opposto rispetto al diodo $\mathrm{D_1}$, perciò la capacità si caricherà sulla resistenza $\mathrm{R_4}$. Il circuito risultante è mostrato in figura \ref{figura:schema4}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=9cm]{immagini/schema4}
-	\caption{Schema dell'oscillatore con duty cicle diverso da 50\%.}
+	\caption{Schema dell'oscillatore con duty cycle diverso da 50\%.}
 	\label{figura:schema4}
 \end{figure}
 \\Scegliendo opportunamente i valori delle due resistenze $\mathrm{R_3}$ e $\mathrm{R_4}$, è possibile ottenere tempi di carica e scarica diversi, senza andare a modificare le tensioni di alimentazione o il valore delle soglie. In particolare, se $\mathrm{R_3}$ è minore di $\mathrm{R_4}$, il duty cycle sarà maggiore del 50\% perché l'onda quadra resterà alta per un tempo maggiore del semiperiodo, viceversa sarà minore.  Il funzionamento del circuito però non cambia, resterà sempre un oscillatore. 
@@ -358,7 +351,7 @@ Le formule utilizzate per il circuito precedente restano valide anche per questo
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/circuito4_1.jpg}
-	\caption{Fotografia dell'oscillatore con duty cicle maggiore del 50\% realizzato in laboratorio.}
+	\caption{Fotografia dell'oscillatore con duty cycle maggiore del 50\% realizzato in laboratorio.}
 	\label{figura:circuito4_1}
 \end{figure}
 \\Colleghiamo l'oscilloscopio per vedere l'andamento della tensione ai capi del condensatore e della tensione in uscita al circuito. Sempre con l'oscilloscopio, misureremo il periodo dell'onda quadra prodotta ed il suo duty cycle. Il grafico è riportato in figura \ref{figura:oscillo4_1}.\par
@@ -391,7 +384,7 @@ Nel grafico seguente, la figura \ref{figura:oscillo4_1_soglie}, vediamo invece l
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/circuito4_2.jpg}
-	\caption{Fotografia dell'oscillatore con duty cicle minore del 50\% realizzato in laboratorio.}
+	\caption{Fotografia dell'oscillatore con duty cycle minore del 50\% realizzato in laboratorio.}
 	\label{figura:circuito4_2}
 \end{figure}
 \\Ripetiamo l'analisi e le misure fatte per il circuito precedente. In questo caso ci aspettiamo un duty cycle minore del 50\%, dato che la fase di scarica della capacità ha una durata superiore rispetto alla fase di carica. L'andamento della tensione ai capi del condensatore e della tensione in uscita al circuito è riportato in figura \ref{figura:oscillo4_2}.
