@@ -112,15 +112,127 @@
 %----------------------------------------------------------------------------------------
 \chapter{Relazione attività di laboratorio 4}
 \section*{Introduzione}
-IC555
+Nei circuiti analizzati durante questo laboratorio sono presenti diodi, amplificatori operazionali e un nuovo circuito integrato, il timer 555.
+\\Nella figura \ref{figura:timer1} a sinistra, si può vedere la numerazione e la denominazione di ciascun pin di questo componente. Per capire quali sono i terminali, sul package è presente una mezza luna in corrispondenza del pin numero 1 e poi la numerazione prosegue in senso antiorario. Invece nella stessa figura a destra si possono notare i componenti interni di questo circuito integrato e in particolare della tipologia di timer LM555, ovvero quella che abbiamo utilizzato durante questo laboratorio.
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=4.6cm]{immagini/timer1}
+	\includegraphics[height=4.6cm]{immagini/timer2}
+	\caption{Package (a sinistra) e contenuto (a destra, fonte: datasheet del LM555) del timer 555.}
+	\label{figura:timer1}
+\end{figure}
+\\Questo componente richiede un'alimentazione singola per poter funzionare correttamente: va collegata la tensione positiva $\mathrm{V_{CC}}$ al pin 8, mentre la massa al pin 1.
+\\Il timer 555 può essere utilizzato in due configurazioni: astabile oppure monostabile. In questo laboratorio abbiamo utilizzato la seconda configurazione, che è rappresentata nella figura \ref{figura:timer2}.
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=4.6cm]{immagini/timer3}
+	\caption{Configurazione monostabile del timer LM555 (fonte: datasheet del LM555).}
+	\label{figura:timer2}
+\end{figure}
+
 \newpage
 \section{Circuito 1: circuito monostabile con trigger di Schmitt}
 \subsection{Schema del circuito e Funzione di Trasferimento}
+Questo circuito (in figura \ref{figura:schema1}) è stato ottenuto apportando delle modifiche all'oscillatore analizzato nel precedente laboratorio. In particolare sono stati aggiunti un diodo (con il catodo collegato a massa e con l'anodo collegato alla reazione negativa) e una rete di filtraggio (situata all'ingresso non invertente dell'amplificatore e collegata al circuito tramite un ulteriore diodo). Entrambi i diodi utilizzati sono stati scelti di tipo 1N4148.
+\\Poi per riuscire a visualizzare i segnali sull'oscilloscopio, abbiamo sostituito l'amplificatore \textmu A741 utilizzato nei precedenti laboratori con un OPAMP di tipo TL071.
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=7.5cm]{immagini/schema1}
+	\caption{Schema del circuito monostabile con trigger di Schmitt.}
+	\label{figura:schema1}
+\end{figure}
+\\\'E un circuito monostabile perchè presenta uno stato stabile, ovvero quello in cui la tensione di uscita $\displaystyle\mathrm{V_{OUT}}$ si trova a un valore pari a $\displaystyle\mathrm{V_{DD}}$ e dunque è possibile generare un impulso negativo fino a $\displaystyle\mathrm{V_{SS}}$ con una durata definita. Questa durata dipende dal processo di carica del condensatore verso il valore di $\displaystyle\mathrm{V_{SS}}$ e questo processo viene interrotto quando viene raggiunta la soglia $\displaystyle\mathrm{V_L^+}$. Difatti la tensione sul condensatore può essere calcolata come:
+\\[2pt]\indent$\displaystyle{\mathrm{V_C(t)}=\mathrm{V^-(t)}=\mathrm{V_{SS}}+(0.7-\mathrm{V_{SS}}) \cdot e^{-\frac{t-t_0}{\tau}}}$
+\\dove $\mathrm{t_0}$ è l'istante in cui si ha il fronte di discesa del segnale in ingresso $\mathrm{V_{IN}}$ e l'inizio del processo di carica del condensatore verso il valore $\mathrm{V_{SS}}$, mentre $\mathrm{\tau}$ corrisponde alla costante di tempo data da: $\displaystyle{\mathrm{\tau}= R \cdot C}$.
+\\Da questa equazione si può ricavare quella della durata dell'impulso negativo in uscita:
+\\[2pt]\indent$\displaystyle{T_A=\tau\cdot\ln(1+\frac{R_2}{R_1})}$
 \subsection{Analisi e dati sperimentali}
+Per poter costruire il circuito sulla breadboard, per prima cosa sono stati scelti i valori dei componenti da utilizzare. Nel caso delle resistenze, le loro misure sono state riportate nella tabella \ref{table:mis_res1}, mentre nel caso dei condensatori sono stati utilizzati dei valori di: $\displaystyle\mathrm{C = \SI{150}{n\farad}}$ e $\displaystyle\mathrm{C_T = \SI{1}{n\farad}}$.
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\cline{2-3} 
+		\multicolumn{1}{c|}{} & \textbf{Valore nominale} & \textbf{Valore misurato}\\ 
+		\hline
+		$\mathbf{R}$ & \SI{12}{k\ohm} & \SI{11.882}{k\ohm} \\ 
+		\hline
+		$\mathbf{R_1}$ & \SI{12}{k\ohm} & \SI{11.934}{k\ohm} \\ 
+		\hline
+		$\mathbf{R_2}$ & \SI{12}{k\ohm} & \SI{11.950}{k\ohm} \\ 
+		\hline
+		$\mathbf{R_T}$ & \SI{12}{k\ohm} & \SI{11.894}{k\ohm} \\ 
+		\hline
+	\end{tabular}
+	\caption{Misure delle resistenze utilizzate per il circuito.}
+	\label{table:mis_res1}
+\end{table}
+\\Una volta costruito il circuito (in figura \ref{figura:circuito1}), è stato alimentato con una tensione duale di $\mathrm{\SI{10}{\volt}}$ e poi gli è stato fornito in ingresso un segnale corrispondente a un'onda quadra (detto segnale di trigger) con duty cycle del 20\% e una frequenza di \SI{100}{\hertz}.
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/circuito1}
+	\caption{Fotografia del circuito monostabile con trigger di Schmitt realizzato in laboratorio.}
+	\label{figura:circuito1}
+\end{figure}
+\\Nella figura \ref{figura:TEK00002} sono mostrati il segnale in ingresso $\mathrm{V_{IN}}$ (in giallo) e il segnale in uscita $\mathrm{V_{OUT}}$ (in azzurro).
+\\Poi abbiamo utilizzato le formule specificate nella sezione precedente per verificare la misura della durata dell'impulso negativo in uscita ($\mathrm{T_A}$) ricavata con l'oscilloscopio:
+\\[4pt]\indent$\displaystyle{T_A=\tau\cdot\ln(1+\frac{R_2}{R_1})=\SI{1.8}{m\second}\cdot\ln(1+\frac{\SI{12}{k\ohm}}{\SI{12}{k\ohm}})=\SI{1.248}{m\second}}$
+\\[4pt]\indent con $\displaystyle{\tau=R \cdot C=\SI{12}{k\ohm}\cdot\SI{150}{n\farad}=\SI{1.8}{m\second}}$
+\\[4pt]Quindi la verifica è soddisfatta perchè l'oscilloscopio misura una durata dell'impulso di \SI{1.312}{m\second} e quindi l'errore tra i due valori è circa del 4\%.
+\\Invece per quanto riguarda il duty cycle, l'oscilloscopio ha misurato un valore pari al 19.95\% e quindi c'è una differenza dello 0.25\% rispetto al duty cycle assegnato a $\mathrm{V_{IN}}$.
+\\TODO: CALCOLO DUTY CYCLE (COME RICAVARE PERIODO) E CAPIRE SE CALCOLARE PER VIN O PER VOUT
+\\TODO: CONFRONTO VALORI DI TB E TA
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=5.5cm]{immagini/TEK00002}
+	\caption{Risposta del circuito con misure dell'oscilloscopio.}
+	\label{figura:TEK00002}
+\end{figure}
+\\[16pt]Inoltre sono stati anche confrontati i segnali delle tensioni in ingresso e in uscita rispetto a quelle presenti sugli ingressi dell'OPAMP e a quella presente nel nodo $\mathrm{V_T}$.
+\\TODO: MANCA FOTO CONFRONTO V+ CON VOUT
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=4.6cm]{immagini/TEK00003}
+	\caption{Confronto di $\mathrm{V_{IN}}$ (CH1) con $\mathrm{V^+}$ (CH2).}
+	\label{figura:TEK00003}
+\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=4.6cm]{immagini/TEK00004}
+	\includegraphics[height=4.6cm]{immagini/TEK00005}
+	\caption{Confronto di $\mathrm{V^-}$ (CH2) con $\mathrm{V_{IN}}$ (CH1 a sinistra) e con $\mathrm{V_{OUT}}$ (CH1 a destra).}
+	\label{figura:TEK00004e5}
+\end{figure}
+\\Per quanto riguarda la tensione sull'ingresso non invertente $\mathrm{V^+}$, essa varia tra $\mathrm{V_L^+}$ e $\mathrm{V_H^+}$ e, come si può notare dalla figura \ref{figura:TEK00003}, questi due valori non sono simmetrici. Questo succede perchè:
+\begin{itemize}
+	\item se $\mathrm{V_{OUT}}$ è negativa (ovvero pari a $\mathrm{V_{SS}}$) si ha che il diodo $\mathrm{D_T}$ è spento e quindi che
+	\\[4pt]$\displaystyle{\;\;\;V_L^+=\frac{V_{SS}}{2}=\frac{\SI{-10}{\volt}}{2}=\SI{-5}{\volt}}$;
+	\item se $\mathrm{V_{OUT}}$ è positiva (ovvero pari a $\mathrm{V_{DD}}$) si ha che il diodo $\mathrm{D_T}$ è accesso e quindi che
+	\\[4pt]$\displaystyle{\;\;\;V_H^+=\frac{V_{DD}}{3}=\frac{\SI{10}{\volt}}{3}=\SI{3.33}{\volt}}$.
+\end{itemize}
+Invece la tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tensione sul condensatore C ($\mathrm{V_C}$), è stata rappresentata nella figura \ref{figura:TEK00004e5} e presenta un'espressione nel tempo pari a:
+\\[4pt]\indent$\displaystyle{V_C(t)=V^-(t)=V_{SS}+(0.7-V_{SS})\cdot e^{-\frac{t-t_0}{\tau}}=\SI{-10}{\volt}+\SI{10.7}{\volt}\cdot e^{-\frac{t-t_0}{\SI{1.8}{m\second}}}}$
+\\[4pt]TODO: METTERE VALORE DI t0 NELL'ESPRESSIONE DI V-
+\\Infine considerando la tensione $\mathrm{V_T}$, TODO: FINIRE TESTO + MANCANO FOTO OSCILLOSCOPIO
+\\TODO: MANCANO FOTO OSCILLOSCOPIO STATO STABILE
+
 \newpage
 \section{Circuito 2: circuito monostabile con NE555}
 \subsection{Schema del circuito e Funzione di Trasferimento}
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=7.5cm]{immagini/schema2}
+	\caption{Schema del circuito monostabile con NE555.}
+	\label{figura:schema2}
+\end{figure}
 \subsection{Analisi e dati sperimentali}
+%R ... k\ohm --> 12k\ohm
+%R 4.698 k\ohm --> 4.7 k\ohm
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/circuito2}
+	\caption{Fotografia del circuito monostabile con LM555 realizzato in laboratorio.}
+	\label{figura:circuito2}
+\end{figure}
 
 %----------------------------------------------------------------------------------------
 
