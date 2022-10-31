@@ -195,6 +195,7 @@ Successivamente, abbiamo utilizzato le formule descritte nella sezione precedent
 	\caption{Confronto di $\mathrm{V_{IN}}$ (CH1) con $\mathrm{V^+}$ (CH2).}
 	\label{figura:TEK00003}
 \end{figure}
+\todo{foto oscilloscopio con V+ e Vout}
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00004}
@@ -211,9 +212,32 @@ Successivamente, abbiamo utilizzato le formule descritte nella sezione precedent
 \end{itemize}
 Invece la tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tensione sul condensatore C ($\mathrm{V_C}$), è stata rappresentata nella figura \ref{figura:TEK00004e5} e presenta un'espressione nel tempo pari a:
 \\[4pt]\indent$\displaystyle{V_C(t)=V^-(t)=V_{SS}+(0.7-V_{SS})\cdot e^{-\frac{t-t_0}{\tau}}=\SI{-10}{\volt}+\SI{10.7}{\volt}\cdot e^{-\frac{t-t_0}{\SI{1.8}{m\second}}}}$
-\\[4pt]TODO: METTERE VALORE DI t0 NELL'ESPRESSIONE DI V-
-\\Infine considerando la tensione $\mathrm{V_T}$, TODO: FINIRE TESTO + MANCANO FOTO OSCILLOSCOPIO
-\\TODO: MANCANO FOTO OSCILLOSCOPIO STATO STABILE
+\todo{determinare valore di t0 da mettere nell'espressione}
+\\Infine considerando la tensione $\mathrm{V_T}$, TODO: FINIRE TESTO (COMPORTAMENTO COME DERIVATORE DI VIN)
+\todo{foto oscilloscopio con VT e Vin e Vout}
+\todo{commentare e sistemare immagine complessiva}
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=6cm]{immagini/plot_sim}
+	\caption{Confronto di $\mathrm{V_{IN}}$, $\mathrm{V_{OUT}}$, $\mathrm{V^+}$ e $\mathrm{V^-}$.}
+	\label{figura:simulazione}
+\end{figure}
+\\Infine è stato considerato lo stato stabile di questo circuito, che consiste nell'aggiungere al circuito del precedente laboratorio soltanto il diodo D ottenendo il circuito in figura \ref{figura:schema1stabile}. Per questa analisi sono stati mantenuti invariati i valori dei componenti utilizzati. Inoltre al circuito risultante non si applica nessun segnale in ingresso.
+\\Analizzando il segnale sull'ingresso invertente dell'OPAMP $\mathrm{V^-}$ in figura \ref{figura:simulazione1}, si può notare che questa tensione (corrispondente alla tensione sul condensatore C), presenta una fase iniziale di carica e poi, una volta raggiunti gli \SI{0.7}{\volt}, viene bloccata poichè è stato raggiunto il valore della tensione ai capi del diodo e quindi esso si accende impedendo alla capacità di continuare a caricarsi. Invece il segnale in uscita $\mathrm{V_{OUT}}$ rimane al valore dell'alimentazione positiva $\mathrm{V_{DD}}$ e quindi non riesce a commutare siccome $\mathrm{V^-}$ non riesce mai a superare la soglia $\mathrm{V_H^+}$. Quindi questo circuito nello stato stabile non oscilla.
+\\Per poter risolvere la stabilità di questo stato è necessario che la soglia $\mathrm{V_H^+}$ risulti inferiore rispetto a $\mathrm{V^-}$ in modo da avere una transizione in $\mathrm{V_{OUT}}$. Per avere questo effetto è necessario collegare sull'ingresso non invertente dell'OPAMP la rete considerata all'inizio della sezione precedente.
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=5.5cm]{immagini/schema1stabile}
+	\caption{Schema del circuito nello stato stabile.}
+	\label{figura:schema1stabile}
+\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=4.6cm]{immagini/plot_sim_stabile}
+	\caption{Confronto di $\mathrm{V^-}$ (CH1) con $\mathrm{V_{OUT}}$ (CH2) nello stato stabile.}
+	\label{figura:simulazione1}
+\end{figure}
+\todo{aggiornare foto confronto con oscilloscopio}
 
 \newpage
 \section{Circuito 2: circuito monostabile con NE555}
