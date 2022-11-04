@@ -3,4 +3,7 @@ DA RIFARE:
 1. Plot V_in V_out con cursori (abbiamo misurato solo mezzo impulso)
 2. Andamento v^+ e v_out
 3. Derivatore (grafico V_t e v_in)
-4. ????
+4. Grafico circuito stabile
+	CIRCUITO 2
+5. Rifare foto cirucito perché manca il secondo condensatore
+6. prendere misure e continuare analisi
