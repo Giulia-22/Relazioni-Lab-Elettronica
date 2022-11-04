@@ -1,0 +1,6 @@
+DA RIFARE:
+	CIRCUITO 1
+1. Plot V_in V_out con cursori (abbiamo misurato solo mezzo impulso)
+2. Andamento v^+ e v_out
+3. Derivatore (grafico V_t e v_in)
+4. ????
