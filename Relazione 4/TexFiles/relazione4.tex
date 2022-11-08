@@ -113,7 +113,8 @@
 \chapter{Relazione attività di laboratorio 4}
 \section*{Introduzione}
 Nei circuiti analizzati durante questo laboratorio sono presenti diodi, amplificatori operazionali e un nuovo circuito integrato, il timer 555.\par
-Nella figura \ref{figura:timer1} a sinistra, si può vedere la numerazione e la denominazione di ciascun pin di questo componente. Per capire quali sono i terminali, sul package è presente una mezza luna in corrispondenza del pin numero 1 e poi la numerazione prosegue in senso antiorario. Invece nella stessa figura a destra si possono notare i componenti interni di questo circuito integrato e in particolare della tipologia di timer LM555, ovvero quella che abbiamo utilizzato durante questo laboratorio.
+Nella figura \ref{figura:timer1} a sinistra, si può vedere la numerazione e la denominazione di ciascun pin di questo componente. Per capire quali sono i terminali, sul package è presente una mezza luna in corrispondenza del pin numero 1 e poi la numerazione prosegue in senso antiorario. Invece nella stessa figura a destra si possono notare i componenti interni di questo circuito integrato e in particolare della tipologia di timer LM555, ovvero quella che abbiamo utilizzato durante questo laboratorio.\par
+Inoltre il nome del timer 555 è dovuto al fatto che, nel suo schema interno (in figura \ref{figura:timer1}), sono presenti tre resistenze in serie da \SI{5}{k\ohm} l'una.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/timer1}
@@ -259,7 +260,7 @@ Se confrontiamo le tensioni all'ingresso non invertente ed in uscita, vediamo ch
 \newpage
 \section{Circuito 2: circuito monostabile con NE555}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Un circuito monostabile può essere realizzato utilizzando un circuito integrato, il timer 555. Il suo nome è dovuto al fatto che, nel suo schema interno, sono presenti tre resistenze in serie da \SI{5}{k\ohm} l'una. Nella figura seguente (figura \ref{figura:schema2}) è mostrato il package del NE555 con i nomi e la funzione di ogni terminale, oltre che alle connessioni fra i vari componenti per ottenere il circuito monostabile.
+Un circuito monostabile può essere realizzato utilizzando un circuito integrato, il timer 555. Nella figura seguente (figura \ref{figura:schema2}) è mostrato il package del NE555 con i nomi e la funzione di ogni terminale, oltre che alle connessioni fra i vari componenti per ottenere il circuito monostabile.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7.5cm]{immagini/schema2}
@@ -267,7 +268,7 @@ Un circuito monostabile può essere realizzato utilizzando un circuito integrato
 	\label{figura:schema2}
 \end{figure}
 \\In questa modalità, quando al pin 2 viene applicato un trigger negativo (che fa passare la tensione di questo pin dal livello logico alto a quello basso), l'uscita da bassa rimane alta per un periodo di tempo che dipende dalla rete collegata ai pin 6 e 7, dopodichè ritorna bassa e rimane a questo valore fin quando non arriva un nuovo trigger.\par
-L'intervallo di tempo in cui l'uscita rimane alta è dettato dal processo di carica del condensatore $\mathrm{C_1}$: quando arriva il trigger negativo sul pin 2, l'uscita del NE555, corrispondente al pin 3, diventa alta e il condensatore $\mathrm{C_1}$ si carica attraverso la resistenza $\mathrm{R}$. Il processo di carica continua fin quando la tensione ai capi della capacità raggiunge il valore di $\displaystyle{2/3\;V_{DD}}$, questo valore è determinato dallo schema interno del NE555. Raggiunto questo valore, l'uscita del NE555 ritorna al livello logico basso e la capacità si scarica istantaneamente a massa, perciò il circuito ritorna autonomamente al suo stato stabile.
+L'intervallo di tempo in cui l'uscita rimane alta è dettato dal processo di carica del condensatore $\mathrm{C_1}$: quando arriva il trigger negativo sul pin 2, l'uscita del NE555, corrispondente al pin 3, diventa alta e il condensatore $\mathrm{C_1}$ si carica attraverso la resistenza $\mathrm{R}$. Il processo di carica continua fin quando la tensione ai capi della capacità raggiunge il valore di $\displaystyle{2/3\;V_{DD}}$, determinato dallo schema interno del NE555. Raggiunto questo valore, l'uscita del NE555 ritorna al livello logico basso e la capacità si scarica istantaneamente a massa, perciò il circuito ritorna autonomamente al suo stato stabile.
 \\La durata dell'impulso in uscita al NE555 si ricava dalla formula di carica del condensatore: 
 \\[4pt]\indent$\displaystyle{v_C=V_{CC}\cdot\bigl(1-e^{-\frac{t}{R\cdot C}}\bigr)\indent\rightarrow\indent\frac{2}{3}\cdot V_{CC}=V_{CC}\cdot\bigl(1-e^{-\frac{t}{R\cdot C}}\bigr)}$
 \\[4pt]\indent$\displaystyle{\Rightarrow\indent T=-R\cdot C\cdot\ln\frac{1}{3}=1.1\cdot R\cdot C}$
