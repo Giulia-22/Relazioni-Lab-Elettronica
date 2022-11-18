@@ -261,58 +261,98 @@ L'intervallo di tempo in cui l'uscita rimane alta è dettato dal processo di car
 \\La durata dell'impulso in uscita al NE555 si ricava dalla formula di carica del condensatore: 
 \\[4pt]\indent$\displaystyle{v_C=V_{CC}\cdot\bigl(1-e^{-\frac{t}{R\cdot C_1}}\bigr)\indent\rightarrow\indent\frac{2}{3}\cdot V_{CC}=V_{CC}\cdot\bigl(1-e^{-\frac{t}{R\cdot C_1}}\bigr)}$
 \\[4pt]\indent$\displaystyle{\Rightarrow\indent T=-R\cdot C_1\cdot\ln\frac{1}{3}=1.1\cdot R\cdot C_1}$
-\\La capacità $\mathrm{C_2}$ ha il solo scopo di ripulire il segnale di massa da eventuali disturbi ad alta frequenza.
+\\[4pt]La capacità $\mathrm{C_2}$ ha il solo scopo di ripulire il segnale di massa da eventuali disturbi ad alta frequenza.
 \subsection{Analisi e dati sperimentali}
 %R ... k\ohm --> 12k\ohm
 %R 4.698 k\ohm --> 4.7 k\ohm
-Per simulare il trigger sul pin 2, utilizziamo un'onda quadra di ampiezza picco-picco di \SI{10}{\volt} e offset DC di \SI{5}{\volt}. Il duty cycle utilizzato è di 80\%, ovvero il valore più alto fornito dallo strumento, perché è necessario che i trigger negativi siano distanziati di un tempo maggiore rispetto alla durata dell'impulso alto in uscita. In figura \ref{figura:circuito2} vediamo la fotografia del circuito con resistenza R di \SI{}{\ohm}, $\mathrm{C_1}$ da  \SI{}{\farad} e $\mathrm{C_2}$ da  \SI{}{\farad}. Il modello di timer 555 utilizzato è il LM555CE, alimentiamo la breadboard fra massa e +\SI{10}{\volt} perché questo componente funziona ad alimentazione singola.
-%% TODO 5: foto da rifare perchè manca il secondo condensatore
+Per simulare il trigger sul pin 2, utilizziamo un'onda quadra di ampiezza picco-picco di \SI{10}{\volt} e offset DC di \SI{5}{\volt}. Il duty cycle utilizzato è di 80\%, ovvero il valore più alto fornito dallo strumento, perché è necessario che i trigger negativi siano distanziati di un tempo maggiore rispetto alla durata dell'impulso alto in uscita. Anche la frequenza sarà fatta variare in modo tale da rispettare sempre questa condizione, altrimenti il circuito non funziona correttamente. In figura \ref{figura:circuito2} vediamo la fotografia del circuito con la resistenza R da \SI{12}{k\ohm}, $\mathrm{C_1}$ da  \SI{150}{n\farad} e $\mathrm{C_2}$ da  \SI{1}{n\farad}. Il modello di timer 555 utilizzato è il LM555CE, alimentiamo la breadboard fra massa e +\SI{10}{\volt} perché questo componente funziona ad alimentazione singola.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.5cm]{immagini/circuito2}
+	\includegraphics[height=7cm]{immagini/circuito2}
 	\caption{Fotografia del circuito monostabile con LM555CE realizzato in laboratorio.}
 	\label{figura:circuito2}
 \end{figure}
 %%%
-\\Per verificare la relazione fra durata dell'impulso T ed i valori della resistenza e della capacità, andiamo a misurare la durata dell'impulso al variare di R, con $\mathrm{C_1}$ fissata a \SI{}{\farad}, successivamente fissiamo la capacità ad un nuovo valore, \SI{}{\farad}, e facciamo variare nuovamente la resistenza. Le misure sono riportate nelle tabelle \ref{table:impulsoRvar} e \ref{table:impulsoCvar}.
+\\Per verificare la relazione esistente fra la durata dell'impulso T ed i valori della resistenza e della capacità, andiamo a misurare la durata dell'impulso al variare di R, con $\mathrm{C_1}$ fissata a \SI{150}{n\farad}, successivamente fissiamo la capacità ad un nuovo valore, \SI{10}{n\farad}, e facciamo variare nuovamente la resistenza. Le misure delle resistenze scelte sono riportate in tabella \ref{table:mis_res2}, mentre quelle dell'impulso T al variare della resistenza per i due valori di capacità sono riportate nelle tabelle \ref{table:impulsoRvar} e \ref{table:impulsoCvar}.
 \begin{table}[h!]
 	\centering
-	\begin{tabular}{|c|c|c|}
-		\cline{2-3} 
-		\multicolumn{1}{c|}{} & \textbf{Valore calcolato} & \textbf{Valore misurato}\\ 
+	\begin{tabular}{|c|c|}
+	\hline
+		\textbf{Valore nominale} & \textbf{Valore misurato}\\ 
 		\hline
-		$\mathbf{R = \SI{}{\ohm}}$ & \SI{}{m\second} & \SI{}{m\second} \\ 
+		\SI{4.6}{k\ohm} & \SI{4.625}{k\ohm} \\ 
 		\hline
-		$\mathbf{R = \SI{}{\ohm}}$ & \SI{}{m\second} & \SI{}{m\second} \\ 
+		 \SI{12}{k\ohm} & \SI{11.898}{k\ohm} \\ 
 		\hline
-		$\mathbf{R = \SI{}{\ohm}}$ & \SI{}{m\second} & \SI{}{m\second} \\ 
+		\SI{18}{k\ohm} & \SI{17.998}{k\ohm} \\ 
 		\hline
-		$\mathbf{R = \SI{}{\ohm}}$ & \SI{}{m\second} & \SI{}{m\second} \\ 
+		 \SI{22}{k\ohm} & \SI{23.947}{k\ohm} \\ 
 		\hline
 	\end{tabular}
-	\caption{Misura e valore teorico della durata dell'impulso al variare della resistenza, con $\mathrm{C_1}$=\SI{}{\farad}.}
+	\caption{Misure delle resistenze utilizzate per il circuito monostabile con NE555.}
+	\label{table:mis_res2}
+\end{table}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\cline{2-4} 
+		\multicolumn{1}{c|}{} & \textbf{Valore calcolato} & \textbf{Valore misurato}& \textbf{Errore percentuale}\\ 
+		\hline
+		$\mathbf{{R = 4.6k}\Omega}$ & \SI{763}{\mu\second} & \SI{772}{\mu\second} & 1.16\% \\ 
+		\hline
+		$\mathbf{{R = 12k}\Omega}$ & \SI{1.96}{m\second} & \SI{1.99}{m\second} & 1.37\% \\ 
+		\hline
+		$\mathbf{{R = 18k}\Omega}$ & \SI{2.97}{m\second} & \SI{3.00}{m\second} & 1.02\% \\ 
+		\hline
+		$\mathbf{{R = 22k}\Omega}$ & \SI{3.95}{m\second} & \SI{4.00}{m\second} & 1.23\% \\ 
+		\hline
+	\end{tabular}
+	\caption{Misura e valore teorico della durata dell'impulso al variare della resistenza, con $\mathrm{C_1}$=\SI{150}{n\farad}.}
 	\label{table:impulsoRvar}
 \end{table}
 \begin{table}[h!]
 	\centering
-	\begin{tabular}{|c|c|c|}
-		\cline{2-3} 
-		\multicolumn{1}{c|}{} & \textbf{Valore calcolato} & \textbf{Valore misurato}\\ 
+	\begin{tabular}{|c|c|c|c|}
+		\cline{2-4} 
+		\multicolumn{1}{c|}{} & \textbf{Valore calcolato} & \textbf{Valore misurato}& \textbf{Errore percentuale}\\ 
 		\hline
-		$\mathbf{R = \SI{}{\ohm}}$ & \SI{}{m\second} & \SI{}{m\second} \\ 
+		$\mathbf{{R = 4.6k}\Omega}$ & \SI{50.9}{\mu\second} & \SI{53.2}{\mu\second} & 4.57\% \\ 
 		\hline
-		$\mathbf{R = \SI{}{\ohm}}$ & \SI{}{m\second} & \SI{}{m\second} \\ 
+		$\mathbf{{R = 12k}\Omega}$ & \SI{131}{\mu\second} & \SI{135}{\mu\second} & 3.15\% \\ 
 		\hline
-		$\mathbf{R = \SI{}{\ohm}}$ & \SI{}{m\second} & \SI{}{m\second} \\ 
+		$\mathbf{{R = 18k}\Omega}$ & \SI{198}{\mu\second} & \SI{207}{\mu\second} & 4.56\% \\ 
 		\hline
-		$\mathbf{R = \SI{}{\ohm}}$ & \SI{}{m\second} & \SI{}{m\second} \\ 
+		$\mathbf{{R = 22k}\Omega}$ & \SI{263}{\mu\second} & \SI{270}{\mu\second} & 2.50\% \\ 
 		\hline
 	\end{tabular}
-	\caption{Misura e valore teorico della durata dell'impulso al variare della resistenza, con $\mathrm{C_1}$=\SI{}{\farad}.}
+	\caption{Misura e valore teorico della durata dell'impulso al variare della resistenza, con $\mathrm{C_1}$=\SI{10}{n\farad}.}
 	\label{table:impulsoCvar}
 \end{table}
-%attenzione a saturazione
-%andamento lineare (plot matlab)
+\newpage
+\noindent Le misure di T ottenute con le due diverse capacità sono confrontabili con i valori teorici, nel secondo caso le misure sono affette da un errore maggiore perché la capacità utilizzata è più piccola, quindi l'onda quadra resta alta per un periodo di tempo minore, di  conseguenza gli errori di misura impattano maggiormente sui risultati ottenuti. \par
+Nella figura seguente (figura \ref{figura:TEK00014}) è mostrato il grafico in uscita all'oscilloscopio per $R = \SI{12}{k\ohm}$ e $C_1 = \SI{150}{n\farad}$, in cui possiamo vedere la misura di T effettuata dall'oscilloscopio. Il grafico è simile per le altre combinazioni di $R$ e $C_1$, cambia solo la durata dell'intervallo di tempo T. Dal grafico si nota anche che quando la tensione del pin 2 ha una transizione negativa, l'uscita si porta alta per un intervallo di tempo di durata T, successivamente rimane al livello logico basso fin quando non si ha una nuova transizione negativa del segnale in ingresso.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/TEK00014}
+	\caption{Confronto di fra la tensione al pin 2 (CH1) e la tensione al pin 3 (CH2).}
+	\label{figura:TEK00014}
+\end{figure}
+\\ Per visualizzare meglio i dati delle tabelle, confrontiamo il grafico della durata dell'impulso misurata con quella teorica al variare della resistenza, per entrambe le capacità. Il risultato di quest'elaborazione è mostrato in figura \ref{figura:graf1e2}.\begin{figure}[h!]
+	\centering
+	\includegraphics[height=5.8cm]{immagini/graficomis1}
+	\includegraphics[height=5.8cm]{immagini/graficomis2}
+	\caption{Grafico di T in funzione di R per $\mathrm{C_1}$ = \SI{150}{n\farad} (a sinistra) e $\mathrm{C_1}$ = \SI{10}{n\farad} (a destra).}
+	\label{figura:graf1e2}
+\end{figure}
+\\ In entrambi i casi, le misure sono sovrapponibili ai risultati teorici. Come ci aspettiamo dalla formula, l'andamento di T in funzione di R è di tipo lineare, infatti a resistenze di valore maggiore corrispondono durate dell'impulso T maggiori. \par
+Per analizzare l'influenza della capacità su T, possiamo andare a confrontare fra di loro i grafici delle misure per i due valori di capacità. Questo grafico è mostrato in figura \ref{figura:confrontoplot}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/graficoconfronto1}
+	\caption{Confronto fra i grafici delle diverse misure con i due valori di capacità.}
+	\label{figura:confrontoplot}
+\end{figure}
+\\Anche in questo caso possiamo dire che la capacità e l'intervallo T sono proporzionali, perché a valori di capacità minori corrispondono durate dell'impulso minori, viceversa per capacità maggiori la durata di T è maggiore. % pendenza retta ?
 
 %----------------------------------------------------------------------------------------
 
