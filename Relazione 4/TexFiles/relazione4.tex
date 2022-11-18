@@ -122,7 +122,7 @@ Nella figura \ref{figura:timer1} a sinistra, si può vedere la numerazione e la 
 	\label{figura:timer1}
 \end{figure}
 \\Questo componente richiede un'alimentazione singola per poter funzionare correttamente: la tensione positiva $\mathrm{V_{CC}}$ va collegata al pin 8, mentre la massa al pin 1.\par
-Il timer 555 può essere utilizzato in due modalità: astabile oppure monostabile. In questo laboratorio abbiamo utilizzato la seconda configurazione, che è rappresentata nella figura \ref{figura:timer2}.
+Il timer 555 può essere utilizzato in tre modalità: astabile, monostabile e bistabile. In questo laboratorio abbiamo utilizzato la seconda configurazione, che è rappresentata nella figura \ref{figura:timer2}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/timer3}
@@ -171,25 +171,22 @@ Per poter costruire il circuito sulla breadboard, per prima cosa sono stati scel
 \\Una volta costruito il circuito (figura \ref{figura:circuito1}), è stato alimentato con una tensione duale di $\mathrm{\pm\SI{10}{\volt}}$ e poi gli è stato fornito in ingresso un segnale a onda quadra (detto segnale di trigger) con duty cycle del 20\% e frequenza di \SI{100}{\hertz}. Abbiamo scelto il valore di duty cycle più piccolo che il generatore di forme d'onda può erogare perché nell'intervallo di tempo in cui l'onda quadra è bassa, il condensatore deve scaricarsi fino a $\mathrm{V_L^+}$ e quindi caricarsi fino a +\SI{0.7}{\volt}. Dato che tutto questo non avviene istantaneamente, ma ad una velocità legata a $\tau$, affinché il circuito funzioni correttamente è necessario che l'onda quadra stia al livello logico basso per un tempo sufficiente. La tensione picco-picco utilizzata è di \SI{10}{\volt}.\\ % controllare
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.5cm]{immagini/circuito1}
+	\includegraphics[height=7cm]{immagini/circuito1}
 	\caption{Fotografia del circuito monostabile con trigger di Schmitt realizzato in laboratorio.}
 	\label{figura:circuito1}
 \end{figure}
 \\Nella figura \ref{figura:TEK00002} sono mostrati il segnale in ingresso $\mathrm{V_{IN}}$ (in giallo, CH1) e il segnale in uscita $\mathrm{V_{OUT}}$ (in azzurro, CH2). \`E stata effettuata anche la misura di $\mathrm{T_A}$ utilizzando i cursori dell'oscilloscopio, così da poterla confrontare con il risultato teorico.
-%%% TODO1: rifare screen oscilloscopio con cursori giusti
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6cm]{immagini/TEK00002}
+	\includegraphics[height=6.7cm]{immagini/TEK00002}
 	\caption{Confronto di $\mathrm{V_{IN}}$ (CH1) con $\mathrm{V_{OUT}}$ (CH2) e misura di $\mathrm{T_A}$ con cursori.}
 	\label{figura:TEK00002}
 \end{figure}
 \\Successivamente, abbiamo utilizzato le formule descritte nella sezione precedente per verificare la correttezza della misura della durata dell'impulso negativo in uscita ($\mathrm{T_A}$) ottenuta con l'oscilloscopio:
 \\[4pt]\indent$\displaystyle{T_A=\tau\cdot\ln\biggl(1+\frac{R_2}{R_1}\biggr)=\SI{1.8}{m\second}\cdot\ln\biggl(1+\frac{\SI{12}{k\ohm}}{\SI{12}{k\ohm}}\biggr)=\SI{1.248}{m\second}}$
 \\[4pt]\indent con $\displaystyle{\tau=R \cdot C=\SI{12}{k\ohm}\cdot\SI{150}{n\farad}=\SI{1.8}{m\second}}$
-\\[4pt]La verifica è quindi soddisfatta perché l'oscilloscopio misura una durata dell'impulso di \SI{1.312}{m\second}, dunque l'errore tra i due valori è circa del 4\%. Questa percentuale di errore è causata in parte anche dall'imprecisione  della strumentazione utilizzata. Infatti, con il generatore di forme d'onda è stata applicata in ingresso un'onda quadra con duty cycle pari al 20\%, mentre l'oscilloscopio ne rileva un valore di 19.95\% (in figura \ref{figura:TEK00002}) e quindi leggermente inferiore. %Di conseguenza la rilevazione sull'oscilloscopio di una durata dell'impulso negativo maggiore è determinata dal fatto che l'onda rimane a un livello basso per più tempo rispetto all'intervallo teorico.\par
-%%% Correggere in base a nuovo grafico
-%% T_B serve solo per il duty cycle?  
-\par Abbiamo poi confrontato la durata dell'impulso negativo in uscita $\mathrm{T_A}$ con la durata dell'impulso negativo in ingresso $\mathrm{T_B}$, calcolata come:
+\\[4pt]La verifica è quindi soddisfatta perché l'oscilloscopio misura una durata dell'impulso di $\displaystyle{T_{A,meas}=2\cdot\SI{656}{\mu\second}=\SI{1.312}{m\second}}$, l'errore tra i due valori è circa del 4\%. 
+\\ Abbiamo poi confrontato la durata dell'impulso negativo in uscita $\mathrm{T_A}$ con la durata dell'impulso negativo in ingresso $\mathrm{T_B}$, calcolata come:
 \\[4pt]\indent$\displaystyle{T_B=(1-\delta)\cdot T=(1-20\%)\cdot\SI{10}{m\second}=\SI{8}{m\second}}$
 \\[4pt]\indent con f = \SI{100}{\hertz} $\Rightarrow\;\displaystyle{T=\frac{1}{f}=\SI{10}{m\second}}$
 \\[4pt]Come ci si aspetta dalla teoria, si ottiene che $\mathrm{T_B}\gg\mathrm{T_A}$, quindi il condensatore riesce a eseguire il ciclo di carica in tempo, di conseguenza il circuito funzionerà correttamente.\par
@@ -203,17 +200,11 @@ Per quanto riguarda la tensione sull'ingresso non invertente $\mathrm{V^+}$, ess
 \end{itemize}
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6cm]{immagini/TEK00003}
+	\includegraphics[height=6.7cm]{immagini/TEK00003}
 	\caption{Confronto di $\mathrm{V_{IN}}$ (CH1) con $\mathrm{V^+}$ (CH2).}
 	\label{figura:TEK00003}
 \end{figure}
-%% TODO2: screen v+ e vout
-\todo{foto oscilloscopio con V+ e Vout}
-Se confrontiamo le tensioni all'ingresso non invertente ed in uscita, vediamo che entrambe hanno lo stesso andamento, ma la tensione $\mathrm{V_{OUT}}$ è limitata dalle alimentazioni mentre la tensione $\mathrm{V^+}$ è limitata dalle due soglie del trigger di Schmitt, $\mathrm{V_L^+}$ e $\mathrm{V_H^+}$.
-% mettere grafico
-\\(foto)
-%%%
-\\Invece la tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tensione sul condensatore C ($\mathrm{V_C}$), è stata rappresentata nella figura \ref{figura:TEK00004e5} e presenta un andamento nel tempo simile ad un treno di impulsi negativi.
+La tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tensione sul condensatore C ($\mathrm{V_C}$), è stata rappresentata nella figura \ref{figura:TEK00004e5} e presenta un andamento nel tempo simile ad un treno di impulsi negativi. La sua tensione non potrà mai superare \SI{0.7}{\volt} perché per tensioni superiori a questo valore, il diodo si accende e la corrente non fluirà più nel condensatore, ma andrà a massa attraverso il diodo. Dal grafico di sinistra, possiamo osservare che nell'intervallo di tempo in cui l'onda quadra è bassa la capacità risce a svolgere correttamente il ciclo di carica, mentre dal grafico di destra vediamo che quando la tensione ai capi della capacità scende da \SI{0.7}{\volt} a $\mathrm{V_L^+}$ l'uscita rimane bassa, successivamente ritorna alta fin quando non sopraggiunge un nuovo trigger.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00004}
@@ -222,27 +213,32 @@ Se confrontiamo le tensioni all'ingresso non invertente ed in uscita, vediamo ch
 	\label{figura:TEK00004e5}
 \end{figure}
 %% TODO3: derivatore
-\\Analizzamo ora le tensioni $\mathrm{V_T}$ e $\mathrm{V_{IN}}$. Il sottocircuito a sinistra del diodo $\mathrm{D_T}$ si comporta come un derivatore della tensione in ingresso, a patto di lavorare ad una frequenza molto minore della frequenza di taglio. La frequenza di taglio del filtro è:
+\\Analizzamo ora le tensioni $\mathrm{V_T}$ e $\mathrm{V_{IN}}$. Il sottocircuito a sinistra del diodo $\mathrm{D_T}$ si comporta come un derivatore della tensione in ingresso, ma solo se lavoriamo ad una frequenza molto minore della frequenza di taglio. La frequenza di taglio del filtro è:
 \\[4pt]\indent$\displaystyle{f_T = \frac{1}{2\pi\cdot R_T\cdot C_T} = \frac{1}{2\pi\cdot \SI{12}{k\ohm}\cdot\SI{1}{n\farad}} =\SI{13.263}{k\hertz}}$
-\\[4pt]Dato che il nostro circuito lavora ad una frequenza di \SI{100}{\hertz}, la condizione $f_T\gg f$ è rispettata, pertanto al nodo $\mathrm{V_T}$ avremo la derivata della tensione del nodo $\mathrm{V_{IN}}$. In figura \ref{figura:} è mostrato l'andamento nel tempo delle due tensioni.
-\todo{foto oscilloscopio con VT e Vin e Vout}
-\\(foto)
-%%%
-\\Nella figura successiva, sono mostrate tutte le tensioni che abbiamo misurato in precedenza, ottenute simulando il circuito su un periodo di tempo dell'onda quadra. Anche su questo grafico possiamo ritrovare tutte le considerazioni fatte per i grafici precedenti, ad eccezione dell'istante iniziale, perché il simulatore inizializza tutti i nodi a \SI{0}{\volt}. 
+\\[8pt]Dato che il nostro circuito lavora ad una frequenza di \SI{100}{\hertz}, la condizione $f_T\gg f$ è rispettata, pertanto al nodo $\mathrm{V_T}$ avremo la derivata della tensione del nodo $\mathrm{V_{IN}}$. Quando l'onda quadra effettua una transizione verso il basso, avremo un impulso negativo, mentre se effettua una transizione verso l'alto, avremo un impulso positivo la cui tensione massima è però troncata dall'accensione del diodo. Se l'onda quadra è costante, la sua derivata è nulla, perciò la tensione del nodo $\mathrm{V_T}$ è anch'essa nulla. In figura \ref{figura:TEK00013} è mostrato l'andamento nel tempo delle due tensioni considerate. 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=5cm]{immagini/plot_sim} %% va poi ingrandita, messa solo per semplicità impaginazione
+	\includegraphics[height=6.7cm]{immagini/TEK00013}
+	\caption{Confronto di $\mathrm{V_{IN}}$ (CH1) con $\mathrm{V_T}$ (CH2).}
+	\label{figura:TEK00013}
+\end{figure}
+%Se confrontiamo le tensioni all'ingresso non invertente ed in uscita, vediamo che entrambe hanno lo stesso andamento, ma la tensione $\mathrm{V_{OUT}}$ è limitata dalle alimentazioni mentre la tensione $\mathrm{V^+}$ è limitata dalle due soglie del trigger di Schmitt, $\mathrm{V_L^+}$ e $\mathrm{V_H^+}$.
+%%%
+\\Nella figura successiva, sono mostrate tutte le tensioni che abbiamo misurato in precedenza, ottenute simulando il circuito su un periodo di tempo dell'onda quadra. Anche su questo grafico possiamo ritrovare tutte le considerazioni fatte per i grafici precedenti, ad eccezione dell'istante iniziale, perché il simulatore inizializza i nodi $\mathrm{V^-}$ e $\mathrm{V_{OUT}}$ a \SI{0}{\volt}. 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/plot_sim_2} 
 	\caption{Confronto di $\mathrm{V_{IN}}$, $\mathrm{V_{OUT}}$, $\mathrm{V^+}$ e $\mathrm{V^-}$.}
 	\label{figura:simulazione}
 \end{figure}
-\\Infine, è stato considerato lo stato stabile di questo circuito, che consiste nell'aggiungere al circuito del precedente laboratorio soltanto il diodo D ottenendo il circuito in figura \ref{figura:schema1stabile}. Per questa analisi sono stati mantenuti invariati i valori dei componenti utilizzati. Inoltre, al circuito risultante non si applica nessun segnale in ingresso.
+\\Infine, è stato considerato lo stato stabile di questo circuito, che consiste nell'aggiungere al circuito del precedente laboratorio soltanto il diodo D ottenendo il circuito in figura \ref{figura:schema1stabile}.  Questo circuito è in pratica il monostabile appena analizzato, a cui togliamo però la rete che realizza i trigger. Per quest'analisi sono stati mantenuti invariati i valori dei componenti utilizzati. Inoltre, al circuito risultante non si applica nessun segnale in ingresso.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=5.5cm]{immagini/schema1stabile}
+	\includegraphics[height=7cm]{immagini/schema1stabile}
 	\caption{Schema del circuito nello stato stabile.}
 	\label{figura:schema1stabile}
 \end{figure}
-\\Analizzando il segnale sull'ingresso invertente dell'OPAMP, $\mathrm{V^-}$, si può notare che questa tensione presenta una fase iniziale di carica e poi, una volta raggiunti gli \SI{0.7}{\volt}, viene bloccata poichè è stato raggiunto il valore della tensione ai capi del diodo e quindi esso si accende, impedendo alla capacità di continuare a caricarsi (la corrente che prima fluiva nel condensatore e lo caricava, ora andrà a massa attraverso il diodo acceso). Invece il segnale in uscita, $\mathrm{V_{OUT}}$, rimane al valore dell'alimentazione positiva $\mathrm{V_{DD}}$ e quindi non riesce a commutare, siccome $\mathrm{V^-}$ non riesce mai a superare la soglia $\mathrm{V_H^+}$. Quindi, questo circuito rimane nello stato stabile e  non oscilla. Il grafico è riportato in figura \ref{figura:simulazione1}. 
+\\Analizzando il segnale sull'ingresso invertente dell'OPAMP, $\mathrm{V^-}$, si può notare che questa tensione presenta una fase iniziale di carica e poi, una volta raggiunti gli \SI{0.7}{\volt}, viene bloccata poichè è stato raggiunto il valore della tensione ai capi del diodo e quindi esso si accende, impedendo alla capacità di continuare a caricarsi (la corrente che prima fluiva nel condensatore e lo caricava, ora andrà a massa attraverso il diodo acceso). Invece il segnale in uscita, $\mathrm{V_{OUT}}$, rimane al valore dell'alimentazione positiva $\mathrm{V_{DD}}$ e quindi non riesce a commutare, siccome $\mathrm{V^-}$ non riesce mai a superare la soglia $\mathrm{V_H^+}$. Quindi, questo circuito rimane nello stato stabile e  non oscilla. Il grafico della simulazione è riportato in figura \ref{figura:simulazione1}. 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/plot_sim_stabile}
@@ -250,10 +246,6 @@ Se confrontiamo le tensioni all'ingresso non invertente ed in uscita, vediamo ch
 	\label{figura:simulazione1}
 \end{figure}
 \\Per poter rendere questo circuito monostabile, è necessario che la soglia $\mathrm{V_H^+}$ risulti inferiore rispetto a $\mathrm{V^-}$, in modo da avere una transizione su $\mathrm{V_{OUT}}$. Per avere questo effetto è necessario collegare sull'ingresso non invertente dell'OPAMP la rete che funziona come derivatore.
-%%% TODO4: grafico stato stabile
-\todo{aggiornare foto confronto con oscilloscopio}
-%%%
-
 \newpage
 \section{Circuito 2: circuito monostabile con NE555}
 \subsection{Schema del circuito e Funzione di Trasferimento}
