@@ -204,7 +204,7 @@ Per quanto riguarda la tensione sull'ingresso non invertente $\mathrm{V^+}$, ess
 	\caption{Confronto di $\mathrm{V_{IN}}$ (CH1) con $\mathrm{V^+}$ (CH2).}
 	\label{figura:TEK00003}
 \end{figure}
-La tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tensione sul condensatore C ($\mathrm{V_C}$), è stata rappresentata nella figura \ref{figura:TEK00004e5} e presenta un andamento nel tempo simile ad un treno di impulsi negativi. La sua tensione non potrà mai superare \SI{0.7}{\volt} perché per tensioni superiori a questo valore, il diodo si accende e la corrente non fluirà più nel condensatore, ma andrà a massa attraverso il diodo. Dal grafico di sinistra, possiamo osservare che nell'intervallo di tempo in cui l'onda quadra è bassa la capacità risce a svolgere correttamente il ciclo di carica, mentre dal grafico di destra vediamo che quando la tensione ai capi della capacità scende da \SI{0.7}{\volt} a $\mathrm{V_L^+}$ l'uscita rimane bassa, successivamente ritorna alta fin quando non sopraggiunge un nuovo trigger.
+La tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tensione sul condensatore C ($\mathrm{V_C}$), è stata rappresentata nella figura \ref{figura:TEK00004e5} e presenta un andamento nel tempo simile ad un treno di impulsi negativi. La sua tensione non potrà mai superare \SI{0.7}{\volt} perché per tensioni superiori a questo valore, il diodo si accende e la corrente non fluirà più nel condensatore, ma andrà a massa attraverso il diodo. Dal grafico di sinistra, possiamo osservare che nell'intervallo di tempo in cui l'onda quadra è bassa la capacità riesce a svolgere correttamente il ciclo di carica, mentre dal grafico di destra vediamo che quando la tensione ai capi della capacità scende da \SI{0.7}{\volt} a $\mathrm{V_L^+}$ l'uscita rimane bassa, successivamente ritorna alta fin quando non sopraggiunge un nuovo trigger.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00004}
@@ -213,7 +213,7 @@ La tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tension
 	\label{figura:TEK00004e5}
 \end{figure}
 %% TODO3: derivatore
-\\Analizzamo ora le tensioni $\mathrm{V_T}$ e $\mathrm{V_{IN}}$. Il sottocircuito a sinistra del diodo $\mathrm{D_T}$ si comporta come un derivatore della tensione in ingresso, ma solo se lavoriamo ad una frequenza molto minore della frequenza di taglio. La frequenza di taglio del filtro è:
+\\Analizziamo ora le tensioni $\mathrm{V_T}$ e $\mathrm{V_{IN}}$. Il sottocircuito a sinistra del diodo $\mathrm{D_T}$ si comporta come un derivatore della tensione in ingresso, ma solo se lavoriamo ad una frequenza molto minore della frequenza di taglio. La frequenza di taglio del filtro è:
 \\[4pt]\indent$\displaystyle{f_T = \frac{1}{2\pi\cdot R_T\cdot C_T} = \frac{1}{2\pi\cdot \SI{12}{k\ohm}\cdot\SI{1}{n\farad}} =\SI{13.263}{k\hertz}}$
 \\[8pt]Dato che il nostro circuito lavora ad una frequenza di \SI{100}{\hertz}, la condizione $f_T\gg f$ è rispettata, pertanto al nodo $\mathrm{V_T}$ avremo la derivata della tensione del nodo $\mathrm{V_{IN}}$. Quando l'onda quadra effettua una transizione verso il basso, avremo un impulso negativo, mentre se effettua una transizione verso l'alto, avremo un impulso positivo la cui tensione massima è però troncata dall'accensione del diodo. Se l'onda quadra è costante, la sua derivata è nulla, perciò la tensione del nodo $\mathrm{V_T}$ è anch'essa nulla. In figura \ref{figura:TEK00013} è mostrato l'andamento nel tempo delle due tensioni considerate. 
 \begin{figure}[h!]
@@ -231,21 +231,21 @@ La tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tension
 	\caption{Confronto di $\mathrm{V_{IN}}$, $\mathrm{V_{OUT}}$, $\mathrm{V^+}$ e $\mathrm{V^-}$.}
 	\label{figura:simulazione}
 \end{figure}
-\\Infine, è stato considerato lo stato stabile di questo circuito, che consiste nell'aggiungere al circuito del precedente laboratorio soltanto il diodo D ottenendo il circuito in figura \ref{figura:schema1stabile}.  Questo circuito è in pratica il monostabile appena analizzato, a cui togliamo però la rete che realizza i trigger. Per quest'analisi sono stati mantenuti invariati i valori dei componenti utilizzati. Inoltre, al circuito risultante non si applica nessun segnale in ingresso.
+\\Infine, è stato considerato lo stato stabile di questo circuito, che corrisponde al monostabile appena analizzato a cui viene rimossa la rete che realizza i trigger e quindi, a differenza del circuito del precedente laboratorio, viene aggiunto soltanto il diodo D ottenendo il circuito in figura \ref{figura:schema1stabile}. Per quest'analisi sono stati mantenuti invariati i valori dei componenti utilizzati. Inoltre, al circuito risultante non si applica nessun segnale in ingresso.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/schema1stabile}
 	\caption{Schema del circuito nello stato stabile.}
 	\label{figura:schema1stabile}
 \end{figure}
-\\Analizzando il segnale sull'ingresso invertente dell'OPAMP, $\mathrm{V^-}$, si può notare che questa tensione presenta una fase iniziale di carica e poi, una volta raggiunti gli \SI{0.7}{\volt}, viene bloccata poichè è stato raggiunto il valore della tensione ai capi del diodo e quindi esso si accende, impedendo alla capacità di continuare a caricarsi (la corrente che prima fluiva nel condensatore e lo caricava, ora andrà a massa attraverso il diodo acceso). Invece il segnale in uscita, $\mathrm{V_{OUT}}$, rimane al valore dell'alimentazione positiva $\mathrm{V_{DD}}$ e quindi non riesce a commutare, siccome $\mathrm{V^-}$ non riesce mai a superare la soglia $\mathrm{V_H^+}$. Quindi, questo circuito rimane nello stato stabile e  non oscilla. Il grafico della simulazione è riportato in figura \ref{figura:simulazione1}. 
+\\Analizzando il segnale sull'ingresso invertente dell'OPAMP, $\mathrm{V^-}$, si può notare che questa tensione presenta una fase iniziale di carica e poi, una volta raggiunti gli \SI{0.7}{\volt}, viene bloccata poichè è stato raggiunto il valore della tensione ai capi del diodo e quindi esso si accende, impedendo alla capacità di continuare a caricarsi (la corrente che prima fluiva nel condensatore e lo caricava, ora andrà a massa attraverso il diodo acceso). Invece il segnale in uscita, $\mathrm{V_{OUT}}$, rimane al valore dell'alimentazione positiva $\mathrm{V_{DD}}$ e quindi non riesce a commutare siccome $\mathrm{V^-}$ non riesce mai a superare la soglia $\mathrm{V_H^+}$. Quindi, questo circuito rimane nello stato stabile e  non oscilla. Il grafico della simulazione è riportato in figura \ref{figura:simulazione1}. 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/plot_sim_stabile}
 	\caption{Confronto di $\mathrm{V^-}$ (CH1) con $\mathrm{V_{OUT}}$ (CH2) nello stato stabile.}
 	\label{figura:simulazione1}
 \end{figure}
-\\Per poter rendere questo circuito monostabile, è necessario che la soglia $\mathrm{V_H^+}$ risulti inferiore rispetto a $\mathrm{V^-}$, in modo da avere una transizione su $\mathrm{V_{OUT}}$. Per avere questo effetto è necessario collegare sull'ingresso non invertente dell'OPAMP la rete che funziona come derivatore.
+\\Per poter rendere questo circuito monostabile, è necessario che la soglia $\mathrm{V_H^+}$ risulti inferiore rispetto a $\mathrm{V^-}$, in modo da avere una transizione su $\mathrm{V_{OUT}}$. Per avere questo effetto è necessario collegare sull'ingresso non invertente dell'OPAMP la rete che funziona come un derivatore.
 \newpage
 \section{Circuito 2: circuito monostabile con NE555}
 \subsection{Schema del circuito e Funzione di Trasferimento}
@@ -289,7 +289,7 @@ Per simulare il trigger sul pin 2, utilizziamo un'onda quadra di ampiezza picco-
 		 \SI{22}{k\ohm} & \SI{23.947}{k\ohm} \\ 
 		\hline
 	\end{tabular}
-	\caption{Misure delle resistenze utilizzate per il circuito monostabile con NE555.}
+	\caption{Misure delle resistenze utilizzate per il circuito monostabile con LM555.}
 	\label{table:mis_res2}
 \end{table}
 \begin{table}[h!]
@@ -334,7 +334,7 @@ Nella figura seguente (figura \ref{figura:TEK00014}) è mostrato il grafico in u
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/TEK00014}
-	\caption{Confronto di fra la tensione al pin 2 (CH1) e la tensione al pin 3 (CH2).}
+	\caption{Confronto fra la tensione al pin 2 (CH1) e la tensione al pin 3 (CH2).}
 	\label{figura:TEK00014}
 \end{figure}
 \\ Per visualizzare meglio i dati delle tabelle, confrontiamo il grafico della durata dell'impulso misurata con quella teorica al variare della resistenza, per entrambe le capacità. Il risultato di quest'elaborazione è mostrato in figura \ref{figura:graf1e2}.\begin{figure}[h!]
