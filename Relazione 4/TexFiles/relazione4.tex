@@ -265,11 +265,11 @@ L'intervallo di tempo in cui l'uscita rimane alta è dettato dal processo di car
 \subsection{Analisi e dati sperimentali}
 %R ... k\ohm --> 12k\ohm
 %R 4.698 k\ohm --> 4.7 k\ohm
-Per simulare il trigger sul pin 2, utilizziamo un'onda quadra di ampiezza picco-picco di \SI{10}{\volt} e offset DC di \SI{5}{\volt}. Il duty cycle utilizzato è di 80\%, ovvero il valore più alto fornito dallo strumento, perché è necessario che i trigger negativi siano distanziati di un tempo maggiore rispetto alla durata dell'impulso alto in uscita. Anche la frequenza sarà fatta variare in modo tale da rispettare sempre questa condizione, altrimenti il circuito non funziona correttamente. In figura \ref{figura:circuito2} vediamo la fotografia del circuito con la resistenza R da \SI{12}{k\ohm}, $\mathrm{C_1}$ da  \SI{150}{n\farad} e $\mathrm{C_2}$ da  \SI{1}{n\farad}. Il modello di timer 555 utilizzato è il LM555CE, alimentiamo la breadboard fra massa e +\SI{10}{\volt} perché questo componente funziona ad alimentazione singola.
+Per simulare il trigger sul pin 2, utilizziamo un'onda quadra di ampiezza picco-picco di \SI{10}{\volt} e offset DC di \SI{5}{\volt}. Il duty cycle utilizzato è di 80\%, ovvero il valore più alto fornito dallo strumento, perché è necessario che i trigger negativi siano distanziati di un tempo maggiore rispetto alla durata dell'impulso alto in uscita. Anche la frequenza sarà fatta variare in modo tale da rispettare sempre questa condizione, altrimenti il circuito non funziona correttamente. In figura \ref{figura:circuito2} vediamo la fotografia del circuito con la resistenza R da \SI{12}{k\ohm}, $\mathrm{C_1}$ da  \SI{150}{n\farad} e $\mathrm{C_2}$ da  \SI{1}{n\farad}. Il modello di timer 555 utilizzato è il LM555, alimentiamo la breadboard fra massa e +\SI{10}{\volt} perché questo componente funziona ad alimentazione singola.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/circuito2}
-	\caption{Fotografia del circuito monostabile con LM555CE realizzato in laboratorio.}
+	\caption{Fotografia del circuito monostabile con LM555 realizzato in laboratorio.}
 	\label{figura:circuito2}
 \end{figure}
 %%%
