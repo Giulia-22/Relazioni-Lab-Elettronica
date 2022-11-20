@@ -112,7 +112,15 @@
 %----------------------------------------------------------------------------------------
 \chapter{Relazione attività di laboratorio 5}
 \section*{Introduzione}
-IC555
+In quest'attività di laboratorio abbiamo visto un'ultimo circuito monostabile con NE555, successivamente sono state analizzate le altre due configurazioni realizzabili con questo circuito integrato (prima la configurazione bistabile e dopo quella astabile).  \par
+La seconda modalità, quella astabile, permette di generare in uscita al pin 3 un'onda quadra le cui caratteristiche dipendono dalla rete collegata all'esterno del circuito integrato. Le connessioni sono illustrate nel datasheet del componente, si riporta di seguito lo schema (figura \ref{figura:datasheet1}).
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6cm]{immagini/datasheet1}
+	\caption{Schema delle connessioni da utilizzare per ottenere un circuito astabile (fonte: \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/lm555.pdf?ts=1667144089940&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FLM555}{datasheet}}}).} % LM o NE ??
+	\label{figura:datasheet1}
+\end{figure}
+\\ La configurazione bistabile invece non è presentata nel datasheet. Questa modalità è utile quando si vuole utilizzare il NE555 come flip-flop set reset. Per ottenerla, è sufficiente utilizzare due resistenze e due pulsanti. Una resistenza è collegata tra i pin 8 e 2, l'altra invece è collegata tra i pin 4 e 8; per quanto riguarda i due pulsanti, uno è collegato tra i pin 2 e 1 e pilota il set, mentre l'altro è connesso ai pin 4 e 1 e comanda il reset. Il pin 8 è collegato all'alimentazione, il pin 1 a massa, il segnale è prelevato al pin 3 e tutti gli altri pin sono lasciati floating. Lo schema si trova nella sezione dedicata all'analisi di questo circuito (sezione \ref{sez2}, figura \ref{figura:schema2}).
 \newpage
 \section{Circuito 1: Timer 555 monostabile con switch debouncing}
 \subsection{Schema del circuito e Funzione di Trasferimento}
@@ -130,7 +138,7 @@ IC555
 	\label{figura:circuito1}
 \end{figure}
 \newpage
-\section{Circuito 2: Timer 555 bistabile}
+\section{Circuito 2: NE555 in configurazione bistabile}\label{sez2}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 \begin{figure}[h!]
 	\centering
@@ -146,7 +154,7 @@ IC555
 	\label{figura:circuito2}
 \end{figure}
 \newpage
-\section{Circuito 3: Evoluzione del timer 555 bistabile}
+\section{Circuito 3: NE555 in configurazione astabile}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 \begin{figure}[h!]
 	\centering
@@ -162,7 +170,7 @@ IC555
 	\label{figura:circuito3}
 \end{figure}
 \newpage
-\section{Circuito 4: Timer 555 astabile}
+\section{Circuito 4: Evoluzione del NE555 in configurazione astabile}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 \begin{figure}[h!]
 	\centering
