@@ -185,7 +185,9 @@ Per poter costruire il circuito sulla breadboard, per prima cosa sono stati scel
 \\Successivamente, abbiamo utilizzato le formule descritte nella sezione precedente per verificare la correttezza della misura della durata dell'impulso negativo in uscita ($\mathrm{T_A}$) ottenuta con l'oscilloscopio:
 \\[4pt]\indent$\displaystyle{T_A=\tau\cdot\ln\biggl(1+\frac{R_2}{R_1}\biggr)=\SI{1.8}{m\second}\cdot\ln\biggl(1+\frac{\SI{12}{k\ohm}}{\SI{12}{k\ohm}}\biggr)=\SI{1.248}{m\second}}$
 \\[4pt]\indent con $\displaystyle{\tau=R \cdot C=\SI{12}{k\ohm}\cdot\SI{150}{n\farad}=\SI{1.8}{m\second}}$
-\\[4pt]La verifica è quindi soddisfatta perché l'oscilloscopio misura una durata dell'impulso di $\displaystyle{T_{A,meas}=2\cdot\SI{656}{\mu\second}=\SI{1.312}{m\second}}$, l'errore tra i due valori è circa del 4\%. 
+\\[4pt]La verifica è quindi soddisfatta perché l'oscilloscopio misura una durata dell'impulso di: 
+\\\indent$\displaystyle{T_{A,meas}=2\cdot\SI{656}{\mu\second}=\SI{1.312}{m\second}}$
+\\ e l'errore tra i due valori è circa del 4\%. 
 \\ Abbiamo poi confrontato la durata dell'impulso negativo in uscita $\mathrm{T_A}$ con la durata dell'impulso negativo in ingresso $\mathrm{T_B}$, calcolata come:
 \\[4pt]\indent$\displaystyle{T_B=(1-\delta)\cdot T=(1-20\%)\cdot\SI{10}{m\second}=\SI{8}{m\second}}$
 \\[4pt]\indent con f = \SI{100}{\hertz} $\Rightarrow\;\displaystyle{T=\frac{1}{f}=\SI{10}{m\second}}$
@@ -218,7 +220,7 @@ La tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tension
 \\[8pt]Dato che il nostro circuito lavora ad una frequenza di \SI{100}{\hertz}, la condizione $f_T\gg f$ è rispettata, pertanto al nodo $\mathrm{V_T}$ avremo la derivata della tensione del nodo $\mathrm{V_{IN}}$. Quando l'onda quadra effettua una transizione verso il basso, avremo un impulso negativo, mentre se effettua una transizione verso l'alto, avremo un impulso positivo la cui tensione massima è però troncata dall'accensione del diodo. Se l'onda quadra è costante, la sua derivata è nulla, perciò la tensione del nodo $\mathrm{V_T}$ è anch'essa nulla. In figura \ref{figura:TEK00013} è mostrato l'andamento nel tempo delle due tensioni considerate. 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.7cm]{immagini/TEK00013}
+	\includegraphics[height=6.3cm]{immagini/TEK00013}
 	\caption{Confronto di $\mathrm{V_{IN}}$ (CH1) con $\mathrm{V_T}$ (CH2).}
 	\label{figura:TEK00013}
 \end{figure}
@@ -245,20 +247,20 @@ La tensione sull'ingresso invertente $\mathrm{V^-}$, corrispondente alla tension
 	\caption{Confronto di $\mathrm{V^-}$ (CH1) con $\mathrm{V_{OUT}}$ (CH2) nello stato stabile.}
 	\label{figura:simulazione1}
 \end{figure}
-\\Per poter rendere questo circuito monostabile, è necessario che la soglia $\mathrm{V_H^+}$ risulti inferiore rispetto a $\mathrm{V^-}$, in modo da avere una transizione su $\mathrm{V_{OUT}}$. Per avere questo effetto è necessario collegare sull'ingresso non invertente dell'OPAMP la rete che funziona come un derivatore.
+\\Per poter rendere questo circuito monostabile, è necessario che la soglia $\mathrm{V^+}$ risulti inferiore rispetto a $\mathrm{V^-}$, in modo da avere una transizione su $\mathrm{V_{OUT}}$. Per avere questo effetto è necessario collegare sull'ingresso non invertente dell'OPAMP la rete che funziona come un derivatore.
 \newpage
-\section{Circuito 2: circuito monostabile con NE555}
+\section{Circuito 2: circuito monostabile con LM555}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Un circuito monostabile può anche essere realizzato utilizzando un circuito integrato, il timer 555. Nella figura seguente (figura \ref{figura:schema2}) è mostrato il package del NE555 con i nomi e la funzione di ogni terminale, oltre che alle connessioni fra i vari componenti.
+Un circuito monostabile può anche essere realizzato utilizzando un circuito integrato, il timer 555. Nella figura seguente (figura \ref{figura:schema2}) è mostrato il package del LM555 con i nomi e la funzione di ogni terminale, oltre che alle connessioni fra i vari componenti.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7.5cm]{immagini/schema2}
-	\caption{Schema del circuito monostabile con NE555.}
+	\caption{Schema del circuito monostabile con LM555.}
 	\label{figura:schema2}
 \end{figure}
 \\In questa modalità, quando al pin 2 viene applicato un trigger negativo (che fa passare la tensione di questo pin dal livello logico alto a quello basso), l'uscita da bassa rimane alta per un periodo di tempo che dipende dalla rete collegata ai pin 6 e 7, dopodichè ritorna bassa e rimane a questo valore fin quando non arriva un nuovo trigger.\par
-L'intervallo di tempo in cui l'uscita rimane alta è dettato dal processo di carica del condensatore $\mathrm{C_1}$: quando arriva il trigger negativo sul pin 2, l'uscita del NE555, corrispondente al pin 3, diventa alta e il condensatore $\mathrm{C_1}$ si carica attraverso la resistenza $\mathrm{R}$. Il processo di carica continua fin quando la tensione ai capi della capacità raggiunge la tensione di $\displaystyle{2/3\;V_{DD}}$, questo valore è determinato dallo schema interno del NE555. Raggiunta questa tensione, l'uscita del NE555 ritorna al livello logico basso e la capacità si scarica istantaneamente a massa, perciò il circuito ritorna autonomamente al suo stato stabile.
-\\La durata dell'impulso in uscita al NE555 si ricava dalla formula di carica del condensatore: 
+L'intervallo di tempo in cui l'uscita rimane alta è dettato dal processo di carica del condensatore $\mathrm{C_1}$: quando arriva il trigger negativo sul pin 2, l'uscita del LM555, corrispondente al pin 3, diventa alta e il condensatore $\mathrm{C_1}$ si carica attraverso la resistenza $\mathrm{R}$. Il processo di carica continua fin quando la tensione ai capi della capacità raggiunge la tensione di $\displaystyle{2/3\;V_{DD}}$, questo valore è determinato dallo schema interno del LM555. Raggiunta questa tensione, l'uscita del LM555 ritorna al livello logico basso e la capacità si scarica istantaneamente a massa, perciò il circuito ritorna autonomamente al suo stato stabile.
+\\La durata dell'impulso in uscita al LM555 si ricava dalla formula di carica del condensatore: 
 \\[4pt]\indent$\displaystyle{v_C=V_{CC}\cdot\bigl(1-e^{-\frac{t}{R\cdot C_1}}\bigr)\indent\rightarrow\indent\frac{2}{3}\cdot V_{CC}=V_{CC}\cdot\bigl(1-e^{-\frac{t}{R\cdot C_1}}\bigr)}$
 \\[4pt]\indent$\displaystyle{\Rightarrow\indent T=-R\cdot C_1\cdot\ln\frac{1}{3}=1.1\cdot R\cdot C_1}$
 \\[4pt]La capacità $\mathrm{C_2}$ ha il solo scopo di ripulire il segnale di massa da eventuali disturbi ad alta frequenza.
@@ -296,7 +298,7 @@ Per simulare il trigger sul pin 2, utilizziamo un'onda quadra di ampiezza picco-
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\cline{2-4} 
-		\multicolumn{1}{c|}{} & \textbf{Valore calcolato} & \textbf{Valore misurato}& \textbf{Errore percentuale}\\ 
+		\multicolumn{1}{c|}{} & \textbf{Valore teorico} & \textbf{Valore misurato}& \textbf{Errore percentuale}\\ 
 		\hline
 		$\mathbf{{R = 4.6k}\Omega}$ & \SI{763}{\mu\second} & \SI{772}{\mu\second} & 1.16\% \\ 
 		\hline
@@ -314,7 +316,7 @@ Per simulare il trigger sul pin 2, utilizziamo un'onda quadra di ampiezza picco-
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\cline{2-4} 
-		\multicolumn{1}{c|}{} & \textbf{Valore calcolato} & \textbf{Valore misurato}& \textbf{Errore percentuale}\\ 
+		\multicolumn{1}{c|}{} & \textbf{Valore teorico} & \textbf{Valore misurato}& \textbf{Errore percentuale}\\ 
 		\hline
 		$\mathbf{{R = 4.6k}\Omega}$ & \SI{50.9}{\mu\second} & \SI{53.2}{\mu\second} & 4.57\% \\ 
 		\hline
@@ -330,21 +332,21 @@ Per simulare il trigger sul pin 2, utilizziamo un'onda quadra di ampiezza picco-
 \end{table}
 \newpage
 \noindent Le misure di T ottenute con le due diverse capacità sono confrontabili con i valori teorici, nel secondo caso le misure sono affette da un errore maggiore perché la capacità utilizzata è più piccola, quindi l'onda quadra resta alta per un periodo di tempo minore, di  conseguenza gli errori di misura impattano maggiormente sui risultati ottenuti. \par
-Nella figura seguente (figura \ref{figura:TEK00014}) è mostrato il grafico in uscita all'oscilloscopio per $R = \SI{12}{k\ohm}$ e $C_1 = \SI{150}{n\farad}$, in cui possiamo vedere la misura di T effettuata dall'oscilloscopio. Il grafico è simile per le altre combinazioni di $R$ e $C_1$, cambia solo la durata dell'intervallo di tempo T. Dal grafico si nota anche che quando la tensione del pin 2 ha una transizione negativa, l'uscita si porta alta per un intervallo di tempo di durata T, successivamente rimane al livello logico basso fin quando non si ha una nuova transizione negativa del segnale in ingresso.
+Nella figura seguente (figura \ref{figura:TEK00014}) è mostrato il grafico in uscita all'oscilloscopio per $R = \SI{12}{k\ohm}$ e $C_1 = \SI{150}{n\farad}$, in cui possiamo vedere la misura di T effettuata dall'oscilloscopio. Il grafico è simile per le altre combinazioni di $R$ e $C_1$, cambia solo la durata dell'intervallo di tempo T. Dal grafico si nota anche che quando la tensione in ingresso (pin 2) ha una transizione negativa, l'uscita (pin 3) si porta alta per un intervallo di tempo di durata T, successivamente rimane al livello logico basso fin quando non si ha una nuova transizione negativa del segnale in ingresso.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.5cm]{immagini/TEK00014}
 	\caption{Confronto fra la tensione al pin 2 (CH1) e la tensione al pin 3 (CH2).}
 	\label{figura:TEK00014}
 \end{figure}
-\\ Per visualizzare meglio i dati delle tabelle, confrontiamo il grafico della durata dell'impulso misurata con quella teorica al variare della resistenza, per entrambe le capacità. Il risultato di quest'elaborazione è mostrato in figura \ref{figura:graf1e2}.\begin{figure}[h!]
+\\ Per visualizzare meglio i dati delle tabelle, costruiamo e confrontiamo il grafico della durata dell'impulso misurata con quella teorica al variare della resistenza, per entrambe le capacità. Il risultato di quest'elaborazione è mostrato in figura \ref{figura:graf1e2}.\begin{figure}[h!]
 	\centering
 	\includegraphics[height=5.8cm]{immagini/graficomis1}
 	\includegraphics[height=5.8cm]{immagini/graficomis2}
 	\caption{Grafico di T in funzione di R per $\mathrm{C_1}$ = \SI{150}{n\farad} (a sinistra) e $\mathrm{C_1}$ = \SI{10}{n\farad} (a destra).}
 	\label{figura:graf1e2}
 \end{figure}
-\\ In entrambi i casi, le misure sono sovrapponibili ai risultati teorici. Come ci aspettiamo dalla formula, l'andamento di T in funzione di R è di tipo lineare, infatti a resistenze di valore maggiore corrispondono durate dell'impulso T maggiori. \par
+\\ In entrambi i casi, le misure sono sovrapponibili ai risultati teorici. Come ci aspettiamo dalla formula, l'andamento di T in funzione di R è di tipo lineare, infatti a resistenze di valore maggiore corrispondono durate dell'impulso T maggiori (il processo di carica è più lento perché $\tau$ è maggiore). \par
 Per analizzare l'influenza della capacità su T, possiamo andare a confrontare fra di loro i grafici delle misure per i due valori di capacità. Questo grafico è mostrato in figura \ref{figura:confrontoplot}.
 \begin{figure}[h!]
 	\centering
