@@ -112,7 +112,7 @@
 %----------------------------------------------------------------------------------------
 \chapter{Relazione attività di laboratorio 5}
 \section*{Introduzione}
-In quest'attività di laboratorio abbiamo visto un ultimo circuito monostabile con NE555, successivamente sono state analizzate le altre due configurazioni realizzabili con questo circuito integrato (prima la configurazione bistabile e dopo quella astabile).  \par
+In quest'attività di laboratorio abbiamo visto un ultimo circuito monostabile con LM555, successivamente sono state analizzate le altre due configurazioni realizzabili con questo circuito integrato (prima la configurazione bistabile e dopo quella astabile).  \par
 La seconda modalità, quella astabile, permette di generare in uscita al pin 3 un'onda quadra le cui caratteristiche dipendono dalla rete collegata all'esterno del circuito integrato. Le connessioni sono illustrate nel datasheet del componente, si riporta di seguito lo schema (figura \ref{figura:datasheet1}).
 \begin{figure}[h!]
 	\centering
@@ -120,35 +120,49 @@ La seconda modalità, quella astabile, permette di generare in uscita al pin 3 u
 	\caption{Schema delle connessioni da utilizzare per ottenere un circuito astabile (fonte: \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/lm555.pdf?ts=1667144089940&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FLM555}{datasheet}}}).} % LM o NE ??
 	\label{figura:datasheet1}
 \end{figure}
-\\ La configurazione bistabile invece non è presentata nel datasheet. Questa modalità è utile quando si vuole utilizzare il NE555 come flip-flop set reset. Per ottenerla, è sufficiente utilizzare due resistenze e due pulsanti. Una resistenza è collegata tra i pin 8 e 2, l'altra invece è collegata tra i pin 4 e 8; per quanto riguarda i due pulsanti, uno è collegato tra i pin 2 e 1 e pilota il set, mentre l'altro è connesso ai pin 4 e 1 e comanda il reset. Il pin 8 è collegato all'alimentazione, il pin 1 a massa, il segnale è prelevato al pin 3 e tutti gli altri pin sono lasciati floating. Lo schema si trova nella sezione dedicata all'analisi di questo circuito (sezione \ref{sez2}, figura \ref{figura:schema2}).
+\\ La configurazione bistabile invece non è presentata nel datasheet. Questa modalità è utile quando si vuole utilizzare il LM555 come flip-flop set reset. Per ottenerla, è sufficiente utilizzare due resistenze e due pulsanti. Una resistenza è collegata tra i pin 8 e 2, l'altra invece è collegata tra i pin 4 e 8; per quanto riguarda i due pulsanti, uno è collegato tra i pin 2 e 1 e pilota il set, mentre l'altro è connesso ai pin 4 e 1 e comanda il reset. Il pin 8 è collegato all'alimentazione, il pin 1 a massa, il segnale è prelevato al pin 3 e tutti gli altri pin sono lasciati floating. Lo schema si trova nella sezione dedicata all'analisi di questo circuito (sezione \ref{sez2}, figura \ref{figura:schema2}).
+
 \newpage
-\section{Circuito 1: NE555 in configurazione monostabile con switch debouncing}
+\section{Circuito 1: LM555 in configurazione monostabile con switch debouncing}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Questo circuito è basato principalmente sull'ultimo circuito analizzato nello scorso laboratorio. La differenza più evidente tra i due circuiti è rappresentata dal fatto che questo circuito riceve in ingresso un segnale di trigger generato da un pulsante, mentre il precedente circuito riceveva in ingresso un segnale di trigger fornito da un generatore di forme d'onda. \par
-Il circuito in esame, mostrato in figura \ref{figura:schema1}, presenta due resistenze, due capacità e un pulsante. 
+Questo circuito è basato sull'ultimo circuito analizzato nello scorso laboratorio (ovvero il circuito monostabile con LM555). La differenza più evidente tra i due circuiti è rappresentata dal fatto che il circuito in esame riceve in ingresso un segnale di trigger generato da un pulsante, mentre il precedente circuito riceveva in ingresso un segnale di trigger fornito da un generatore di forme d'onda.
+
+Questo circuito, mostrato in figura \ref{figura:schema1}, presenta: due resistenze (R è collegata tra il pin 7 e l'alimentazione positiva, mentre $\mathrm{R_1}$ tra il pin 2 e l'alimentazione positiva), due capacità ($\mathrm{C_1}$ è collegata tra il pin 6 e la massa, mentre $\mathrm{C_2}$ tra il pin 5 e la massa) e un pulsante collegato tra il pin 2 e la massa.
+
+La caratteristica principale di questo circuito consiste nel correggere l'effetto del rimbalzo dell'interruttore (\textit{switch debouncing}). Questo effetto, che consiste nella generazione di un treno di impulsi spuri su entrambi i fronti dell'impulso in uscita, viene prodotto soltanto dalla rete in ingresso al timer e in particolare è dovuto al fatto che la chiusura e l'apertura del pulsante non avvengono in modo istantaneo. Quindi l'aggiunta del LM555 alla rete in ingresso determina un segnale in uscita filtrato da questo effetto indesiderato poichè il timer genera un solo impulso in uscita non appena riceve il primo fronte di discesa del segnale in ingresso.
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7.5cm]{immagini/schema1}
 	\caption{Schema del circuito monostabile con switch debouncing.}
 	\label{figura:schema1}
 \end{figure}
-\\ \noindent La funzione di trasferimento di questo circuito è:
+
+\noindent La funzione di trasferimento di questo circuito è:
 \begin{equation}
 	\begin{cases}
 		V_{out}= V_{DD}\indent\indent \mathrm{a\;partire\;dalla\;chiusura\;di\;} S_W \mathrm{\;e\;per\;una\;durata\;T\;}\\[5pt]
 		V_{out}= 0\indent\indent\indent \mathrm{altrimenti}\\
 	\end{cases}
 \end{equation}
+
 \subsection{Analisi e dati sperimentali}
-Come NE555 è stato scelto un timer della tipologia LM555. Invece per il dimensionamento di questo circuito (in figura \ref{figura:circuito1}) sono state scelte due resistenze da \SI{12}{k\ohm}, la capacità $\mathrm{C_1}$ da \SI{150}{n\farad} e la capacità $\mathrm{C_2}$ da \SI{1}{n\farad}.
+Per quanto riguarda la scelta e il dimensionamento dei componenti di questo circuito (in figura \ref{figura:circuito1}), come timer è stato scelto un LM555, mentre le due resistenze hanno un valore di \SI{12}{\kilo\ohm}, la capacità $\mathrm{C_1}$ di \SI{150}{\nano\farad} e la capacità $\mathrm{C_2}$ di \SI{1}{\nano\farad}.
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/circuito1}
 	\caption{Fotografia del circuito monostabile con switch debouncing realizzato in laboratorio.}
 	\label{figura:circuito1}
 \end{figure}
-\newpage
-\noindent Nella figura \ref{figura:TEK00016e17} si nota che il segnale in uscita non presenta l'effetto del rimbalzo dell'interruttore e questo è favorito dalla presenza del timer nel circuito.
+
+Avendo dimensionato in questo modo i componenti, ci si aspetta che la durata dell'impulso in uscita al circuito risulti pari a: \indent$\displaystyle{T = 1.1 \cdot R \cdot C_1 = 1.1 \cdot \SI{12}{\kilo\ohm} \cdot \SI{150}{\nano\farad} = \SI{1.98}{\milli\second}}$
+\todo{SBAGLIATO, formula sbagliata? perchè deve risultare > 120 ms}
+
+Dalla figura \ref{figura:TEK00016e17} è stato verificato che questa durata assumesse un valore minore rispetto alla durata dell'impulso in ingresso (che dall'oscilloscopio risulta pari all'incirca a \SI{120}{\milli\second}, ovvero 3 intervalli da \SI{40}{\milli\second} ciascuno).
+
+Inoltre dalla stessa immagine si vede che il segnale in uscita corrisponde a un solo impulso positivo e di conseguenza il timer ha effettivamente corretto il rimbalzo dell'interruttore come preannunciato nella sezione precedente.
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00016}
@@ -156,17 +170,19 @@ Come NE555 è stato scelto un timer della tipologia LM555. Invece per il dimensi
 	\caption{Risposta del circuito.}
 	\label{figura:TEK00016e17}
 \end{figure}
-\\Considerando sempre la figura \ref{figura:TEK00016e17}, la durata dell'impulso in ingresso (che, calcolata con l'oscilloscopio, è pari a \SI{120}{m\second}) risulta essere minore della durata dell'impulso in uscita.
-\section{Circuito 2: NE555 in configurazione bistabile}\label{sez2}
+
+\newpage
+\section{Circuito 2: LM555 in configurazione bistabile}\label{sez2}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-aa
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7.5cm]{immagini/schema2}
 	\caption{Schema del circuito bistabile.}
 	\label{figura:schema2}
 \end{figure}
-\\ \noindent La funzione di trasferimento di questo circuito è:
+
+\noindent La funzione di trasferimento di questo circuito è:
 \begin{equation}
 	\begin{cases}
 		V_{out}= V_{DD}\indent\indent \mathrm{a\;partire\;dalla\;pressione\;di\;} S_{Ws} \mathrm{\;fino\;alla\;pressione\;di\;} S_{Wr}\\[5pt]
@@ -180,8 +196,21 @@ aa
 	\caption{Fotografia del circuito bistabile realizzato in laboratorio.}
 	\label{figura:circuito2}
 \end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/TEK00018}
+	\caption{Risposta del circuito.}
+	\label{figura:TEK00018}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/TEK00019}
+	\caption{Risposta del circuito con misure del duty cycle e del periodo.}
+	\label{figura:TEK00019}
+\end{figure}
+
 \newpage
-\section{Circuito 3: NE555 in configurazione astabile}
+\section{Circuito 3: LM555 in configurazione astabile}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 \begin{figure}[h!]
 	\centering
@@ -196,8 +225,9 @@ aa
 	\caption{Fotografia dell'evoluzione del circuito bistabile realizzata in laboratorio.}
 	\label{figura:circuito3}
 \end{figure}
+
 \newpage
-\section{Circuito 4: Evoluzione del NE555 in configurazione astabile}
+\section{Circuito 4: Evoluzione del LM555 in configurazione astabile}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 \begin{figure}[h!]
 	\centering
