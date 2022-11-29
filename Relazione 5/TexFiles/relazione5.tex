@@ -168,16 +168,6 @@ Dalla figura \ref{figura:TEK00010} è stato verificato che questa durata assumes
 	\label{figura:TEK00010}
 \end{figure}
 
-\noindent Il segnale ottenuto in uscita è stato riportato nelle figure \ref{figura:TEK00016e17}.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[height=4.6cm]{immagini/TEK00016}
-	\includegraphics[height=4.6cm]{immagini/TEK00017}
-	\caption{Risposta del circuito (ingresso CH1 e uscita CH2).}
-	\label{figura:TEK00016e17}
-\end{figure}
-
 \noindent Inoltre dalla figura \ref{figura:TEK00009} si vede che il segnale in uscita al LM555 presenta un solo impulso positivo e di conseguenza il timer ha effettivamente corretto il rimbalzo dell'interruttore, di cui è caratterizzato il segnale in ingresso, come preannunciato nella sezione precedente.
 
 \begin{figure}[h!]
@@ -229,6 +219,23 @@ Per realizzare la breadboard (visibile in figura \ref{figura:circuito2}) sono st
 	\caption{Risposta del circuito: a sinistra S ON - R OFF, a destra S OFF - R ON.}
 	\label{figura:TEK00012e13}
 \end{figure}
+
+\noindent Il segnale ottenuto in uscita dopo aver attivato il pulsante set è stato riportato nella figure \ref{figura:TEK00016}, mentre l'uscita ottenuta dopo aver attivato il pulsante reset è visibile nella figure \ref{figura:TEK00017}. In quest'ultima figura non è presente l'impulso del reset siccome è stato visualizzato il segnale di set.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/TEK00016}
+	\caption{Risposta del circuito (ingresso sul set CH1 e uscita CH2).}
+	\label{figura:TEK00016}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.5cm]{immagini/TEK00017}
+	\caption{Risposta del circuito (ingresso sul set CH1 e uscita CH2).}
+	\label{figura:TEK00017}
+\end{figure}
+\todo{non si vede impulso reset perchè l'ingresso è stato preso sul set e non sul reset}
 
 \newpage
 \section{Circuito 3: LM555 in configurazione astabile}
