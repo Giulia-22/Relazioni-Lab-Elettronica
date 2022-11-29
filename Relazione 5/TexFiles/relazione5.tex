@@ -157,7 +157,7 @@ Per quanto riguarda la scelta e il dimensionamento dei componenti di questo circ
 \end{figure}
 
 \noindent Avendo dimensionato in questo modo i componenti, ci si aspetta che la durata dell'impulso in uscita al circuito risulti pari a: \indent$\displaystyle{T = 1.1 \cdot R \cdot C_1 = 1.1 \cdot \SI{12}{\kilo\ohm} \cdot \SI{150}{\nano\farad} = \SI{1.98}{\milli\second}}$
-\todo{SBAGLIATO, formula sbagliata? perchè deve risultare > 120 ms}
+\todo{SBAGLIATO, formula sbagliata? perchè deve risultare maggiore di 120 ms}
 
 Dalla figura \ref{figura:TEK00010} è stato verificato che questa durata assumesse un valore maggiore rispetto alla durata dell'impulso in ingresso (che dalla misura effettuata con i cursori dell'oscilloscopio risulta pari a \SI{120}{\milli\second}).
 
@@ -210,32 +210,15 @@ Per realizzare la breadboard (visibile in figura \ref{figura:circuito2}) sono st
 \end{figure}
 
 \newpage
-\noindent Inizialmente è stato premuto il pulsante di set (mantenendo il pulsante di reset aperto) e questo ha consentito di avere in uscita un segnale al livello logico alto. Successivamente l'attivazione dei due interruttori è stata invertita (disattivando il pulsante di set e attivando quello di reset) ottenendo di conseguenza un segnale in uscita al livello logico basso. Queste variazioni sull'uscita sono state riportate nelle figure \ref{figura:TEK00012e13}.
+\noindent Inizialmente è stato premuto il pulsante di set (mantenendo il pulsante di reset aperto) e questo ha consentito di avere in uscita un segnale al livello logico alto. Successivamente l'attivazione dei due interruttori è stata invertita (disattivando il pulsante di set e attivando quello di reset) ottenendo di conseguenza un segnale in uscita al livello logico basso. Queste variazioni sull'uscita sono state riportate nelle figure \ref{figura:TEK00012e13} in cui sono rappresentati in giallo l'ingresso (rispettivamente a sinistra il set e a destra il reset) e in azzurro l'uscita.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=4.6cm]{immagini/TEK00012}
-	\includegraphics[height=4.6cm]{immagini/TEK00013}
+	\includegraphics[height=4.6cm]{immagini/TEK00016}
+	\includegraphics[height=4.6cm]{immagini/TEK00017}
 	\caption{Risposta del circuito: a sinistra S ON - R OFF, a destra S OFF - R ON.}
 	\label{figura:TEK00012e13}
 \end{figure}
-
-\noindent Il segnale ottenuto in uscita dopo aver attivato il pulsante set è stato riportato nella figure \ref{figura:TEK00016}, mentre l'uscita ottenuta dopo aver attivato il pulsante reset è visibile nella figure \ref{figura:TEK00017}. In quest'ultima figura non è presente l'impulso del reset siccome è stato visualizzato il segnale di set.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[height=6.5cm]{immagini/TEK00016}
-	\caption{Risposta del circuito (ingresso sul set CH1 e uscita CH2).}
-	\label{figura:TEK00016}
-\end{figure}
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[height=6.5cm]{immagini/TEK00017}
-	\caption{Risposta del circuito (ingresso sul set CH1 e uscita CH2).}
-	\label{figura:TEK00017}
-\end{figure}
-\todo{non si vede impulso reset perchè l'ingresso è stato preso sul set e non sul reset}
 
 \newpage
 \section{Circuito 3: LM555 in configurazione astabile}
