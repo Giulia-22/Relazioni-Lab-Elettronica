@@ -147,7 +147,7 @@ La funzione di trasferimento di questo circuito è:
 \end{equation}
 
 \subsection{Analisi e dati sperimentali}
-Per quanto riguarda la scelta e il dimensionamento dei componenti di questo circuito (in figura \ref{figura:circuito1}), come timer è stato scelto un LM555, mentre le due resistenze hanno un valore di \SI{12}{\kilo\ohm}, la capacità $\mathrm{C_1}$ di \SI{150}{\nano\farad} e la capacità $\mathrm{C_2}$ di \SI{1}{\nano\farad}.
+Per quanto riguarda la scelta e il dimensionamento dei componenti di questo circuito (in figura \ref{figura:circuito1}), come timer è stato scelto un LM555, mentre le due resistenze hanno un valore di \SI{12}{\kilo\ohm}, la capacità $\mathrm{C_1}$ di \SI{10}{\micro\farad} e la capacità $\mathrm{C_2}$ di \SI{1}{\nano\farad}.
 
 \begin{figure}[h!]
 	\centering
@@ -156,8 +156,7 @@ Per quanto riguarda la scelta e il dimensionamento dei componenti di questo circ
 	\label{figura:circuito1}
 \end{figure}
 
-\noindent Avendo dimensionato in questo modo i componenti, ci si aspetta che la durata dell'impulso in uscita al circuito risulti pari a: \indent$\displaystyle{T = 1.1 \cdot R \cdot C_1 = 1.1 \cdot \SI{12}{\kilo\ohm} \cdot \SI{150}{\nano\farad} = \SI{1.98}{\milli\second}}$
-\todo{SBAGLIATO, formula sbagliata? perchè deve risultare maggiore di 120 ms}
+\noindent Avendo dimensionato in questo modo i componenti, ci si aspetta che la durata dell'impulso in uscita al circuito risulti pari a: \indent$\displaystyle{T = 1.1 \cdot R \cdot C_1 = 1.1 \cdot \SI{12}{\kilo\ohm} \cdot \SI{10}{\micro\farad} = \SI{132}{\milli\second}}$
 
 Dalla figura \ref{figura:TEK00010} è stato verificato che questa durata assumesse un valore maggiore rispetto alla durata dell'impulso in ingresso (che dalla misura effettuata con i cursori dell'oscilloscopio risulta pari a \SI{120}{\milli\second}).
 
@@ -168,7 +167,7 @@ Dalla figura \ref{figura:TEK00010} è stato verificato che questa durata assumes
 	\label{figura:TEK00010}
 \end{figure}
 
-\noindent Inoltre dalla figura \ref{figura:TEK00009} si vede che il segnale in uscita al LM555 presenta un solo impulso positivo e di conseguenza il timer ha effettivamente corretto il rimbalzo dell'interruttore, di cui è caratterizzato il segnale in ingresso, come preannunciato nella sezione precedente.
+\noindent Inoltre dalla figura \ref{figura:TEK00009}, ottenuta ingrandendo l'immagine precedente, si vede che il segnale in uscita al LM555 presenta un solo impulso positivo e di conseguenza il timer ha effettivamente corretto il rimbalzo dell'interruttore, di cui è caratterizzato il segnale in ingresso, come preannunciato nella sezione precedente.
 
 \begin{figure}[h!]
 	\centering
@@ -180,7 +179,7 @@ Dalla figura \ref{figura:TEK00010} è stato verificato che questa durata assumes
 \newpage
 \section{Circuito 2: LM555 in configurazione bistabile}\label{sez2}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Questo circuito (in figura \ref{figura:schema2}) è costituito da un timer 555, da due resistenze (dette resistenze di pull-up) e da due pulsanti (set e reset).
+Questo circuito (in figura \ref{figura:schema2}) è costituito da un timer 555, da due resistenze (dette resistenze di pull-up) e da due pulsanti (uno per il set e uno per il reset).
 
 \begin{figure}[h!]
 	\centering
@@ -189,7 +188,11 @@ Questo circuito (in figura \ref{figura:schema2}) è costituito da un timer 555, 
 	\label{figura:schema2}
 \end{figure}
 
-\noindent Si tratta di un circuito bistabile perché presenta due stati stabili, set e reset, che vengono attivati in modo mutuamente esclusivo tramite la pressione di due pulsanti situati tra i rispettivi nodi e la massa. Dunque in ingresso si riceve un segnale che può essere di due tipologie differenti in base all'interruttore attivato: uno per il set oppure uno per il reset che determinano in uscita una transizione al livello logico alto o a quello basso rispettivamente. Perciò la durata dell'impulso positivo presente sul segnale in uscita dipende dal momento in cui il 555 riceve un comando di set e da quello in cui ne riceve uno di reset.
+\noindent Si tratta di un circuito bistabile perché presenta due stati stabili, set e reset, che vengono attivati in modo mutuamente esclusivo tramite la pressione di due pulsanti situati tra i rispettivi nodi e la massa.
+
+Dunque in ingresso si riceve un segnale che può essere di due tipologie differenti in base all'interruttore attivato: uno per il set oppure uno per il reset che determinano in uscita una transizione al livello logico alto o a quello basso rispettivamente.
+
+Perciò la durata dell'impulso positivo presente sul segnale in uscita dipende dal momento in cui il 555 riceve i due comandi. In particolare il momento della ricezione del comando di set determina l'istante del fronte di salita dell'impulso, mentre la ricezione del comando di reset ne determina l'istante del fronte di discesa.
 
 La funzione di trasferimento di questo circuito è:
 \begin{equation}
@@ -200,7 +203,7 @@ La funzione di trasferimento di questo circuito è:
 \end{equation}
 
 \subsection{Analisi e dati sperimentali}
-Per realizzare la breadboard (visibile in figura \ref{figura:circuito2}) sono state utilizzate delle resistenze con un valore di \SI{10}{\kilo\ohm} ciascuna.
+Per realizzare la breadboard (visibile in figura \ref{figura:circuito2}) sono state utilizzate due resistenze con un valore di \SI{10}{\kilo\ohm} ciascuna.
 
 \begin{figure}[h!]
 	\centering
@@ -210,7 +213,11 @@ Per realizzare la breadboard (visibile in figura \ref{figura:circuito2}) sono st
 \end{figure}
 
 \newpage
-\noindent Inizialmente è stato premuto il pulsante di set (mantenendo il pulsante di reset aperto) e questo ha consentito di avere in uscita un segnale al livello logico alto. Successivamente l'attivazione dei due interruttori è stata invertita (disattivando il pulsante di set e attivando quello di reset) ottenendo di conseguenza un segnale in uscita al livello logico basso. Queste variazioni sull'uscita sono state riportate nelle figure \ref{figura:TEK00012e13} in cui sono rappresentati in giallo l'ingresso (rispettivamente a sinistra il set e a destra il reset) e in azzurro l'uscita.
+\noindent Inizialmente è stato premuto il pulsante di set (mantenendo il pulsante di reset aperto) e questo ha consentito di avere in uscita un segnale al livello logico alto.
+
+Successivamente l'attivazione dei due interruttori è stata invertita (disattivando il pulsante di set e attivando quello di reset) ottenendo di conseguenza un segnale in uscita al livello logico basso.
+
+Queste variazioni sull'uscita sono state riportate nelle figure \ref{figura:TEK00012e13} in cui sono rappresentati in giallo l'ingresso (rispettivamente a sinistra il set e a destra il reset) e in azzurro l'uscita.
 
 \begin{figure}[h!]
 	\centering
