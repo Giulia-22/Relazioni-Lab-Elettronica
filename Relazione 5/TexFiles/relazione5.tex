@@ -136,7 +136,7 @@ Questo circuito, mostrato in figura \ref{figura:schema1}, presenta: due resisten
 	\label{figura:schema1}
 \end{figure}
 
-\noindent La caratteristica principale di questo circuito consiste nel correggere l'effetto del rimbalzo dell'interruttore (\textit{switch debouncing}, visibile nella figura \ref{figura:TEK00009}). Questo effetto, che consiste nella generazione di un treno di impulsi spuri su entrambi i fronti dell'impulso in ingresso, viene prodotto soltanto dalla rete antecedente il timer e in particolare è dovuto al fatto che la chiusura e l'apertura del pulsante non avvengono in modo istantaneo. Quindi l'aggiunta del LM555 alla rete in ingresso determina un segnale in uscita filtrato da questo effetto indesiderato poichè il timer genera un solo impulso in uscita non appena riceve il primo fronte di discesa del segnale in ingresso.
+\noindent La caratteristica principale di questo circuito consiste nel correggere l'effetto del rimbalzo dell'interruttore (\textit{switch debouncing}, visibile nella figura \ref{figura:TEK00009}). Questo effetto, che consiste nella generazione di un treno di impulsi spuri su entrambi i fronti dell'impulso in ingresso, viene prodotto soltanto dalla rete antecedente il timer e in particolare è dovuto al fatto che la chiusura e l'apertura del pulsante non avvengono in modo istantaneo, perché c'è un transitorio. L'aggiunta del LM555 alla rete in ingresso determina un segnale in uscita filtrato da questo effetto indesiderato poichè il timer genera un solo impulso in uscita non appena riceve il primo fronte di discesa del segnale in ingresso. % metterei aggiunta 555 a valle dell'interruttore
 
 La funzione di trasferimento di questo circuito è:
 \begin{equation}
@@ -151,18 +151,19 @@ Per quanto riguarda la scelta e il dimensionamento dei componenti di questo circ
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=7cm]{immagini/circuito1}
+	\includegraphics[height=6.8cm]{immagini/circuito1}
 	\caption{Fotografia del circuito monostabile con switch debouncing realizzato in laboratorio.}
 	\label{figura:circuito1}
 \end{figure}
 
-\noindent Avendo dimensionato in questo modo i componenti, ci si aspetta che la durata dell'impulso in uscita al circuito risulti pari a: \indent$\displaystyle{T = 1.1 \cdot R \cdot C_1 = 1.1 \cdot \SI{12}{\kilo\ohm} \cdot \SI{10}{\micro\farad} = \SI{132}{\milli\second}}$
+\noindent Avendo dimensionato in questo modo i componenti, ci si aspetta che la durata dell'impulso in uscita al circuito risulti pari a: 
+\\\indent$\displaystyle{T = 1.1 \cdot R \cdot C_1 = 1.1 \cdot \SI{12}{\kilo\ohm} \cdot \SI{10}{\micro\farad} = \SI{132}{\milli\second}}$
 
-Dalla figura \ref{figura:TEK00010} è stato verificato che questa durata assumesse un valore maggiore rispetto alla durata dell'impulso in ingresso (che dalla misura effettuata con i cursori dell'oscilloscopio risulta pari a \SI{120}{\milli\second}).
+\noindent Dalla figura \ref{figura:TEK00010} è stato verificato che questa durata assumesse un valore maggiore rispetto alla durata dell'impulso in ingresso (che dalla misura effettuata con i cursori dell'oscilloscopio risulta pari a \SI{120}{\milli\second}).
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.5cm]{immagini/TEK00010}
+	\includegraphics[height=6.3cm]{immagini/TEK00010}
 	\caption{Risposta del circuito con cursori.}
 	\label{figura:TEK00010}
 \end{figure}
@@ -183,7 +184,7 @@ Questo circuito (in figura \ref{figura:schema2}) è costituito da un timer 555, 
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=7.5cm]{immagini/schema2}
+	\includegraphics[height=8cm]{immagini/schema2}
 	\caption{Schema del circuito bistabile.}
 	\label{figura:schema2}
 \end{figure}
@@ -198,12 +199,12 @@ La funzione di trasferimento di questo circuito è:
 \begin{equation}
 	\begin{cases}
 		V_{out}= V_{DD}\indent\indent \mathrm{a\;partire\;dalla\;pressione\;di\;} S_{Ws} \mathrm{\;fino\;alla\;pressione\;di\;} S_{Wr}\\[5pt]
-		V_{out}= 0\indent\indent\indent \mathrm{altrimenti}\\
+		V_{out}= 0\indent\indent\indent \mathrm{{a\;partire\;dalla\;pressione\;di\;} S_{Wr} \mathrm{\;fino\;alla\;pressione\;di\;} S_{Ws}}\\ % MOD
 	\end{cases}
 \end{equation}
 
 \subsection{Analisi e dati sperimentali}
-Per realizzare la breadboard (visibile in figura \ref{figura:circuito2}) sono state utilizzate due resistenze con un valore di \SI{10}{\kilo\ohm} ciascuna.
+Per realizzare il circuito (visibile in figura \ref{figura:circuito2}) sono state utilizzate due resistenze con un valore di \SI{10}{\kilo\ohm} ciascuna.
 
 \begin{figure}[h!]
 	\centering
@@ -212,12 +213,11 @@ Per realizzare la breadboard (visibile in figura \ref{figura:circuito2}) sono st
 	\label{figura:circuito2}
 \end{figure}
 
-\newpage
 \noindent Inizialmente è stato premuto il pulsante di set (mantenendo il pulsante di reset aperto) e questo ha consentito di avere in uscita un segnale al livello logico alto.
 
-Successivamente l'attivazione dei due interruttori è stata invertita (disattivando il pulsante di set e attivando quello di reset) ottenendo di conseguenza un segnale in uscita al livello logico basso.
+Successivamente è stato premuto il pulsante di reset (mantenendo il pulsante di set aperto), ottenendo di conseguenza in uscita un segnale al livello logico basso.
 
-Queste variazioni sull'uscita sono state riportate nelle figure \ref{figura:TEK00012e13} in cui sono rappresentati in giallo l'ingresso (rispettivamente a sinistra il set e a destra il reset) e in azzurro l'uscita.
+Queste variazioni sull'uscita sono state riportate nella figura \ref{figura:TEK00012e13} in cui sono rappresentati in giallo l'ingresso (rispettivamente a sinistra il set e a destra il reset) e in azzurro l'uscita.
 
 \begin{figure}[h!]
 	\centering
@@ -234,34 +234,139 @@ Andiamo ora a studiare l'ultima configurazione del NE555, che è la modalità as
 In quest'ultima configurazione, il NE555 viene utilizzato per generare un'onda quadra con duty cycle variabile, le cui caratteristiche dipendono dalla rete collegata esternamente al componente. Non abbiamo nessuno stato stabile, l'uscita oscillerà continuamente tra due stati instabili.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=7.5cm]{immagini/schema3}
-	\caption{Schema dell'evoluzione del circuito bistabile.}
+	\includegraphics[height=8cm]{immagini/schema3}
+	\caption{Schema del circuito astabile.}
 	\label{figura:schema3}
 \end{figure}
-\\Il percorso di carica della capacità $\mathrm{C_1}$ avviene attraverso la serie delle resistenze $\mathrm{R_A}$ e $\mathrm{R_B}$, ha inizio quando la tensione ai capi della capacità è di $1/3\cdot V_{DD}$ e termina quando questo valore raggiunge $2/3\cdot V_{DD}$. Durante quest'intervallo, l'uscita va a $\mathrm{V_{DD}}$, quindi rimane alta. Terminata la fase di carica, ha inizio la fase di scarica della capacità $\mathrm{C_1}$ attraverso la resistenza $\mathrm{R_B}$. La scarica continua fin quando la tensione ai capi di $\mathrm{C_1}$ raggiunge il valore di $1/3\cdot V_{DD}$, quindi il ciclo di carica/scarica si ripete. 
-% formule + consid dc
+\\Il percorso di carica della capacità $\mathrm{C_1}$ avviene attraverso la serie delle resistenze $\mathrm{R_A}$ e $\mathrm{R_B}$: la fase di carica ha inizio quando la tensione ai capi della capacità è di $1/3\cdot V_{DD}$ e termina quando questo valore raggiunge $2/3\cdot V_{DD}$. Durante quest'intervallo di tempo, $t_1$, l'uscita va a $\mathrm{V_{DD}}$, quindi rimane alta. Terminata la fase di carica, ha inizio la fase di scarica della capacità $\mathrm{C_1}$ attraverso la resistenza $\mathrm{R_B}$. La scarica continua fin quando la tensione ai capi di $\mathrm{C_1}$ raggiunge il valore di $1/3\cdot V_{DD}$ e durante questo perioso di tempo, $t_2$, l'uscita va a massa, dunque rimane bassa. 
+\\Le fasi di carica e scarica si alternano continuamente nel tempo, la loro durata si calcola come segue:
+\\[4pt]\indent$\displaystyle{t_1 = (R_A+R_B)\cdot C_1\cdot \ln2}$
+\\[4pt]\indent$\displaystyle{t_2 = R_B\cdot C_1\cdot \ln2}$
+\\[4pt]\indent$\displaystyle{\rightarrow T=t_1+t_2\indent\Rightarrow f=\frac{1}{t_1+t_2}}$
+\\[4pt]Noti $t_1$ e $T$, possiamo calcolare il duty cycle dell'onda quadra, $\delta$:
+\\[4pt]\indent$\displaystyle{\delta=\frac{t_1}{T}=\frac{R_A+R_B}{R_A+2\cdot R_B}}$
+\\[8pt] Da questa formula, possiamo dire che:
+\begin{itemize}
+\item se $\displaystyle{R_A\ll R_B\Rightarrow\delta\simeq 50\%}$
+\item se $\displaystyle{R_A\gg R_B\Rightarrow\delta\simeq 100\%}$
+\end{itemize}
+di conseguenza, non sarà possibile ottenere un'onda quadra con duty cycle inferiore al 50\%.
 \subsection{Analisi e dati sperimentali}
+In figura \ref{figura:circuito3} è riportata la fotografia del circuito realizzato, con $\mathrm{R_A=R_B}$=\SI{12}{k\ohm} e $\mathrm{C_1}$ pari a \SI{150}{n\farad}.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=7cm]{immagini/circuito3}
-	\caption{Fotografia dell'evoluzione del circuito bistabile realizzata in laboratorio.}
+	\includegraphics[height=8cm]{immagini/circuito3}
+	\caption{Fotografia del circuito astabile realizzato in laboratorio.}
 	\label{figura:circuito3}
 \end{figure}
-
+\\Il nostro obiettivo è andare a studiare come si comporta il circuito al variare della resistenza $\mathrm{R_A}$ e della capacità $\mathrm{C_1}$. Fissiamo la resistenza $\mathrm{R_B}$ a \SI{12}{k\ohm} e la capacità $\mathrm{C_1}$ a \SI{150}{n\farad}, mentre $\mathrm{R_A}$ varia, i valori utilizzati sono riportati in tabella \ref{table:mis_res3}. Con l'oscilloscopio, andiamo a misurare il periodo e il duty cyle, le misure sono riportate in tabella \ref{table:mis_cto3_1}. \par
+Una volta ottenute queste misure, sostituiamo la capacità $\mathrm{C_1}$ con una di valore \SI{68}{n\farad} e ripetiamo le misure, di cui si riportano i risultati in tabella \ref{table:mis_cto3_2}. \par
+Successivamente, rielaboriamo tutti questi dati per ottenere dei grafici, dai quali è più immediato capire le caratteristiche del circuito. 
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|}
+	\hline
+		\textbf{Valore nominale} & \textbf{Valore misurato}\\ 
+		\hline
+		\SI{12}{k\ohm} & \SI{11.973}{k\ohm} \\ 
+		\hline
+		 \SI{24}{k\ohm} & \SI{23.943}{k\ohm} \\ 
+		\hline
+		\SI{39}{k\ohm} & \SI{37.621}{k\ohm} \\ 
+		\hline
+		 \SI{54}{k\ohm} & \SI{54.735}{k\ohm} \\ 
+		\hline
+		 \SI{82}{k\ohm} & \SI{82.132}{k\ohm} \\ 
+		\hline
+		 \SI{136}{k\ohm} & \SI{136.867}{k\ohm} \\ 
+		\hline
+	\end{tabular}
+	\caption{Misure delle resistenze utilizzate per il circuito monostabile con LM555.}
+	\label{table:mis_res3}
+\end{table}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		$\mathbf{R_A}$ & \textbf{T teorico} & \textbf{T misurato} & $\mathbf\delta$\textbf{ teorico} & $\mathbf\delta$\textbf{ misurato}\\ 
+		\hline
+		\SI{12}{k\ohm} & \SI{3.743}{m\second} & \SI{3.771}{m\second} & 66.67\% & 66.52\% \\ 
+		\hline
+		\SI{24}{k\ohm} & \SI{4.991}{m\second} & \SI{5.048}{m\second} & 75.00\% & 74.94\% \\ 
+		\hline
+		\SI{39}{k\ohm} & \SI{6.550}{m\second} & \SI{6.502}{m\second} & 80.95\% & 80.54\% \\ 
+		\hline
+		\SI{54}{k\ohm} & \SI{8.110}{m\second} & \SI{8.325}{m\second} & 84.62\% & 84.77\% \\ 
+		\hline
+		\SI{82}{k\ohm} & \SI{11.021}{m\second} & \SI{11.250}{m\second} & 88.68\% & 88.71\% \\ 
+		\hline
+		\SI{136}{k\ohm} & \SI{16.636}{m\second} & \SI{17.180}{m\second} &  92.50\% & 92.61\% \\ 
+		\hline
+	\end{tabular}
+	\caption{Misure e valori teorici con $\mathrm{C_1}$=\SI{150}{n\farad} e $\mathrm{R_B}$=\SI{12}{k\ohm}.}
+	\label{table:mis_cto3_1}
+\end{table}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		$\mathbf{R_A}$ & \textbf{T teorico} & \textbf{T misurato} & $\mathbf\delta$\textbf{ teorico} & $\mathbf\delta$\textbf{ misurato}\\ 
+		\hline
+		\SI{12}{k\ohm} & \SI{1.697}{m\second} & \SI{1.710}{m\second} & 66.67\% & 66.46\% \\ 
+		\hline
+		\SI{24}{k\ohm} & \SI{2.262}{m\second} & \SI{2.277}{m\second} & 75.00\% & 74.95\% \\ 
+		\hline
+		\SI{39}{k\ohm} & \SI{2.969}{m\second} & \SI{2.926}{m\second} & 80.95\% & 80.48\% \\ 
+		\hline
+		\SI{54}{k\ohm} & \SI{3.677}{m\second} & \SI{3.743}{m\second} & 84.62\% & 84.90\% \\ 
+		\hline
+		\SI{82}{k\ohm} & \SI{4.996}{m\second} & \SI{5.069}{m\second} & 88.68\% & 88.73\% \\ 
+		\hline
+		\SI{136}{k\ohm} & \SI{7.541}{m\second} & \SI{7.762}{m\second} & 92.50\% & 92.60\% \\ 
+		\hline
+	\end{tabular}
+	\caption{Misure e valori teorici con $\mathrm{C_1}$=\SI{68}{n\farad} e $\mathrm{R_B}$=\SI{12}{k\ohm}.}
+	\label{table:mis_cto3_2}
+\end{table}
+\newpage
+Dalle due tabelle, vediamo che i risultati sperimentali coincidono con quelli teorici per entrambi i valori di capacità. Di seguito, vediamo i grafici in cui si confrontano, nell'ordine: il periodo e il duty cycle (misurati e calcolati) della prima capacità utilizzata (\ref{figura:graficiC1}), il periodo e il duty cycle (misurati e calcolati) con il secondo valore di capacità (\ref{figura:graficiC2}), infine i valori misurati con i due valori (\ref{figura:graficiC12}).\par 
+Dai grafici delle prime due figure, possiamo confermare che i risultati ottenuti attraverso le misure sono paragonabili a quelli che vengono calcolati con le formule illustrate in precedenza. \par
+Dall'ultima figura, invece, possiamo vedere che la relazione che lega $\mathrm{R_A}$ e T è di diretta proporzionalità, infatti all'aumentare del valore della resistenza, aumenta anche T (grafico a sinistra). Anche fra $\mathrm{C_1}$ e T c'è una relazione di proporzionalità, perché all'aumentare della capacità aumenta anche il periodo T. Per quanto riguarda il duty cycle, questo è inversamente proporzionale alla resistenza $\mathrm{R_A}$, infatti il grafico che otteniamo è un ramo di iperbole (grafico di destra).
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=5.8cm]{immagini/graficoT1}
+	\includegraphics[height=5.8cm]{immagini/graficoDC1}
+	\caption{Grafico di T (a sinistra) e $\delta$ (a destra) in funzione di $\mathrm{R_A}$ per $\mathrm{C_1}$ = \SI{150}{n\farad}.}
+	\label{figura:graficiC1}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=5.8cm]{immagini/graficoT2}
+	\includegraphics[height=5.8cm]{immagini/graficoDC2}
+	\caption{Grafico di T (a sinistra) e $\delta$ (a destra) in funzione di $\mathrm{R_A}$ per $\mathrm{C_1}$ = \SI{68}{n\farad}.}
+	\label{figura:graficiC2}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=5.8cm]{immagini/graficoConfrontoT}
+	\includegraphics[height=5.8cm]{immagini/graficoConfrontoDC}
+	\caption{Grafico di T (a sinistra) e $\delta$ (a destra) in funzione di $\mathrm{R_A}$ per i due valori di capacità.}
+	\label{figura:graficiC12}
+\end{figure}
 \newpage
 \section{Circuito 4: Evoluzione del LM555 in configurazione astabile}
 \subsection{Schema del circuito e Funzione di Trasferimento}
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7.5cm]{immagini/schema4}
-	\caption{Schema del circuito astabile.}
+	\caption{Schema dell'evoluzione del circuito astabile.}
 	\label{figura:schema4}
 \end{figure}
 \subsection{Analisi e dati sperimentali}
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/circuito4}
-	\caption{Fotografia del circuito astabile realizzato in laboratorio.}
+	\caption{Fotografia del circuito astabile con trimmer realizzato in laboratorio.}
 	\label{figura:circuito4}
 \end{figure}
 
