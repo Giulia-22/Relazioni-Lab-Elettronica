@@ -125,18 +125,18 @@ La seconda modalità, quella astabile, permette di generare in uscita al pin 3 u
 \newpage
 \section{Circuito 1: LM555 in configurazione monostabile con switch debouncing}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Questo circuito è basato sull'ultimo circuito analizzato nello scorso laboratorio (ovvero il circuito monostabile con LM555). La differenza più evidente tra i due circuiti è rappresentata dal fatto che il circuito in esame riceve in ingresso un segnale di trigger generato da un pulsante, mentre il precedente circuito riceveva in ingresso un segnale di trigger fornito da un generatore di forme d'onda.
+Questo circuito è basato sul circuito monostabile con LM555 (analizzato nello scorso laboratorio). La differenza più evidente tra i due circuiti è rappresentata dal fatto che il circuito in esame riceve in ingresso un segnale di trigger generato da un pulsante, mentre il precedente circuito riceveva in ingresso un segnale di trigger fornito da un generatore di forme d'onda.
 
 Questo circuito, mostrato in figura \ref{figura:schema1}, presenta: due resistenze (R è collegata tra il pin 7 e l'alimentazione positiva, mentre $\mathrm{R_1}$ tra il pin 2 e l'alimentazione positiva), due capacità ($\mathrm{C_1}$ è collegata tra il pin 6 e la massa, mentre $\mathrm{C_2}$ tra il pin 5 e la massa) e un pulsante collegato tra il pin 2 e la massa.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=7.5cm]{immagini/schema1}
+	\includegraphics[height=6.5cm]{immagini/schema1}
 	\caption{Schema del circuito monostabile con switch debouncing.}
 	\label{figura:schema1}
 \end{figure}
 
-\noindent La caratteristica principale di questo circuito consiste nel correggere l'effetto del rimbalzo dell'interruttore (\textit{switch debouncing}, visibile nella figura \ref{figura:TEK00009}). Questo effetto, che consiste nella generazione di un treno di impulsi spuri su entrambi i fronti dell'impulso in ingresso, viene prodotto soltanto dalla rete antecedente il timer e in particolare è dovuto al fatto che la chiusura e l'apertura del pulsante non avvengono in modo istantaneo, perché c'è un transitorio. L'aggiunta del LM555 alla rete in ingresso determina un segnale in uscita filtrato da questo effetto indesiderato poichè il timer genera un solo impulso in uscita non appena riceve il primo fronte di discesa del segnale in ingresso. % metterei aggiunta 555 a valle dell'interruttore
+\noindent La caratteristica principale di questo circuito consiste nel correggere l'effetto del rimbalzo dell'interruttore (\textit{switch debouncing}, visibile nella figura \ref{figura:TEK00009}). Questo effetto, che consiste nella generazione di un treno di impulsi spuri su entrambi i fronti dell'impulso in ingresso, viene prodotto dalla rete antecedente il timer e in particolare è dovuto al fatto che la chiusura e l'apertura del pulsante non avvengono in modo istantaneo, perché c'è un transitorio. L'aggiunta del LM555 alla rete in ingresso (e in particolare a valle dell'interruttore) determina un segnale in uscita filtrato da questo effetto indesiderato poichè il timer genera un solo impulso in uscita non appena riceve il primo fronte di discesa del segnale in ingresso. % metterei aggiunta 555 a valle dell'interruttore
 
 La funzione di trasferimento di questo circuito è:
 \begin{equation}
@@ -177,6 +177,8 @@ Per quanto riguarda la scelta e il dimensionamento dei componenti di questo circ
 	\label{figura:TEK00009}
 \end{figure}
 
+\noindent I grafici delle figure precedenti sono stati ottenuti utilizzando la modalità Single dell'oscilloscopio, che permette di visualizzare a schermo segnali costituiti da un impulso definito tramite un pulsante (e quindi segnali non periodici), come il segnale di trigger di questo circuito. Anche per i prossimi circuiti analizzati servirà utilizzare questa modalità dell'oscilloscopio.
+
 \newpage
 \section{Circuito 2: LM555 in configurazione bistabile}\label{sez2}
 \subsection{Schema del circuito e Funzione di Trasferimento}
@@ -189,11 +191,11 @@ Questo circuito (in figura \ref{figura:schema2}) è costituito da un timer 555, 
 	\label{figura:schema2}
 \end{figure}
 
-\noindent Si tratta di un circuito bistabile perché presenta due stati stabili, set e reset, che vengono attivati in modo mutuamente esclusivo tramite la pressione di due pulsanti situati tra i rispettivi nodi e la massa.
+\noindent Si tratta di un circuito bistabile perché presenta due stati stabili, set e reset, che vengono attivati in modo mutuamente esclusivo tramite la pressione alternata di due pulsanti situati tra i rispettivi nodi e la massa.
 
 Dunque in ingresso si riceve un segnale che può essere di due tipologie differenti in base all'interruttore attivato: uno per il set oppure uno per il reset che determinano in uscita una transizione al livello logico alto o a quello basso rispettivamente.
 
-Perciò la durata dell'impulso positivo presente sul segnale in uscita dipende dal momento in cui il 555 riceve i due comandi. In particolare il momento della ricezione del comando di set determina l'istante del fronte di salita dell'impulso, mentre la ricezione del comando di reset ne determina l'istante del fronte di discesa.
+Perciò la durata dell'impulso positivo presente sul segnale in uscita dipende dal momento in cui il 555 riceve ciascuno dei due comandi. In particolare il momento della ricezione del comando di set determina l'istante del fronte di salita dell'impulso, mentre la ricezione del comando di reset ne determina l'istante del fronte di discesa.
 
 La funzione di trasferimento di questo circuito è:
 \begin{equation}
@@ -213,11 +215,11 @@ Per realizzare il circuito (visibile in figura \ref{figura:circuito2}) sono stat
 	\label{figura:circuito2}
 \end{figure}
 
-\noindent Inizialmente è stato premuto il pulsante di set (mantenendo il pulsante di reset aperto) e questo ha consentito di avere in uscita un segnale al livello logico alto.
+\noindent Inizialmente è stato premuto il pulsante di set (mantenendo il pulsante di reset aperto) e questo ha consentito di avere in uscita un segnale al livello logico alto. Perciò si entra nello stato stabile di set.
 
-Successivamente è stato premuto il pulsante di reset (mantenendo il pulsante di set aperto), ottenendo di conseguenza in uscita un segnale al livello logico basso.
+Successivamente è stato premuto il pulsante di reset (mantenendo il pulsante di set aperto), ottenendo di conseguenza in uscita un segnale al livello logico basso. Quindi si passa dallo stato stabile di set a quello stabile di reset.
 
-Queste variazioni sull'uscita sono state riportate nella figura \ref{figura:TEK00012e13} in cui sono rappresentati in giallo l'ingresso (rispettivamente a sinistra il set e a destra il reset) e in azzurro l'uscita.
+Queste variazioni sull'uscita sono state riportate nella figura \ref{figura:TEK00012e13} in cui sono rappresentati in giallo l'ingresso (a sinistra il set e a destra il reset) e in azzurro l'uscita.
 
 \begin{figure}[h!]
 	\centering
@@ -238,7 +240,7 @@ In quest'ultima configurazione, il NE555 viene utilizzato per generare un'onda q
 	\caption{Schema del circuito astabile.}
 	\label{figura:schema3}
 \end{figure}
-\\Il percorso di carica della capacità $\mathrm{C_1}$ avviene attraverso la serie delle resistenze $\mathrm{R_A}$ e $\mathrm{R_B}$: la fase di carica ha inizio quando la tensione ai capi della capacità è di $1/3\cdot V_{DD}$ e termina quando questo valore raggiunge $2/3\cdot V_{DD}$. Durante quest'intervallo di tempo, $t_1$, l'uscita va a $\mathrm{V_{DD}}$, quindi rimane alta. Terminata la fase di carica, ha inizio la fase di scarica della capacità $\mathrm{C_1}$ attraverso la resistenza $\mathrm{R_B}$. La scarica continua fin quando la tensione ai capi di $\mathrm{C_1}$ raggiunge il valore di $1/3\cdot V_{DD}$ e durante questo perioso di tempo, $t_2$, l'uscita va a massa, dunque rimane bassa. 
+\\Il percorso di carica della capacità $\mathrm{C_1}$ avviene attraverso la serie delle resistenze $\mathrm{R_A}$ e $\mathrm{R_B}$: la fase di carica ha inizio quando la tensione ai capi della capacità è di $1/3\cdot V_{DD}$ e termina quando questo valore raggiunge $2/3\cdot V_{DD}$. Durante quest'intervallo di tempo, $t_1$, l'uscita va a $\mathrm{V_{DD}}$, quindi rimane alta. Terminata la fase di carica, ha inizio la fase di scarica della capacità $\mathrm{C_1}$ attraverso la resistenza $\mathrm{R_B}$. La scarica continua fin quando la tensione ai capi di $\mathrm{C_1}$ raggiunge il valore di $1/3\cdot V_{DD}$ e durante questo periodo di tempo, $t_2$, l'uscita va a massa, dunque rimane bassa. 
 \\Le fasi di carica e scarica si alternano continuamente nel tempo, la loro durata si calcola come segue:
 \\[4pt]\indent$\displaystyle{t_1 = (R_A+R_B)\cdot C_1\cdot \ln2}$
 \\[4pt]\indent$\displaystyle{t_2 = R_B\cdot C_1\cdot \ln2}$
@@ -426,7 +428,7 @@ Per realizzare il circuito, di cui si riporta la fotografia in figura \ref{figur
 	\caption{Misure e valori teorici del duty cycle al variare della resistenza del potenziometro.}
 	\label{table:mis_cto4}
 \end{table}
-\\Dalla tabella, possiamo vedere che per valori elevati di $\mathrm{R_{T_1}}$, e quindi per valori elevati del duty cycle, i valori teorici e misurati sono abbastanza precisi. Per valori piccoli, invece, le misure hanno un errore elevato. Quest'imprecisione potrebbe essere duvota al fatto che l'approssimazione del calcolo del duty cycle fatta con la condizione $\displaystyle{R_{T}\gg R_A}$ è troppo forte, dato che le resistenze $\mathrm{R_{T_1}}$ e $\mathrm{R_{A}}$ sono confrontabili. Anche dal grafico seguente, la figura \ref{figura:grafico4} ritroviasmo quanto appena detto.
+\\Dalla tabella, possiamo vedere che per valori elevati di $\mathrm{R_{T_1}}$, e quindi per valori elevati del duty cycle, i valori teorici e misurati sono abbastanza precisi. Per valori piccoli, invece, le misure hanno un errore elevato. Quest'imprecisione potrebbe essere dovuta al fatto che l'approssimazione del calcolo del duty cycle fatta con la condizione $\displaystyle{R_{T}\gg R_A}$ è troppo forte, dato che le resistenze $\mathrm{R_{T_1}}$ e $\mathrm{R_{A}}$ sono confrontabili. Anche dal grafico seguente, la figura \ref{figura:grafico4} ritroviamo quanto appena detto.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/graficomis4}
