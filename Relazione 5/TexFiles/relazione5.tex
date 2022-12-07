@@ -112,7 +112,7 @@
 %----------------------------------------------------------------------------------------
 \chapter{Relazione attività di laboratorio 5}
 \section*{Introduzione}
-In quest'attività di laboratorio abbiamo visto un ultimo circuito monostabile con LM555, successivamente sono state analizzate le altre due configurazioni realizzabili con questo circuito integrato (prima la configurazione bistabile e dopo quella astabile).  \par
+In quest'attività di laboratorio abbiamo visto un ultimo circuito monostabile con NE555, successivamente sono state analizzate le altre due configurazioni realizzabili con questo circuito integrato (prima la configurazione bistabile e dopo quella astabile).  \par
 La seconda modalità, quella astabile, permette di generare in uscita al pin 3 un'onda quadra le cui caratteristiche dipendono dalla rete collegata all'esterno del circuito integrato. Le connessioni sono illustrate nel datasheet del componente, si riporta di seguito lo schema (figura \ref{figura:datasheet1}).
 \begin{figure}[h!]
 	\centering
@@ -120,14 +120,14 @@ La seconda modalità, quella astabile, permette di generare in uscita al pin 3 u
 	\caption{Schema delle connessioni da utilizzare per ottenere un circuito astabile (fonte: \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/lm555.pdf?ts=1667144089940&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FLM555}{datasheet}}}).} % LM o NE ??
 	\label{figura:datasheet1}
 \end{figure}
-\\ La configurazione bistabile invece non è presentata nel datasheet. Questa modalità è utile quando si vuole utilizzare il LM555 come flip-flop set reset. Per ottenerla, è sufficiente utilizzare due resistenze e due pulsanti. Una resistenza è collegata tra i pin 8 e 2, l'altra invece è collegata tra i pin 4 e 8; per quanto riguarda i due pulsanti, uno è collegato tra i pin 2 e 1 e pilota il set, mentre l'altro è connesso ai pin 4 e 1 e comanda il reset. Il pin 8 è collegato all'alimentazione, il pin 1 a massa, il segnale è prelevato al pin 3 e tutti gli altri pin sono lasciati floating. Lo schema si trova nella sezione dedicata all'analisi di questo circuito (sezione \ref{sez2}, figura \ref{figura:schema2}).
+\\ La configurazione bistabile invece non è presentata nel datasheet. Questa modalità è utile quando si vuole utilizzare il NE555 come flip-flop set reset. Per ottenerla, è sufficiente utilizzare due resistenze e due pulsanti. Una resistenza è collegata tra i pin 8 e 2, l'altra invece è collegata tra i pin 4 e 8; per quanto riguarda i due pulsanti, uno è collegato tra i pin 2 e 1 e pilota il set, mentre l'altro è connesso ai pin 4 e 1 e comanda il reset. Il pin 8 è collegato all'alimentazione, il pin 1 a massa, il segnale è prelevato al pin 3 e tutti gli altri pin sono lasciati floating. Lo schema si trova nella sezione dedicata all'analisi di questo circuito (sezione \ref{sez2}, figura \ref{figura:schema2}).
 
 \newpage
-\section{Circuito 1: LM555 in configurazione monostabile con switch debouncing}
+\section{Circuito 1: NE555 in configurazione monostabile con switch debouncing}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Questo circuito è basato sul circuito monostabile con LM555 (analizzato nello scorso laboratorio). La differenza più evidente tra i due circuiti è rappresentata dal fatto che il circuito in esame riceve in ingresso un segnale di trigger generato da un pulsante, mentre il precedente circuito riceveva in ingresso un segnale di trigger fornito da un generatore di forme d'onda.
+Questo circuito è basato sul circuito monostabile con NE555 (analizzato nello scorso laboratorio). La differenza più evidente tra i due circuiti è rappresentata dal fatto che il circuito in esame riceve in ingresso un segnale di trigger generato da un pulsante, mentre il precedente circuito riceveva in ingresso un segnale di trigger fornito da un generatore di forme d'onda.
 
-Questo circuito, mostrato in figura \ref{figura:schema1}, presenta: due resistenze (R è collegata tra il pin 7 e l'alimentazione positiva, mentre $\mathrm{R_1}$ tra il pin 2 e l'alimentazione positiva), due capacità ($\mathrm{C_1}$ è collegata tra il pin 6 e la massa, mentre $\mathrm{C_2}$ tra il pin 5 e la massa) e un pulsante collegato tra il pin 2 e la massa.
+Questo circuito, mostrato in figura \ref{figura:schema1}, presenta: due resistenze (R è collegata tra il pin 7 e l'alimentazione positiva, mentre $\mathrm{R_1}$ tra il pin 2 e l'alimentazione positiva), due capacità ($\mathrm{C_1}$ è collegata tra il pin 6 e la massa, mentre $\mathrm{C_2}$ tra il pin 5 e la massa) e un pulsante collegato tra il pin 2 e la massa. I pin 6 e 7 sono cortocircuitati.
 
 \begin{figure}[h!]
 	\centering
@@ -136,7 +136,7 @@ Questo circuito, mostrato in figura \ref{figura:schema1}, presenta: due resisten
 	\label{figura:schema1}
 \end{figure}
 
-\noindent La caratteristica principale di questo circuito consiste nel correggere l'effetto del rimbalzo dell'interruttore (\textit{switch debouncing}, visibile nella figura \ref{figura:TEK00009}). Questo effetto, che consiste nella generazione di un treno di impulsi spuri su entrambi i fronti dell'impulso in ingresso, viene prodotto dalla rete antecedente il timer e in particolare è dovuto al fatto che la chiusura e l'apertura del pulsante non avvengono in modo istantaneo, perché c'è un transitorio. L'aggiunta del LM555 alla rete in ingresso (e in particolare a valle dell'interruttore) determina un segnale in uscita filtrato da questo effetto indesiderato poichè il timer genera un solo impulso in uscita non appena riceve il primo fronte di discesa del segnale in ingresso. % metterei aggiunta 555 a valle dell'interruttore
+\noindent La caratteristica principale di questo circuito consiste nel correggere l'effetto del rimbalzo dell'interruttore (\textit{switch debouncing}, visibile nella figura \ref{figura:TEK00009}). Questo effetto, che consiste nella generazione di un treno di impulsi spuri su entrambi i fronti dell'impulso in ingresso, viene prodotto dalla rete antecedente il timer e in particolare è dovuto al fatto che la chiusura e l'apertura del pulsante non avvengono in modo istantaneo, perché c'è un transitorio dovuto ai componenti meccanici dell'interruttore. L'aggiunta del NE555 alla rete in ingresso (e in particolare a valle dell'interruttore) determina un segnale in uscita filtrato da questo effetto indesiderato poichè il timer genera un solo impulso in uscita non appena riceve il primo fronte di discesa del segnale in ingresso. % metterei aggiunta 555 a valle dell'interruttore
 
 La funzione di trasferimento di questo circuito è:
 \begin{equation}
@@ -177,12 +177,12 @@ Per quanto riguarda la scelta e il dimensionamento dei componenti di questo circ
 	\label{figura:TEK00009}
 \end{figure}
 
-\noindent I grafici delle figure precedenti sono stati ottenuti utilizzando la modalità Single dell'oscilloscopio, che permette di visualizzare a schermo segnali costituiti da un impulso definito tramite un pulsante (e quindi segnali non periodici), come il segnale di trigger di questo circuito. Anche per i prossimi circuiti analizzati servirà utilizzare questa modalità dell'oscilloscopio.
+\noindent I grafici delle figure precedenti sono stati ottenuti utilizzando la modalità \textit{Single} dell'oscilloscopio, che permette di visualizzare a schermo segnali costituiti da un impulso definito tramite un pulsante (e quindi segnali non periodici), come il segnale di trigger di questo circuito. Anche per i prossimi circuiti analizzati servirà utilizzare questa modalità dell'oscilloscopio.
 
 \newpage
 \section{Circuito 2: LM555 in configurazione bistabile}\label{sez2}
 \subsection{Schema del circuito e Funzione di Trasferimento}
-Questo circuito (in figura \ref{figura:schema2}) è costituito da un timer 555, da due resistenze (dette resistenze di pull-up) e da due pulsanti (uno per il set e uno per il reset).
+Questo circuito (in figura \ref{figura:schema2}) è costituito da un timer NE555, da due resistenze (dette resistenze di pull-up) e da due pulsanti (uno per il set e uno per il reset).
 
 \begin{figure}[h!]
 	\centering
@@ -193,15 +193,15 @@ Questo circuito (in figura \ref{figura:schema2}) è costituito da un timer 555, 
 
 \noindent Si tratta di un circuito bistabile perché presenta due stati stabili, set e reset, che vengono attivati in modo mutuamente esclusivo tramite la pressione alternata di due pulsanti situati tra i rispettivi nodi e la massa.
 
-Dunque in ingresso si riceve un segnale che può essere di due tipologie differenti in base all'interruttore attivato: uno per il set oppure uno per il reset che determinano in uscita una transizione al livello logico alto o a quello basso rispettivamente.
+Dunque in ingresso si riceve un segnale che può essere di due tipologie differenti in base all'interruttore premuto: uno per il set oppure uno per il reset che determinano in uscita una transizione al livello logico alto o a quello basso rispettivamente.
 
-Perciò la durata dell'impulso positivo presente sul segnale in uscita dipende dal momento in cui il 555 riceve ciascuno dei due comandi. In particolare il momento della ricezione del comando di set determina l'istante del fronte di salita dell'impulso, mentre la ricezione del comando di reset ne determina l'istante del fronte di discesa.
+Perciò la durata dell'impulso positivo presente sul segnale in uscita dipende dal momento in cui il NE555 riceve ciascuno dei due comandi. In particolare il momento della ricezione del comando di set determina l'istante del fronte di salita dell'impulso, mentre la ricezione del comando di reset ne determina l'istante del fronte di discesa.
 
 La funzione di trasferimento di questo circuito è:
 \begin{equation}
 	\begin{cases}
 		V_{out}= V_{DD}\indent\indent \mathrm{a\;partire\;dalla\;pressione\;di\;} S_{Ws} \mathrm{\;fino\;alla\;pressione\;di\;} S_{Wr}\\[5pt]
-		V_{out}= 0\indent\indent\indent \mathrm{{a\;partire\;dalla\;pressione\;di\;} S_{Wr} \mathrm{\;fino\;alla\;pressione\;di\;} S_{Ws}}\\ % MOD
+		V_{out}= 0\indent\indent\indent \mathrm{a\;partire\;dalla\;pressione\;di\;} S_{Wr} \mathrm{\;fino\;alla\;pressione\;di\;} S_{Ws}\\ % MOD
 	\end{cases}
 \end{equation}
 
@@ -215,9 +215,9 @@ Per realizzare il circuito (visibile in figura \ref{figura:circuito2}) sono stat
 	\label{figura:circuito2}
 \end{figure}
 
-\noindent Inizialmente è stato premuto il pulsante di set (mantenendo il pulsante di reset aperto) e questo ha consentito di avere in uscita un segnale al livello logico alto. Perciò si entra nello stato stabile di set.
+\noindent Inizialmente è stato premuto il pulsante di set (mantenendo il pulsante di reset aperto) e questo ha consentito di avere in uscita un segnale al livello logico alto, perciò si entra nello stato stabile di set.
 
-Successivamente è stato premuto il pulsante di reset (mantenendo il pulsante di set aperto), ottenendo di conseguenza in uscita un segnale al livello logico basso. Quindi si passa dallo stato stabile di set a quello stabile di reset.
+Successivamente è stato premuto il pulsante di reset (mantenendo il pulsante di set aperto), ottenendo di conseguenza in uscita un segnale al livello logico basso, quindi si passa dallo stato stabile di set a quello stabile di reset.
 
 Queste variazioni sull'uscita sono state riportate nella figura \ref{figura:TEK00012e13} in cui sono rappresentati in giallo l'ingresso (a sinistra il set e a destra il reset) e in azzurro l'uscita.
 
@@ -331,9 +331,9 @@ Successivamente, rielaboriamo tutti questi dati per ottenere dei grafici, dai qu
 	\label{table:mis_cto3_2}
 \end{table}
 \newpage
-Dalle due tabelle, vediamo che i risultati sperimentali coincidono con quelli teorici per entrambi i valori di capacità. Di seguito, vediamo i grafici in cui si confrontano, nell'ordine: il periodo e il duty cycle (misurati e calcolati) della prima capacità utilizzata (\ref{figura:graficiC1}), il periodo e il duty cycle (misurati e calcolati) con il secondo valore di capacità (\ref{figura:graficiC2}), infine i valori misurati con i due valori (\ref{figura:graficiC12}).\par 
+Dalle due tabelle, vediamo che i risultati sperimentali coincidono con quelli teorici per entrambi i valori di capacità. Di seguito, vediamo i grafici in cui si confrontano: il periodo e il duty cycle (misurati e calcolati) della prima capacità usata (figura \ref{figura:graficiC1}), il periodo e il duty cycle (misurati e calcolati) con il secondo valore di capacità (figura \ref{figura:graficiC2}), infine i valori misurati con i due valori (figura \ref{figura:graficiC12}).\par 
 Dai grafici delle prime due figure, possiamo confermare che i risultati ottenuti attraverso le misure sono paragonabili a quelli che vengono calcolati con le formule illustrate in precedenza. \par
-Dall'ultima figura, invece, possiamo vedere che la relazione che lega $\mathrm{R_A}$ e T è di diretta proporzionalità, infatti all'aumentare del valore della resistenza, aumenta anche T (grafico a sinistra). Anche fra $\mathrm{C_1}$ e T c'è una relazione di proporzionalità, perché all'aumentare della capacità aumenta anche il periodo T. Per quanto riguarda il duty cycle, questo è inversamente proporzionale alla resistenza $\mathrm{R_A}$, infatti il grafico che otteniamo è un ramo di iperbole (grafico di destra).
+Dall'ultima figura, invece, possiamo vedere che la relazione che lega $\mathrm{R_A}$ e T è di diretta proporzionalità, infatti all'aumentare del valore della resistenza, aumenta anche T (grafico a sinistra). Anche fra $\mathrm{C_1}$ e T c'è una relazione di proporzionalità, perché all'aumentare della capacità aumenta il periodo T. Per quanto riguarda il duty cycle, questo è inversamente proporzionale alla resistenza $\mathrm{R_A}$, infatti il grafico che otteniamo è un ramo di iperbole (grafico di destra).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=5.8cm]{immagini/graficoT1}
@@ -374,16 +374,16 @@ Lo svantaggio del circuito appena visto è che siamo vincolati ad avere un duty 
 \end{figure}
 \\L'intervallo di tempo in cui l'onda quadra rimane alta ($t_1$) e l'intervallo in cui questa rimane bassa ($t_2$) si ricavano dalle leggi di carica e scarica del condensatore e si calcolano come segue:
 \\[4pt]\indent$\displaystyle{t_1 = (R_A+R_{T_1})\cdot C_1\cdot \ln2}$
-\\[4pt]\indent$\displaystyle{t_2 = (R_{T_2})\cdot C_1\cdot \ln2 = (R_T+R_{T_1})\cdot C_1\cdot \ln2}$
+\\[4pt]\indent$\displaystyle{t_2 = (R_{T_2})\cdot C_1\cdot \ln2 = (R_T-R_{T_1})\cdot C_1\cdot \ln2}$
 \\[4pt]\indent$\displaystyle{\rightarrow T=t_1+t_2=(R_A+R_{T_1}+R_T-R_{T_1})\cdot C_1\cdot \ln2 = (R_A+R_T)\cdot C_1\cdot \ln2}$
 \\[4pt]Il duty cycle dell'onda quadra, $\delta$ si calcola come:
 \\[4pt]\indent$\displaystyle{\delta=\frac{t_1}{T}=\frac{(R_A+R_{T_1})\cdot C_1\cdot \ln2}{(R_A+R_T)\cdot C_1\cdot \ln2}=\frac{R_A+R_{T_1}}{R_A+R_T}\simeq\frac{R_{T_1}}{R_T}\mathrm{\; se \;}R_{T}\gg R_A}$
 \\[4pt]Dato che il duty cycle è il rapporto fra una porzione di resistenza e la resistenza stessa, e $\displaystyle{R_{T_1} = 0\div R_T}$, il duty cycle può variare tra 0\% e 100\%, quindi questo circuito non è più limitato come il precedente.
 \subsection{Analisi e dati sperimentali}
-Per realizzare il circuito, di cui si riporta la fotografia in figura \ref{figura:circuito4}, utilizziamo per $\mathrm{R_T}$ un potenziometro che può variare tra \SI{0}{\ohm} e \SI{10}{k\ohm}, quindi per rispettare la condizione $\displaystyle{R_{T}\gg R_A}$ sceglieremo per $\mathrm{R_A}$ una resistenza da \SI{1}{k\ohm}. La capacità $\mathrm{C_2}$ non la utilizziamo, $\mathrm{C_1}$ resta invece invariata, il suo valore è di \SI{150}{n\farad}. I valori nominali e misurati delle nuove resistenze sono riportati in tabella \ref{table:res4}.
+Per realizzare il circuito, di cui si riporta la fotografia in figura \ref{figura:circuito4}, utilizziamo per $\mathrm{R_T}$ un potenziometro che può variare tra \SI{0}{\ohm} e \SI{10}{k\ohm}, quindi per rispettare la condizione $\displaystyle{R_{T}\gg R_A}$ sceglieremo per $\mathrm{R_A}$ una resistenza da \SI{1}{k\ohm} (utilizziamo due resistenze in serie, una da \SI{180}{\ohm} e l'altra da \SI{820}{\ohm}). La capacità $\mathrm{C_2}$ non la utilizziamo, per $\mathrm{C_1}$  invece utilizziamo una capacità da \SI{150}{n\farad}. I valori nominali e misurati delle nuove resistenze sono riportati in tabella \ref{table:res4}.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[height=6.3cm]{immagini/circuito4}
+	\includegraphics[height=5.7cm]{immagini/circuito4}
 	\caption{Fotografia del circuito astabile con potenziometro realizzato in laboratorio.}
 	\label{figura:circuito4}
 \end{figure}
@@ -399,9 +399,9 @@ Per realizzare il circuito, di cui si riporta la fotografia in figura \ref{figur
 		\hline
 		$\mathbf{R_{A}}$ & \SI{1.000}{k\ohm} & \SI{1.003}{k\ohm} \\ 
 		\hline
-		$\mathbf{R_{T_{min}}}$ & \SI{0}{\ohm} & \SI{11.950}{k\ohm} \\ 
+		$\mathbf{R_{T_{min}}}$ & \SI{0}{\ohm} & \SI{0.22}{k\ohm} \\ 
 		\hline
-		$\mathbf{R_{T_{max}}}$ & \SI{10}{k\ohm} & \SI{11.894}{k\ohm} \\ 
+		$\mathbf{R_{T_{max}}}$ & \SI{10}{k\ohm} & \SI{10.16}{k\ohm} \\ 
 		\hline
 	\end{tabular}
 	\caption{Misure delle resistenze utilizzate per il circuito.}
@@ -439,10 +439,10 @@ Per realizzare il circuito, di cui si riporta la fotografia in figura \ref{figur
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=7cm]{immagini/graficomis4_prec}
-	\caption{Grafico del confronto fra duty cycle calcolato e misurato.}
+	\caption{Grafico del confronto fra duty cycle calcolato senza approssimazione e misurato.}
 	\label{figura:grafico4_prec}
 \end{figure}
-\\Il comportamento del circuito è quindi corretto, perciò siamo in grado di ottenere in uscita un'onda con duty cycle variabile da 0\% a 100\%, come si vede anche dai grafici ottenuti dall'oscilloscopio e mostrati in figura \ref{figura:TEK00032e36}
+\\Il comportamento del circuito è quindi corretto, perciò siamo in grado di ottenere in uscita un'onda quadra con duty cycle variabile da 0\% a 100\%, come si vede anche dai grafici ottenuti dall'oscilloscopio e mostrati in figura \ref{figura:TEK00032e36}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=4.6cm]{immagini/TEK00032}
