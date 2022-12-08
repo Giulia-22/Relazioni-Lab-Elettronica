@@ -1,0 +1,6 @@
+progetto_timer555 -> utilizzato per dimensionare e capire il comportamento del timer
+	(rispetto alla versione precedente, ho tolto il collegamento fra Va e reset perché lo forzava al livello alto)
+ - Se Vctrl è positiva (es. +10V) -> uscita OPAMP va a Vdd => Reset disattivato, in out ho onda quadra ==> T > 25°C
+			(--> V+ > V-)
+ - Se Vctrl è negativa (es. -10V) -> uscita OPAMP va a Vss => Reset sttivato, in out non ho onda quadra ==> T < 25°C
+			(--> V+ < V-)
