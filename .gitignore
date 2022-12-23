@@ -274,3 +274,8 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+
+# File circuiti
+*.op.raw
+*.log
+*.raw
