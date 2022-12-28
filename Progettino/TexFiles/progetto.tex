@@ -94,13 +94,13 @@ La temperatura di riferimento è \SI{25}{\degree C}, a questa temperatura la res
 
 \newpage
 \section{Progettazione del circuito}
-Per progettare il circuito, progetteremo e dimensioneremo separatamente la rete del termistore e la rete oscilllante, quindi integreremo le sue sottoreti per ottenere il progetto del sistema finale.
+Per progettare il circuito, progetteremo e dimensioneremo separatamente la rete del termistore e la rete oscillante, quindi integreremo le sue sottoreti per ottenere il progetto del sistema finale.
 \subsection{Progettazione della rete oscillante}
 Inizialmente progettiamo la rete oscillante. Configuriamo il timer 555 in modo tale che funzioni in modalità astabile. Lo schema scelto è mostrato in figura \ref{figura:schema555}, i pin sono collegati in questo modo:
 \begin{itemize}
 \item PIN 1, è il terminale di \textit{ground}, perciò è collegato a massa;
 \item PIN 2, è il terminale di \textit{trigger}, è cortocircuitato con il PIN 6;
-\item PIN 3, è l'\textit{uscita}, qui sarà collegato il LED tramite una resistenza;
+\item PIN 3, è l'\textit{uscita}, a cui sarà collegato il LED tramite una resistenza;
 \item PIN 4, è il terminale di \textit{reset}, servirà per gestire il collegamento alla rete che pilota il termistore;
 \item PIN 5, è il terminale di \textit{control voltage}, non lo utilizziamo, è collegato a massa tramite una capacità di filtraggio ($\mathrm{C_1}$);
 \item PIN 6, è il terminale di \textit{threshold}, gestisce la carica della capacità $\mathrm{C_2}$ attraverso la resistenza $\mathrm{R_1}$;
@@ -122,17 +122,17 @@ Tra i pin 6 e 7 viene collegato un diodo (l'anodo è collegato al pin 7 mentre i
 \end{itemize}
 Per primo, scegliamo il valore che deve avere la tensione di alimentazione $V_A$. Dal \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/lm555.pdf?ts=1667144089940&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FLM555}{datasheet}}} del timer 555, vediamo che il componente deve essere alimentato con una tensione compresa fra \SI{4.5}{\volt} e \SI{16}{\volt}: dato che il progetto della rete del termistore (sezione \ref{rete_termistore}) prevederà di utilizzare un OPAMP, scegliamo un valore compatibile anche con questo componente, in modo tale da avere un'unica tensione di alimentazione per il circuito finale. Dal \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/ua741.pdf?ts=1672216941275&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FUA741}{datasheet}}} del \textmu A741, un amplificatore operazionale \textit{general purpose}, sappiamo che dobbiamo scegliere una tensione duale o singola compresa fra \SI{-18}{\volt} e +\SI{18}{\volt}. Di conseguenza, dobbiamo scegliere un valore di  $V_A$ di circa \SI{10}{\volt}: visto che nella realtà il circuito non funzionerà con un alimentatore da banco, ma con delle batterie, scegliamo di alimentare i componenti attivi con una tensione da \SI{9}{\volt}, così da poter utilizzare queste batterie. \par
 Successivamente, scegliamo i valori delle capacità. La capacità $\mathrm{C_1}$ serve per filtrare il segnale di massa da eventuali disturbi, il valore consigliato dal datasheet è di \SI{0.01}{\mu\farad}, perciò $\displaystyle{C_1=\SI{0.01}{\mu\farad}}$. La capacità $\mathrm{C_2}$ regola il periodo di oscillazione, scegliamo una capacità da \SI{200}{\mu\farad}. \par
-Dimensionate le capacità, scegliamo i valori che devono avere le resistenze $R_1$ e $R_2$. Per fare ciò, decidiamo prima per quanto tempo il LED deve rimanere acceso e quanto spento, da questi due intervalli di tempo ricaveremo i valori delle due resistenze. Le formule che descrivono queste due grandezze sono:
+Dimensionate le capacità, scegliamo i valori che devono avere le resistenze $R_1$ e $R_2$. Per fare ciò, decidiamo prima per quanto tempo il LED deve rimanere acceso e per quanto spento, da questi due intervalli di tempo ricaveremo i valori delle due resistenze. Le formule che descrivono queste due grandezze sono:
 \\$$t_{low}=\ln2\cdot R_2\cdot C_2\indent\indent\indent \mathrm{e}\indent\indent\indent t_{high}=\ln2\cdot R_1\cdot C_2$$
 Vorremmo che il LED resti spento per \SI{1}{\second} e acceso per \SI{2}{\second}, dunque $\displaystyle{t_{low}=\SI{1}{\second}}$ e $\displaystyle{t_{high}=\SI{2}{\second}}$. Perciò, dalle formule inverse si ricavano i valori delle resistenze $R_1$ e $R_2$:
 \\$$R_2 = \frac{t_{low}}{\ln2\cdot C_2}=\frac{\SI{1}{\second}}{0.693\cdot\SI{200}{\mu\farad}}=\SI{7.213}{k\ohm}\simeq\SI{7.5}{k\ohm}$$
 $$R_1 = \frac{t_{high}}{\ln2\cdot C_2}=\frac{\SI{2}{\second}}{0.693\cdot\SI{200}{\mu\farad}}=\SI{14.427}{k\ohm}\simeq\SI{15}{k\ohm}$$
-Con i valori delle resistenze approssimati a valori reali, i due tempi risultano $\displaystyle{t_{low}=\SI{1.04}{\second}\mathrm{\;e\;}t_{high}=\SI{2.08}{\second}}$, perciò i calcoli risultano in accordo con quanto scelto. \par
+Con i valori delle resistenze approssimati ai valori reali, i due tempi risultano $\displaystyle{t_{low}=\SI{1.04}{\second}\mathrm{\;e\;}t_{high}=\SI{2.08}{\second}}$, perciò i calcoli risultano in accordo con quanto scelto. \par
 L'ultima resistenza da dimensionare è $\mathrm{R_3}$. Questa resistenza ha lo scopo di ridurre la corrente che fluisce nel LED, altrimenti si rischia di bruciarlo. Di solito, in questi dispositivi circola una corrente di 15\SI{-20}{m\ampere}, per il dimensionamento ipotizziamo che nel diodo circoli una corrente pari a \SI{20}{m\ampere}, mentre la caduta di tensione ai capi di un LED di colore rosso è di \SI{1.8}{\volt}. Per ricavare il valore di $\mathrm{R_3}$, basta utilizzare la legge di Ohm:
 $$\indent i_R = i_D\indent\rightarrow\indent \frac{V_{out}-V_D}{R_3}=i_D\indent\rightarrow\indent\frac{\SI{9}{\volt}-\SI{1.8}{\volt}}{R_3}=\SI{20}{m\ampere}$$
 $$\Rightarrow\indent R_3=\frac{(9\SI{-1.8}{)\volt}}{\SI{20}{m\ampere}}=\SI{360}{\ohm}$$
 Per $\mathrm{R_3}$ scegliamo una resistenza da \SI{500}{\ohm}, di conseguenza nel diodo fluirà una corrente di circa \SI{15}{m\ampere}. \par 
-Nell'immagine di figura \ref{figura:dim555} è mostrato il sottosistema della rete oscillante con i valori scelti per ogni componente. 
+Nell'immagine in figura \ref{figura:dim555} è mostrato il sottosistema della rete oscillante con i valori scelti per ogni componente. 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6.9cm]{immagini/dim555}
@@ -140,7 +140,7 @@ Nell'immagine di figura \ref{figura:dim555} è mostrato il sottosistema della re
 	\label{figura:dim555}
 \end{figure}
 \\Nella figura \ref{figura:555out} vengono invece mostrati i grafici che si ottengono in uscita (corrente che fluisce nel LED) quando il circuito si trova nello stato di allarme e di riposo. \par
-Nel primo caso, la temperatura sarà superiore a \SI{25}{\degree}C, quindi il sistema si troverà nello stato di allerta. Il circuito si comporterà come un oscillatore, perciò, terminato il transitorio iniziale, l'uscita resta alta per circa due secondi e bassa per circa un secondo. Le imprecisioni su $t_{high}$ sono dovute al fatto che nei calcoli si è trascurata la caduta di tensione data dal diodo D1, perciò quest'intervallo di tempo è di poco superiore rispetto a quanto dimensionato. Dalle misure con i cursori, questa differenza risulta essere pari a \SI{0.36}{\second}. \par
+Nel primo caso, la temperatura sarà superiore a \SI{25}{\degree}C, quindi il sistema si troverà nello stato di allerta. Il circuito si comporterà come un oscillatore, perciò, terminato il transitorio iniziale, l'uscita resta alta per circa due secondi e bassa per circa un secondo. Le imprecisioni su $t_{high}$ sono dovute al fatto che nei calcoli è stata trascurata la caduta di tensione data dal diodo D1, perciò quest'intervallo di tempo è di poco superiore rispetto a quanto dimensionato. Dalle misure con i cursori, questa differenza risulta essere pari a \SI{0.36}{\second}. \par
 Nel secondo caso invece, il sistema registrerà una temperatura inferiore a \SI{25}{\degree}C, di conseguenza nel LED non deve fluire corrente perché deve rimanere spento, dato che il sistema non è nello stato di allarme.
 \begin{figure}[h!]
 	\centering
@@ -149,13 +149,14 @@ Nel secondo caso invece, il sistema registrerà una temperatura inferiore a \SI{
 	\caption{Grafico dell'uscita quando il sistema è nello stato di allarme (sopra) e riposo (sotto).} 
 	\label{figura:555out}
 \end{figure}
+\todo{spostare foto 6.3 prima di "Nel primo caso..." e metterle sulla stessa riga?}
 \subsection{Progettazione della rete del termistore}\label{rete_termistore}
 Per gestire le due situazioni descritte alla fine della sezione precedente, dobbiamo pilotare opportunamente il PIN 4, ovvero il \textit{reset}, del timer 555. In particolare, se la temperatura è inferiore a \SI{25}{\degree}C, sul PIN 4 deve essere applicato un segnale di tensione che corrisponde al livello logico basso (\SI{0}{\volt}), perché vogliamo che anche l'uscita si trovi al livello logico basso,  in modo tale che il LED non si accenda. Al contrario, se la temperatura è superiore alla temperatura di riferimento, al reset deve essere applicato un segnale corrispondente al livello logico alto (\SI{9}{\volt}), così da far lavorare il timer 555 in modalità astabile e pilotare l'accensione e lo spegnimento del LED secondo i tempi scelti nella sezione precedente. \par
 \noindent Queste scelte sono dovute al fatto che il timer 555 viene resettato quando si applica un impulso negativo sul PIN 4 (fonte: \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/lm555.pdf?ts=1667144089940&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FLM555}{datasheet}}}), e questa transizione la otteniamo se utilizziamo le tensioni come appena descritto. \par
 Il segnale che pilota il reset è dato dall'OPAMP, che sarà utilizzato in configurazione di comparatore: per la nostra applicazione, è necessario configurare gli ingressi invertente e non invertente per fare in modo che la condizione $V^+>V^-$ si verifichi quando la temperatura è superiore a \SI{25}{\degree}C, così che l'uscita dell'amplificatore operazionale sia alta, il viceversa deve invece verificarsi quando la temperatura è minore del valore critico. \par
 Per decidere come dimensionare gli ingressi, dobbiamo prima capire il comportamento elettrico del termistore al variare della temperatura. Un termistore NTC è schematizzabile come una resistenza variabile, il cui andamento in funzione della temperatura (in kelvin) è di tipo esponenziale:
 $$ R_T = R_0\cdot e^{B\bigl(\frac{1}{T}-\frac{1}{T_0}\bigr)}$$
-Dalla specifica, sappiamo che $R_0$ vale \SI{1}{k\ohm} quando $T_0 = \SI{25}{\degree C}=\SI{298}{\kelvin}$. Il parametro $B$ varia in base al termistore scelto, per un termistore NTC con le nostre caratteristiche vale circa \SI{3000}{\kelvin}, come possiamo ricavare dal seguente \textcolor{blue}{\underline{\href{https://www.mouser.it/datasheet/2/240/Littelfuse_Leaded_Thermistors_Glass_Encapsulated_T-1315924.pdf}{datasheet}}}. Sostituendo alla relazione precedente le grandezze note, otteniamo:
+Dalla specifica, sappiamo che $R_0$ vale \SI{1}{k\ohm} quando $T_0 = \SI{25}{\degree C}=\SI{298}{\kelvin}$. Il parametro $B$ varia in base al termistore scelto e in particolare per un termistore NTC con le nostre caratteristiche vale circa \SI{3000}{\kelvin}, come possiamo ricavare dal seguente \textcolor{blue}{\underline{\href{https://www.mouser.it/datasheet/2/240/Littelfuse_Leaded_Thermistors_Glass_Encapsulated_T-1315924.pdf}{datasheet}}}. Sostituendo alla relazione precedente le grandezze note, otteniamo:
 $$R_T = 42.45\cdot 10^{-3}\;\SI{}{\ohm}\cdot e^{\bigl(\frac{\SI{3000}{\kelvin}}{T}\bigr)} $$
 Dalla formula, verifichiamo che a \SI{25}{\degree C}=\SI{298}{\kelvin} la resistenza è effettivamente di \SI{1}{k\ohm}.
 % prendo due valori (uno + e l'altro - di 25) e vedo comportamento -> r aumenta se t minore e viceversa
@@ -164,9 +165,12 @@ Dalla formula, verifichiamo che a \SI{25}{\degree C}=\SI{298}{\kelvin} la resist
 
 \newpage
 \section{Simulazione del circuito}
+Una volta integrate le due sottoreti del sistema nel circuito complessivo, abbiamo simulato quest'ultimo utilizzando due programmi differenti: LTSpice e Tinkercad.
 % unione dei due sotto sistemi
 \subsection{Simulazione con LTSpice}
-\subsection{Simulazione con Thinkercad}
+\subsection{Simulazione con Tinkercad}
+In Tinkercad per prima cosa abbiamo realizzato il circuito su una breadboard (visibile in figura \todo{inserire figura}) inserendovi i componenti dimensionati nella sezione precedente.
+Poi per valutarne il comportamento, abbiamo simulato il circuito.
 
 
 
