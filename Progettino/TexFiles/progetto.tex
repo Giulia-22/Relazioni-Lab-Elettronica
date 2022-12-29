@@ -151,7 +151,7 @@ Nel primo caso, la temperatura sarà superiore a \SI{25}{\celsius}, quindi il si
 Nel secondo caso invece, il sistema registrerà una temperatura inferiore a \SI{25}{\celsius}, di conseguenza nel LED non deve fluire corrente perché deve rimanere spento, dato che il sistema non è nello stato di allarme.
 \todo{spostare foto 6.3 prima di "Nel primo caso..." e metterle sulla stessa riga?}
 \subsection{Progettazione della rete del termistore}\label{rete_termistore}
-Per gestire le due situazioni descritte alla fine della sezione precedente, dobbiamo pilotare opportunamente il PIN 4, ovvero il \textit{reset}, del timer 555. In particolare, se la temperatura è inferiore a \SI{25}{\celsius}, sul PIN 4 deve essere applicato un segnale di tensione che corrisponde al livello logico basso (\SI{0}{\volt}), perché vogliamo che anche l'uscita si trovi al livello logico basso,  in modo tale che il LED non si accenda. Al contrario, se la temperatura è superiore alla temperatura di riferimento, al reset deve essere applicato un segnale corrispondente al livello logico alto (\SI{9}{\volt}), così da far lavorare il timer 555 in modalità astabile e pilotare l'accensione e lo spegnimento del LED secondo i tempi scelti nella sezione precedente. Queste scelte sono dovute al fatto che il timer 555 viene resettato quando si applica un impulso negativo sul PIN 4 (fonte: \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/lm555.pdf?ts=1667144089940&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FLM555}{datasheet}}}), e questa transizione la otteniamo se utilizziamo le tensioni come appena descritto. \par
+Per gestire le due situazioni descritte alla fine della sezione precedente, dobbiamo pilotare opportunamente il pin 4, ovvero il \textit{reset}, del timer 555. In particolare, se la temperatura è inferiore a \SI{25}{\celsius}, sul pin 4 deve essere applicato un segnale di tensione che corrisponde al livello logico basso (\SI{0}{\volt}), perché vogliamo che anche l'uscita si trovi al livello logico basso,  in modo tale che il LED non si accenda. Al contrario, se la temperatura è superiore alla temperatura di riferimento, al reset deve essere applicato un segnale corrispondente al livello logico alto (\SI{9}{\volt}), così da far lavorare il timer 555 in modalità astabile e pilotare l'accensione e lo spegnimento del LED secondo i tempi scelti nella sezione precedente. Queste scelte sono dovute al fatto che il timer 555 viene resettato quando si applica un impulso negativo sul pin 4 (fonte: \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/lm555.pdf?ts=1667144089940&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FLM555}{datasheet}}}), e questa transizione la otteniamo se utilizziamo le tensioni come appena descritto. \par
 Il segnale che pilota il reset è dato dall'OPAMP, che sarà utilizzato in configurazione di comparatore: per la nostra applicazione, è necessario configurare gli ingressi invertente e non invertente per fare in modo che la condizione $V^+>V^-$ si verifichi quando la temperatura è superiore a \SI{25}{\celsius}, così che l'uscita dell'amplificatore operazionale sia alta; il viceversa deve invece verificarsi quando la temperatura è minore del valore critico. Inoltre, per ottenere in uscita i segnali descritti al paragrafo precedente, dovremo alimentare l'OPAMP con una tensione singola, cioé fra massa e $V_A$. \par
 Per decidere come dimensionare gli ingressi, dobbiamo prima capire il comportamento elettrico del termistore al variare della temperatura. Un termistore NTC è schematizzabile come una resistenza variabile, il cui andamento in funzione della temperatura (in kelvin) è di tipo esponenziale:
 $$ R_T = R_0\cdot e^{B\bigl(\frac{1}{T}-\frac{1}{T_0}\bigr)}$$
@@ -184,16 +184,32 @@ Nella figura \ref{figura:NTCout} vengono invece mostrati i grafici che si otteng
 
 \newpage
 \section{Simulazione del circuito}
-Prima di simulare il circuito, dobbiamo integrare i due sottosistemi. Per come sono stati progettati, è sufficiente collegare l'uscita dell'OPAMP al PIN 4 del timer 555, senza utilizzare altri componenti, dato che entrambi i componenti lavorano con le stesse tensioni. Il circuito complessivo è rappresentato in figura \ref{figura:schemaFinale}.
+Prima di simulare il circuito, dobbiamo integrare i due sottosistemi. Per come sono stati progettati, è sufficiente collegare l'uscita dell'OPAMP al pin 4 del timer 555, senza utilizzare altri componenti, dato che entrambi i componenti lavorano con le stesse tensioni. Il circuito complessivo è rappresentato in figura \ref{figura:schemaFinale}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{immagini/schemaFinale}
 	\caption{Schema del circuito finale.} 
 	\label{figura:schemaFinale}
 \end{figure}
-\\Una volta ottenuto il circuito complessivo, per verificarne il corretto funzionamento lo abbiamo simulato utilizzando due programmi differenti: LTSpice e Tinkercad.  
+\\Una volta ottenuto il circuito complessivo, per verificarne il corretto funzionamento lo abbiamo simulato utilizzando due programmi differenti: \textit{LTSpice} e \textit{Tinkercad}.  
 \subsection{Simulazione con LTSpice}
-\subsection{Simulazione con Tinkercad}
+Per la simulazione con \textit{LTSpice} utilizziamo il circuito mostrato in figura \ref{figura:schemaFinale}. Vediamo prima come si comporta il sistema quando non è nello stato di allarme, perciò con $R_T$ che vale \SI{1.70}{k\ohm}. Si riporta di seguito il grafico con il confronto della tensione in uscita all'amplificatore operazionale (che coincide con la tensione applicata al pin 4 del timer 555) e la tensione misurata ai capi del LED. Successivamente, simuliamo il circuito quando non si trova nello stato di allarme, dunque con $R_T$ che vale \SI{1.70}{k\ohm}. Questi grafici sono riportati in figura \ref{figura:sistemaOFF}. \par
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{immagini/sistemaON}
+	\caption{Uscita del circuito quando si trova nello stato di allarme.} 
+	\label{figura:sistemaON}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{immagini/sistemaOFF}
+	\caption{Uscita del circuito quando non si trova nello stato di allarme.} 
+	\label{figura:sistemaOFF}
+\end{figure}
+Per entrambe le figure, la traccia verde corrisponde all'uscita dell'OPAMP, mentre quella blu alla tensione ai capi del diodo. Possiamo osservare che il comportamento del circuito è corretto, perché produce l'onda quadra solo quando il termistore registra una temperatura superiore a T = \SI{25}{\celsius}. \par
+Per simulare meglio le transizioni tra i due stati, utilizzeremo un altro programma, \textit{Tinkercad}. I risultati di questa simulazione sono descritti nella sezione successiva (sezione \ref{tinkercad}). 
+
+\subsection{Simulazione con Tinkercad}\label{tinkercad}
 In Tinkercad per prima cosa abbiamo realizzato il circuito su una breadboard (visibile in figura \todo{inserire figura}) inserendovi i componenti dimensionati nella sezione precedente.
 Poi per valutarne il comportamento, abbiamo simulato il circuito.
 
