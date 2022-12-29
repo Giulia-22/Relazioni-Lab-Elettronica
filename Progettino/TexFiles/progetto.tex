@@ -89,8 +89,8 @@ Il progetto richiede di realizzare un circuito che, superata una temperatura di 
 \item un timer 555;
 \item componenti passivi.
 \end{itemize}
-La temperatura di riferimento è \SI{25}{\degree C}, a questa temperatura la resistenza del termistore NTC è di \SI{1}{k\ohm}.
-% modifica per non copiare da slide
+La temperatura di riferimento è \SI{25}{\celsius}, a questa temperatura la resistenza del termistore NTC è di \SI{1}{k\ohm}.
+% modifica per non copiare da slide ? 
 
 \newpage
 \section{Progettazione del circuito}
@@ -140,8 +140,6 @@ Nell'immagine in figura \ref{figura:dim555} è mostrato il sottosistema della re
 	\label{figura:dim555}
 \end{figure}
 \\Nella figura \ref{figura:555out} vengono invece mostrati i grafici che si ottengono in uscita (corrente che fluisce nel LED) quando il circuito si trova nello stato di allarme e di riposo. \par
-Nel primo caso, la temperatura sarà superiore a \SI{25}{\degree}C, quindi il sistema si troverà nello stato di allerta. Il circuito si comporterà come un oscillatore, perciò, terminato il transitorio iniziale, l'uscita resta alta per circa due secondi e bassa per circa un secondo. Le imprecisioni su $t_{high}$ sono dovute al fatto che nei calcoli è stata trascurata la caduta di tensione data dal diodo D1, perciò quest'intervallo di tempo è di poco superiore rispetto a quanto dimensionato. Dalle misure con i cursori, questa differenza risulta essere pari a \SI{0.36}{\second}. \par
-Nel secondo caso invece, il sistema registrerà una temperatura inferiore a \SI{25}{\degree}C, di conseguenza nel LED non deve fluire corrente perché deve rimanere spento, dato che il sistema non è nello stato di allarme.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6cm]{immagini/555on}
@@ -149,24 +147,51 @@ Nel secondo caso invece, il sistema registrerà una temperatura inferiore a \SI{
 	\caption{Grafico dell'uscita quando il sistema è nello stato di allarme (sopra) e riposo (sotto).} 
 	\label{figura:555out}
 \end{figure}
+Nel primo caso, la temperatura sarà superiore a \SI{25}{\celsius}, quindi il sistema si troverà nello stato di allerta. Il circuito si comporterà come un oscillatore, perciò, terminato il transitorio iniziale, l'uscita resta alta per circa due secondi e bassa per circa un secondo. Le imprecisioni su $t_{high}$ sono dovute al fatto che nei calcoli è stata trascurata la caduta di tensione data dal diodo D1, perciò quest'intervallo di tempo è di poco superiore rispetto a quanto dimensionato. Dalle misure con i cursori, questa differenza risulta essere pari a \SI{0.36}{\second}. \par
+Nel secondo caso invece, il sistema registrerà una temperatura inferiore a \SI{25}{\celsius}, di conseguenza nel LED non deve fluire corrente perché deve rimanere spento, dato che il sistema non è nello stato di allarme.
 \todo{spostare foto 6.3 prima di "Nel primo caso..." e metterle sulla stessa riga?}
 \subsection{Progettazione della rete del termistore}\label{rete_termistore}
-Per gestire le due situazioni descritte alla fine della sezione precedente, dobbiamo pilotare opportunamente il PIN 4, ovvero il \textit{reset}, del timer 555. In particolare, se la temperatura è inferiore a \SI{25}{\degree}C, sul PIN 4 deve essere applicato un segnale di tensione che corrisponde al livello logico basso (\SI{0}{\volt}), perché vogliamo che anche l'uscita si trovi al livello logico basso,  in modo tale che il LED non si accenda. Al contrario, se la temperatura è superiore alla temperatura di riferimento, al reset deve essere applicato un segnale corrispondente al livello logico alto (\SI{9}{\volt}), così da far lavorare il timer 555 in modalità astabile e pilotare l'accensione e lo spegnimento del LED secondo i tempi scelti nella sezione precedente. \par
-\noindent Queste scelte sono dovute al fatto che il timer 555 viene resettato quando si applica un impulso negativo sul PIN 4 (fonte: \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/lm555.pdf?ts=1667144089940&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FLM555}{datasheet}}}), e questa transizione la otteniamo se utilizziamo le tensioni come appena descritto. \par
-Il segnale che pilota il reset è dato dall'OPAMP, che sarà utilizzato in configurazione di comparatore: per la nostra applicazione, è necessario configurare gli ingressi invertente e non invertente per fare in modo che la condizione $V^+>V^-$ si verifichi quando la temperatura è superiore a \SI{25}{\degree}C, così che l'uscita dell'amplificatore operazionale sia alta, il viceversa deve invece verificarsi quando la temperatura è minore del valore critico. \par
+Per gestire le due situazioni descritte alla fine della sezione precedente, dobbiamo pilotare opportunamente il PIN 4, ovvero il \textit{reset}, del timer 555. In particolare, se la temperatura è inferiore a \SI{25}{\celsius}, sul PIN 4 deve essere applicato un segnale di tensione che corrisponde al livello logico basso (\SI{0}{\volt}), perché vogliamo che anche l'uscita si trovi al livello logico basso,  in modo tale che il LED non si accenda. Al contrario, se la temperatura è superiore alla temperatura di riferimento, al reset deve essere applicato un segnale corrispondente al livello logico alto (\SI{9}{\volt}), così da far lavorare il timer 555 in modalità astabile e pilotare l'accensione e lo spegnimento del LED secondo i tempi scelti nella sezione precedente. Queste scelte sono dovute al fatto che il timer 555 viene resettato quando si applica un impulso negativo sul PIN 4 (fonte: \textcolor{blue}{\underline{\href{https://www.ti.com/lit/ds/symlink/lm555.pdf?ts=1667144089940&ref_url=https\%253A\%252F\%252Fwww.ti.com\%252Fproduct\%252FLM555}{datasheet}}}), e questa transizione la otteniamo se utilizziamo le tensioni come appena descritto. \par
+Il segnale che pilota il reset è dato dall'OPAMP, che sarà utilizzato in configurazione di comparatore: per la nostra applicazione, è necessario configurare gli ingressi invertente e non invertente per fare in modo che la condizione $V^+>V^-$ si verifichi quando la temperatura è superiore a \SI{25}{\celsius}, così che l'uscita dell'amplificatore operazionale sia alta; il viceversa deve invece verificarsi quando la temperatura è minore del valore critico. Inoltre, per ottenere in uscita i segnali descritti al paragrafo precedente, dovremo alimentare l'OPAMP con una tensione singola, cioé fra massa e $V_A$. \par
 Per decidere come dimensionare gli ingressi, dobbiamo prima capire il comportamento elettrico del termistore al variare della temperatura. Un termistore NTC è schematizzabile come una resistenza variabile, il cui andamento in funzione della temperatura (in kelvin) è di tipo esponenziale:
 $$ R_T = R_0\cdot e^{B\bigl(\frac{1}{T}-\frac{1}{T_0}\bigr)}$$
-Dalla specifica, sappiamo che $R_0$ vale \SI{1}{k\ohm} quando $T_0 = \SI{25}{\degree C}=\SI{298}{\kelvin}$. Il parametro $B$ varia in base al termistore scelto e in particolare per un termistore NTC con le nostre caratteristiche vale circa \SI{3000}{\kelvin}, come possiamo ricavare dal seguente \textcolor{blue}{\underline{\href{https://www.mouser.it/datasheet/2/240/Littelfuse_Leaded_Thermistors_Glass_Encapsulated_T-1315924.pdf}{datasheet}}}. Sostituendo alla relazione precedente le grandezze note, otteniamo:
+Dalla specifica, sappiamo che $R_0$ vale \SI{1}{k\ohm} quando $T_0 = \SI{25}{\celsius}=\SI{298}{\kelvin}$. Il parametro $B$ varia in base al termistore scelto e in particolare per un termistore NTC con le nostre caratteristiche vale circa \SI{3000}{\kelvin}, come possiamo ricavare dal seguente \textcolor{blue}{\underline{\href{https://www.mouser.it/datasheet/2/240/Littelfuse_Leaded_Thermistors_Glass_Encapsulated_T-1315924.pdf}{datasheet}}}. Sostituendo alla relazione precedente le grandezze note, otteniamo:
 $$R_T = 42.45\cdot 10^{-3}\;\SI{}{\ohm}\cdot e^{\bigl(\frac{\SI{3000}{\kelvin}}{T}\bigr)} $$
-Dalla formula, verifichiamo che a \SI{25}{\degree C}=\SI{298}{\kelvin} la resistenza è effettivamente di \SI{1}{k\ohm}.
-% prendo due valori (uno + e l'altro - di 25) e vedo comportamento -> r aumenta se t minore e viceversa
-% procedo con dimensionamento partitore ingressi opamp
-
+Dalla formula, verifichiamo che a \SI{25}{\celsius}=\SI{298}{\kelvin} la resistenza è effettivamente di \SI{1}{k\ohm}. Sempre da questa formula, ci aspettiamo che se la temperatura aumenta, la resistenza $\mathrm{R_T}$ diminuisce; viceversa, se la temperatura diminuisce, questa resistenza aumenta. Infatti, se calcoliamo la resistenza per due valori di temperatura, uno maggiore e l'altro minore di \SI{25}{\celsius}=\SI{298}{\kelvin}, otteniamo:
+$$R_{T=\SI{283}{\kelvin}} = 42.45\cdot 10^{-3}\;\SI{}{\ohm}\cdot e^{\bigl(\frac{\SI{3000}{\kelvin}}{\SI{283}{\kelvin}}\bigr)}=\SI{1.70}{k\ohm}>\SI{1}{k\ohm}\indent\mathrm{per \;}T = \SI{10}{\celsius}=\SI{283}{\kelvin}$$
+$$R_{T=\SI{313}{\kelvin}} = 42.45\cdot 10^{-3}\;\SI{}{\ohm}\cdot e^{\bigl(\frac{\SI{3000}{\kelvin}}{\SI{313}{\kelvin}}\bigr)}=\SI{617}{\ohm}<\SI{1}{k\ohm}\;\;\;\indent\mathrm{per \;}T = \SI{40}{\celsius}=\SI{313}{\kelvin}$$
+Nella fase di simulazione del circuito, utilizzeremo questi due valori per analizzare le due diverse situazioni. \par
+Agli ingressi dell'operazionale, possiamo utilizzare due partitori, di cui uno formato da due resistenza da \SI{1}{k\ohm}, mentre l'altro da una resistenza da \SI{1}{k\ohm} e dal termistore NTC. La tensione in uscita al primo partitore è fissa e pari a:
+$$V_1 = \frac{\SI{1}{k\ohm}}{\SI{1}{k\ohm}+\SI{1}{k\ohm}}\cdot V_A = \frac{V_A}{2} = \SI{4.5}{\volt}$$
+L'uscita del secondo partitore è invece funzione di $R_T$. La resistenza da \SI{1}{k\ohm} la colleghiamo tra l'uscita del partitore e massa, mentre il termistore NTC fra l'alimentazione e l'uscita del partitore, pertanto la tensione in uscita vale:
+$$V_2 = \frac{\SI{1}{k\ohm}}{R_T+\SI{1}{k\ohm}}\cdot V_A$$
+In particolare, se $R_T>\SI{1}{k\ohm}$ (ovvero $T<\SI{25}{\celsius}$), allora $V_2<V_A/2\;$; viceversa se $R_T<\SI{1}{k\ohm}$ (ossia $T>\SI{25}{\celsius}$), allora $V_2>V_A/2$. Sfruttando questi due partitori in ingresso all'OPAMP, possiamo confrontare una tensione che è funzione della temperatura con una tensione fissa che corrisponde alla soglia dei \SI{25}{\celsius} e produrre un'uscita diversa in base al fatto che la temperatura sia maggiore o minore di questo riferimento. \par
+Terminato il dimensionamento dei due partitori, dobbiamo decidere quale collegare all'ingresso invertente e quale all'ingresso non invertente. Ricordando che la condizione $V^+>V^-$ deve verificarsi quando la temperatura è superiore a \SI{25}{\celsius}, e sapendo che se la temperatura è superiore a \SI{25}{\celsius}, $V_2$ è maggiore di $V_A/2$, allora $V_1=V^-$ e $V_2=V^+$. Di conseguenza, il primo partitore sarà collegato all'ingresso invertente, mentre il secondo all'ingresso non invertente. Lo schema complessivo della rete del termistore è rappresentato in figura \ref{figura:dimNTC}. \par
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6.9cm]{immagini/dimNTC}
+	\caption{Schema della rete del termistore NTC dimensionata.} 
+	\label{figura:dimNTC}
+\end{figure}
+Nella figura \ref{figura:NTCout} vengono invece mostrati i grafici che si ottengono in uscita all'amplificatore operazionale quando il circuito si trova nello stato di allarme ($T = \SI{40}{\celsius}$; $R_T=\SI{617}{\ohm}$) e di riposo ($T = \SI{10}{\celsius}$; $R_T=\SI{1.70}{k\ohm}$). Vediamo che il comportamento del circuito è quello che ci aspettiamo. \par
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=6cm]{immagini/NTCon}
+	\includegraphics[height=6cm]{immagini/NTCoff}
+	\caption{Grafico dell'uscita quando il sistema è nello stato di allarme (sopra) e riposo (sotto).} 
+	\label{figura:NTCout}
+\end{figure}
 
 \newpage
 \section{Simulazione del circuito}
-Una volta integrate le due sottoreti del sistema nel circuito complessivo, abbiamo simulato quest'ultimo utilizzando due programmi differenti: LTSpice e Tinkercad.
-% unione dei due sotto sistemi
+Prima di simulare il circuito, dobbiamo integrare i due sottosistemi. Per come sono stati progettati, è sufficiente collegare l'uscita dell'OPAMP al PIN 4 del timer 555, senza utilizzare altri componenti, dato che entrambi i componenti lavorano con le stesse tensioni. Il circuito complessivo è rappresentato in figura \ref{figura:schemaFinale}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{immagini/schemaFinale}
+	\caption{Schema del circuito finale.} 
+	\label{figura:schemaFinale}
+\end{figure}
+\\Una volta ottenuto il circuito complessivo, per verificarne il corretto funzionamento lo abbiamo simulato utilizzando due programmi differenti: LTSpice e Tinkercad.  
 \subsection{Simulazione con LTSpice}
 \subsection{Simulazione con Tinkercad}
 In Tinkercad per prima cosa abbiamo realizzato il circuito su una breadboard (visibile in figura \todo{inserire figura}) inserendovi i componenti dimensionati nella sezione precedente.
