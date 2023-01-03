@@ -209,15 +209,37 @@ Per entrambe le figure, la traccia verde corrisponde all'uscita dell'OPAMP, ment
 Per simulare meglio le transizioni tra i due stati, utilizzeremo un altro programma, \textit{Tinkercad}. I risultati di questa simulazione sono descritti nella sezione successiva (sezione \ref{tinkercad}). 
 
 \subsection{Simulazione con Tinkercad}\label{tinkercad}
-Per quanto riguarda la simulazione in \textit{Tinkercad}, per prima cosa abbiamo realizzato il circuito della figura \ref{figura:schemaFinale} su una breadboard. Per poter costruire il circuito (come in figura \ref{figura:tinkercad_breadboard}) sono stati inseriti i componenti dimensionati come specificato nella sezione precedente, ma con la differenza che è stato cambiato il sensore di temperatura: in particolare è stato utilizzato un potenziometro al posto del termistore NTC.
+Per quanto riguarda la simulazione in \textit{Tinkercad}, per prima cosa abbiamo realizzato il circuito della figura \ref{figura:schemaFinale} su una breadboard. Per poter costruire il circuito (come in figura \ref{figura:tinkercad_breadboard}) sono stati inseriti i componenti dimensionati come specificato nella sezione precedente, ma è stata apportata una variazione: è stato cambiato il sensore di temperatura e in particolare è stato utilizzato un potenziometro di valore \SI{2}{\kilo\ohm} al posto del termistore NTC.
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[height=6cm]{immagini/tinkercad_breadboard}
 	\caption{Breadboard su cui è stato realizzato il circuito in \textit{Tinkercad}.} 
 	\label{figura:tinkercad_breadboard}
 \end{figure}
-\newpage
-Poi per verificare il comportamento del sistema, abbiamo simulato il circuito (\textcolor{blue}{\underline{\href{https://www.tinkercad.com/things/5cgEecbtMyg-copy-of-stunning-snicket/editel?sharecode=9z73QqFvXyHOBVZMRfgNmmMNsfyYwwq-TDywLOMkaKc}{simulazione}}}). La prima condizione del circuito che è stata analizzata è caratterizzata da un valore di temperatura maggiore di \SI{25}{\celsius} e quindi ci si trova in stato di allarme (il LED si accende). In questa configurazione la manopola del potenziometro deve essere rivolta verso sinistra. Invece la seconda condizione analizzata è caratterizzata da un valore di temperatura minore di \SI{25}{\celsius} e di conseguenza non ci si trova in stato di allarme (il LED si spegne). In questa configurazione la manopola del potenziometro deve essere rivolta verso destra.
-\\Per entrambe le condizioni sono stati riportati i confronti del segnale ... con il segnale ... .
+
+Poi per verificare il comportamento del sistema rispetto ai risultati ottenuti con \textit{LTSpice}, abbiamo simulato il circuito (\textcolor{blue}{\underline{\href{https://www.tinkercad.com/things/5cgEecbtMyg-copy-of-stunning-snicket/editel?sharecode=9z73QqFvXyHOBVZMRfgNmmMNsfyYwwq-TDywLOMkaKc}{simulazione}}}).
+
+\noindent La prima simulazione effettuata considera un valore di temperatura maggiore di \SI{25}{\celsius} e quindi ci si trova in stato di allarme siccome il valore del potenziometro $R_T$ è inferiore a \SI{1}{\kilo\ohm}. In questo caso il valore di \SI{617}{\ohm} associato ad $R_T$ è stato approssimato a \SI{600}{\ohm} in modo da poterlo definire con la manopola del potenziometro (valore determinato dalla misura effettuata con un multimetro). In questa condizione la manopola del potenziometro deve essere rivolta verso sinistra.
+
+Invece la seconda simulazione eseguita è caratterizzata da un valore di temperatura minore di \SI{25}{\celsius} e di conseguenza non ci si trova nello stato di allarme perchè il potenziometro $R_T$ assume un valore maggiore di \SI{1}{\kilo\ohm}. In quest'altro caso il valore di \SI{1.70}{\kilo\ohm} associato ad $R_T$ è stato approssimato a \SI{1.68}{\kilo\ohm} in modo da poterlo definire con la manopola del potenziometro (valore determinato dalla misura effettuata con un multimetro). In questa condizione la manopola del potenziometro deve essere rivolta verso destra.
+
+I segnali dell'uscita dell'OPAMP (oscilloscopio con i fili verdi) e della tensione ai capi del LED (oscilloscopio con i fili blu) ottenuti per le precedenti due condizioni analizzate sono stati riportati nelle figure \ref{figura:tinkercad_on} e \ref{figura:tinkercad_off} rispettivamente.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{immagini/tinkercad_on}
+	\caption{Simulazione del circuito quando si trova nello stato di allarme.} 
+	\label{figura:tinkercad_on}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{immagini/tinkercad_off}
+	\caption{Simulazione del circuito quando non si trova nello stato di allarme.} 
+	\label{figura:tinkercad_off}
+\end{figure}
+
+Dalle immagini di queste simulazioni si può notare che si ottiene il comportamento desiderato, che era stato descritto nella precedente sezione: quando la temperatura supera i \SI{25}{\celsius} l'allarme è attivo e difatti il segnale della tensione ai capi del LED corrisponde a un'onda quadra, mentre quando si ha una temperatura inferiore l'allarme è spento e di conseguenza il segnale della tensione sul diodo è sempre prossima a 0. 
 
 \end{document}
