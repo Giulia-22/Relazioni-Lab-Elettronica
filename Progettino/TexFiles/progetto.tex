@@ -209,7 +209,7 @@ Per entrambe le figure, la traccia verde corrisponde all'uscita dell'OPAMP, ment
 Per simulare meglio le transizioni tra i due stati, utilizzeremo un altro programma, \textit{Tinkercad}. I risultati di questa simulazione sono descritti nella sezione successiva (sezione \ref{tinkercad}). 
 
 \subsection{Simulazione con Tinkercad}\label{tinkercad}
-Per quanto riguarda la simulazione in \textit{Tinkercad}, per prima cosa abbiamo realizzato il circuito della figura \ref{figura:schemaFinale} su una breadboard. Per poter costruire il circuito (come in figura \ref{figura:tinkercad_breadboard}) sono stati inseriti i componenti dimensionati come specificato nella sezione precedente, ma è stata apportata una variazione: è stato cambiato il sensore di temperatura e in particolare è stato utilizzato un potenziometro di valore \SI{2}{\kilo\ohm} al posto del termistore NTC.
+Per quanto riguarda la simulazione in \textit{Tinkercad}, per prima cosa abbiamo realizzato il circuito della figura \ref{figura:schemaFinale} su una breadboard. Per poter costruire il circuito (come in figura \ref{figura:tinkercad_breadboard}) sono stati inseriti i componenti dimensionati come specificato nella sezione precedente, il termistore NTC (ovvero il sensore di temperatura) è stato simulato utilizzando un potenziometro di valore \SI{2}{\kilo\ohm}.
 
 \begin{figure}[h!]
 	\centering
@@ -218,13 +218,12 @@ Per quanto riguarda la simulazione in \textit{Tinkercad}, per prima cosa abbiamo
 	\label{figura:tinkercad_breadboard}
 \end{figure}
 
-Poi per verificare il comportamento del sistema rispetto ai risultati ottenuti con \textit{LTSpice}, abbiamo simulato il circuito (\textcolor{blue}{\underline{\href{https://www.tinkercad.com/things/5cgEecbtMyg-copy-of-stunning-snicket/editel?sharecode=9z73QqFvXyHOBVZMRfgNmmMNsfyYwwq-TDywLOMkaKc}{simulazione}}}).
+Per verificare il comportamento del sistema rispetto ai risultati ottenuti con \textit{LTSpice}, abbiamo simulato il circuito (la simulazione è visibile al seguente \textcolor{blue}{\underline{\href{https://www.tinkercad.com/things/5cgEecbtMyg-copy-of-stunning-snicket/editel?sharecode=9z73QqFvXyHOBVZMRfgNmmMNsfyYwwq-TDywLOMkaKc}{link}}}).
+\\\\\noindent La prima simulazione effettuata considera un valore di temperatura maggiore di \SI{25}{\celsius} e quindi ci si trova in stato di allarme siccome il valore del potenziometro $R_T$ è inferiore a \SI{1}{\kilo\ohm}. In questo caso il valore di \SI{617}{\ohm} associato ad $R_T$ è stato approssimato a \SI{600}{\ohm} in modo da poterlo definire con la manopola del potenziometro (valore determinato dalla misura effettuata con il multimetro). In questa condizione la manopola del potenziometro deve essere rivolta verso sinistra.
 
-\noindent La prima simulazione effettuata considera un valore di temperatura maggiore di \SI{25}{\celsius} e quindi ci si trova in stato di allarme siccome il valore del potenziometro $R_T$ è inferiore a \SI{1}{\kilo\ohm}. In questo caso il valore di \SI{617}{\ohm} associato ad $R_T$ è stato approssimato a \SI{600}{\ohm} in modo da poterlo definire con la manopola del potenziometro (valore determinato dalla misura effettuata con un multimetro). In questa condizione la manopola del potenziometro deve essere rivolta verso sinistra.
+Invece la seconda simulazione eseguita è caratterizzata da un valore di temperatura minore di \SI{25}{\celsius} e di conseguenza non ci si trova nello stato di allarme perché il potenziometro $R_T$ assume un valore maggiore di \SI{1}{\kilo\ohm}. In quest'altro caso il valore di \SI{1.70}{\kilo\ohm} associato ad $R_T$ è stato approssimato a \SI{1.68}{\kilo\ohm} in modo da poterlo definire con la manopola del potenziometro (valore determinato dalla misura effettuata con il multimetro). In questa condizione la manopola del potenziometro deve essere rivolta verso destra.
 
-Invece la seconda simulazione eseguita è caratterizzata da un valore di temperatura minore di \SI{25}{\celsius} e di conseguenza non ci si trova nello stato di allarme perchè il potenziometro $R_T$ assume un valore maggiore di \SI{1}{\kilo\ohm}. In quest'altro caso il valore di \SI{1.70}{\kilo\ohm} associato ad $R_T$ è stato approssimato a \SI{1.68}{\kilo\ohm} in modo da poterlo definire con la manopola del potenziometro (valore determinato dalla misura effettuata con un multimetro). In questa condizione la manopola del potenziometro deve essere rivolta verso destra.
-
-I segnali dell'uscita dell'OPAMP (oscilloscopio con i fili verdi) e della tensione ai capi del LED (oscilloscopio con i fili blu) ottenuti per le precedenti due condizioni analizzate sono stati riportati nelle figure \ref{figura:tinkercad_on} e \ref{figura:tinkercad_off} rispettivamente.
+I segnali dell'uscita dell'OPAMP (oscilloscopio con i fili verdi) e della tensione ai capi del LED (oscilloscopio con i fili blu) ottenuti per le precedenti due condizioni sono stati riportati nelle figure \ref{figura:tinkercad_on} e \ref{figura:tinkercad_off} rispettivamente.
 
 \begin{figure}[h!]
 	\centering
@@ -240,6 +239,8 @@ I segnali dell'uscita dell'OPAMP (oscilloscopio con i fili verdi) e della tensio
 	\label{figura:tinkercad_off}
 \end{figure}
 
-Dalle immagini di queste simulazioni si può notare che si ottiene il comportamento desiderato, che era stato descritto nella precedente sezione: quando la temperatura supera i \SI{25}{\celsius} l'allarme è attivo e difatti il segnale della tensione ai capi del LED corrisponde a un'onda quadra, mentre quando si ha una temperatura inferiore l'allarme è spento e di conseguenza il segnale della tensione sul diodo è sempre prossima a 0. 
+Dalle immagini di queste simulazioni si può notare che si ottiene il comportamento desiderato: quando la temperatura supera i \SI{25}{\celsius} l'allarme è attivo e difatti il segnale della tensione ai capi del LED corrisponde a un'onda quadra, di conseguenza il LED si accende ad intermittenza, mentre quando si ha una temperatura inferiore l'allarme è spento e di conseguenza il segnale della tensione sul diodo è sempre prossima a \SI{0}{\volt}, perciò il LED non si accende. 
+
+Inoltre, è possibile verificare che il comportamento del sistema è reversibile, cioé ritorna nello stato di riposo quando la temperatura si abbassa ed è sotto la soglia, viceversa va nello stato di allarme quando la temperatura si alza. Questa transizione viene fatta in modo automatico dal sistema ogni volta che il suo stato cambia.
 
 \end{document}
